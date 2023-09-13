@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: var(--font-default);
+
+}
+
+:root {
+    --font-default: #AAA6A6;
+    --font-active: #ffffff;
+    --black1: #000000;
+    --black2: #111111;
+    --black3: #222222;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    background: #10082C;
+}
+
+/* SECTION */
+section {
+    width: 100%;
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+}
+
+
+
+/* LEFT BAR */
+.leftbar {
+    width: 20%;
+    height: 100vh;
+    background: #10082C;
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 2rem;
+    overflow-x: hidden;
+}
+
+.leftbar a:hover {
+    transition: .3s;
+    color: var(--font-active);
+}
+
+.leftbar::-webkit-scrollbar {
+    width: 8px;
+    display: none;
+}
+
+.leftbar::-webkit-scrollbar-track {
+    background: var(--font-default);
+}
+
+.leftbar::-webkit-scrollbar-thumb {
+    background: var(--black3);
+    border-radius: 10px;
+}
+
+/* DASHBOARD */
+.leftbar .dashboard {
+    margin: 0 3rem;
+}
+
+.dashboard a {
+    color: var(--font-active);
+    font-weight: 600;
+}
+
+/* DASHBOARD */
+/* DEAN */
+.dean .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.dean .navDean {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.dean .navDean a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* DEAN */
+/* ATTENDANCE */
+.attendance .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.attendance .navAttendance {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.attendance .navAttendance a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* ATTENDANCE */
+
+/* SETTINGS */
+.settings .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.settings .navSettings {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.settings .navSettings a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* SETTINGS */
+
+/* LEFT BAR */
+
+
+
+
+
+/* CONTAINER */
+.container {
+    width: 60%;
+    height: 100vh;
+    background: #F6F6F6;
+    border-radius: 1rem 0 0 1rem;
+    box-shadow: 2px 0 10px 3px var(--black1);
+}
+
+.header {
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+
+/* HAMBURGER */
+.hamburger {
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 1.6rem;
+    height: .2rem;
+    background: var(--black1);
+    margin: .3rem 0;
+}
+
+/* HAMBURGER */
+/* HEADER */
+.header .title {
+    margin: 0 1rem;
+    color: var(--black3);
+    font-weight: 600;
+}
+
+/* HEADER */
+/* CONTENTS */
+.contents {
+    width: 100%;
+    height: 91vh;
+    padding: 1rem 2rem;
+
+}
+
+.contents .analysis {
+    width: 100%;
+    height: 19rem;
+    background: #E6E6E6;
+    border-radius: 1rem;
+}
+
+.contents .analysis .title {
+    position: absolute;
+    top: 6rem;
+    left: 24rem;
+    color: var(--black3);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.analysis-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.analysis-content .analysis-title {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.analysis-content .analysis-title,
+.analysis-content .analysis-progress {
+    color: var(--black3);
+    font-weight: 500;
+}
+
+/* CONTENTS */
+
+/* CONTAINER */
+
+
+
+
+
+/* RIGHT BAR */
+.rightbar {
+    width: 20%;
+    height: 100vh;
+    background: red;
+}
+
+/* RIGHT BAR */
+
+
+
+/* SECTION */
