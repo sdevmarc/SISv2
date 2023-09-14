@@ -65,12 +65,12 @@
                 <div class="contents">
                     <div class="analysis">
                         <div class="title">
-                            DAILY STUDENT ATTENDANCE ANALYSIS
+                            <h1>DAILY STUDENT ATTENDANCE ANALYSIS</h1>
                         </div>
 
                         <div class="analysis-content">
                             <div class="analysis-title">
-                                ADMISSIONS
+                                <h1>ADMISSIONS</h1>
                             </div>
                             <div class="analysis-progress">
                                 test
@@ -80,7 +80,7 @@
                     <div class="other-analysis">
                         <div class="late">
                             <div class="title">
-                                LATE ADMISSIONS
+                                <h1>LATE ADMISSIONS</h1>
                             </div>
                             <div class="progress">
                                 test
@@ -88,7 +88,7 @@
                         </div>
                         <div class="absent">
                             <div class="title">
-                                ABSENT ADMISSIONS
+                                <h1>ABSENT ADMISSIONS</h1>
                             </div>
                             <div class="progress">
                                 test
@@ -96,7 +96,7 @@
                         </div>
                         <div class="excused">
                             <div class="title">
-                                EXCUSED ADMISSIONS
+                                <h1>EXCUSED ADMISSIONS</h1>
                             </div>
                             <div class="progress">
                                 test
@@ -107,7 +107,38 @@
 
             </div>
             <div class="rightbar">
+                <div class="header">
+                    <div class="picture">
 
+                    </div>
+                    <div class="user">
+                        <div class="name">
+                            Marc Edison
+                        </div>
+                        <div class="role">
+                            <p>ADMINISTRATOR</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-active">
+                    <div class="title">
+                        <p>ACTIVE</p>
+                        <input type="text" placeholder="Search">
+                    </div>
+                    <div class="active-names">
+                        <div class="picture">
+
+                        </div>
+                        <div class="name-role">
+                            <div class="name">
+                                Jose Rizal
+                            </div>
+                            <div class="role">
+                                STAFF
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

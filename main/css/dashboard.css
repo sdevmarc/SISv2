@@ -11,6 +11,9 @@
 :root {
     --font-default: #AAA6A6;
     --font-active: #ffffff;
+    --container: #F6F6F6;
+    --contents: #E6E6E6;
+    --box-shadow: #837e7e;
     --black1: #000000;
     --black2: #111111;
     --black3: #222222;
@@ -153,7 +156,7 @@ section {
 
 /* CONTAINER */
 .container {
-    width: 60%;
+    width: 62%;
     height: 100vh;
     background: #F6F6F6;
     border-radius: 1rem 0 0 1rem;
@@ -202,14 +205,21 @@ section {
 .contents .analysis {
     width: 100%;
     height: 19rem;
-    background: #E6E6E6;
+    background: var(--contents);
     border-radius: 1rem;
+    box-shadow: 0 7px 10px 0 var(--box-shadow);
+    transition: .3s;
+    transform: scale(1);
 }
 
-.contents .analysis .title {
+.contents .analysis:hover {
+    transform: scale(.98);
+}
+
+.contents .analysis .title h1 {
     position: absolute;
-    top: 6rem;
-    left: 24rem;
+    top: 1rem;
+    left: 2rem;
     color: var(--black3);
     font-size: 14px;
     font-weight: 600;
@@ -221,17 +231,61 @@ section {
     display: flex;
     justify-content: space-around;
     align-items: center;
+
 }
 
-.analysis-content .analysis-title {
-    font-size: 23px;
+.analysis-content .analysis-title h1 {
+    font-size: 27px;
+    color: var(--black3);
     font-weight: 600;
+    letter-spacing: 5px;
 }
 
-.analysis-content .analysis-title,
 .analysis-content .analysis-progress {
     color: var(--black3);
     font-weight: 500;
+}
+
+.other-analysis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4em;
+    margin: 2rem 0;
+}
+
+.other-analysis .late,
+.other-analysis .absent,
+.other-analysis .excused {
+    width: 15rem;
+    height: 11rem;
+    background: var(--contents);
+    border-radius: 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 7px 10px 0 var(--box-shadow);
+    transition: .3s;
+}
+
+.other-analysis .late:hover,
+.other-analysis .absent:hover,
+.other-analysis .excused:hover {
+    scale: .98;
+}
+
+.late .progress,
+.absent .progress,
+.excused .progress {
+    color: var(--black3);
+}
+
+.late .title h1,
+.absent .title h1,
+.excused .title h1 {
+    color: var(--black3);
+    font-size: 16px;
 }
 
 /* CONTENTS */
@@ -244,10 +298,130 @@ section {
 
 /* RIGHT BAR */
 .rightbar {
-    width: 20%;
+    width: 18%;
     height: 100vh;
-    background: red;
+    background: var(--container);
+
 }
+/* HEADER */
+
+.rightbar .header {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header .picture {
+    width: 2.9rem;
+    height: 2.4rem;
+    border-radius: 2rem;
+    background: var(--black3);
+}
+
+.header .user {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.user .name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black3);
+}
+
+.user .role p {
+    font-size: 8px;
+    font-weight: lighter;
+    margin: -.1rem 0;
+}
+/* HEADER */
+/* BOX ACTIVE */
+.box-active {
+    width: 100%;
+    height: 35rem;
+    background: var(--font-active);
+    border-radius: 1rem 0 0 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+
+.box-active .title {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+}
+
+.box-active .title p {
+    color: var(--black3);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.box-active .title input {
+    width: 10rem;
+    height: 1.6rem;
+    border-radius: .5rem;
+    border: none;
+    padding: .5rem;
+    color: var(--black3);
+    border: 1px solid var(--black3);
+}
+
+.box-active .active-names {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+    cursor: pointer;
+    padding: .7rem 1rem;
+    border-bottom: 1px solid var(--font-default);
+}
+
+.active-names .picture {
+    width: 3.1rem;
+    height: 2.4rem;
+    border-radius: 2rem;
+    background: var(--black3);
+}
+
+.active-names .name-role {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.name-role .name {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--black3);
+}
+
+.name-role .role {
+    font-size: 10px;
+    font-weight: 100;
+    color: var(--black3);
+}
+
+
+
+
+
+
+/* BOX ACTIVE */
+
 
 /* RIGHT BAR */
 
