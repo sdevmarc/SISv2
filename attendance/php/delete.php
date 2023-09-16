@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIS | Dean</title>
+    <title>SIS | ADSAS</title>
     <link rel="stylesheet" href="/dbfiles/ias/sisv2/attendance/css/delete.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -36,9 +36,9 @@
                         <div class="navAttendance">
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/create.php">UPDATE ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
                             <a href="">DELETE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/create.php">AUDIT LOG</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="settings">
