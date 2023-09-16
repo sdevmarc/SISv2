@@ -39,7 +39,6 @@ document.getElementById('editGender').addEventListener('click', () => {
     }
     else {
         gender.setAttribute('disabled', '');
-        gender.style.backgroundColor = '#7DCE7D';
     }
 });
 
