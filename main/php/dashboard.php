@@ -12,44 +12,51 @@
     <section>
         <div class="wrapper">
             <div class="leftbar">
+                <div class="leftbar-content">
+                    <div class="dashboard">
+                        <a href="">DASHBOARD</a>
+                    </div>
+                    <div class="dean">
+                        <div class="title">
+                            DEAN
+                        </div>
+                        <div class="navDean">
+                            <a href="">SEARCH</a>
+                            <a href="">ADD ADMISSION</a>
+                            <a href="">UPDATE ADMISSION</a>
+                            <a href="">DELETE ADMISSION</a>
+                            <a href="">AUDIT LOG</a>
+                        </div>
+                    </div>
+                    <div class="attendance">
+                        <div class="title">
+                            ATTENDANCE
+                        </div>
+                        <div class="navAttendance">
+                            <a href="">SEARCH</a>
+                            <a href="">ADD ADMISSION</a>
+                            <a href="">UPDATE ADMISSION</a>
+                            <a href="">DELETE ADMISSION</a>
+                            <a href="">AUDIT LOG</a>
+                        </div>
+                    </div>
+                    <div class="settings">
+                        <div class="title">
+                            SETTINGS
+                        </div>
+                        <div class="navSettings">
+                            <a href="">AUDIT LOG</a>
+                            <a href="">MANAGE USER</a>
+                            <a href="">MANAGE UI</a>
+                        </div>
+                    </div>
 
-                <div class="dashboard">
-                    <a href="">DASHBOARD</a>
                 </div>
-                <div class="dean">
-                    <div class="title">
-                        DEAN
-                    </div>
-                    <div class="navDean">
-                        <a href="">SEARCH</a>
-                        <a href="">ADD ADMISSION</a>
-                        <a href="">UPDATE ADMISSION</a>
-                        <a href="">DELETE ADMISSION</a>
-                        <a href="">AUDIT LOG</a>
-                    </div>
+                <div class="design">
+                    <div class="box box-1"></div>
+                    <div class="box box-2"></div>
                 </div>
-                <div class="attendance">
-                    <div class="title">
-                        ATTENDANCE
-                    </div>
-                    <div class="navAttendance">
-                        <a href="">SEARCH</a>
-                        <a href="">ADD ADMISSION</a>
-                        <a href="">UPDATE ADMISSION</a>
-                        <a href="">DELETE ADMISSION</a>
-                        <a href="">AUDIT LOG</a>
-                    </div>
-                </div>
-                <div class="settings">
-                    <div class="title">
-                        SETTINGS
-                    </div>
-                    <div class="navSettings">
-                        <a href="">AUDIT LOG</a>
-                        <a href="">MANAGE USER</a>
-                        <a href="">MANAGE UI</a>
-                    </div>
-                </div>
+
             </div>
             <div class="container">
                 <div class="header">
@@ -73,7 +80,22 @@
                                 <h1>ADMISSIONS</h1>
                             </div>
                             <div class="analysis-progress">
-                                test
+                                <div class="outer">
+                                    <div class="inner">
+                                        <div id="number">
+                                            119
+                                        </div>
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                                    <defs>
+                                        <linearGradient id="GradientColor">
+                                            <stop offset="0%" stop-color="#222222" />
+                                            <stop offset="100%" stop-color="#222222" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+                                </svg>
                             </div>
                         </div>
                     </div>
