@@ -21,11 +21,11 @@
                             DEAN
                         </div>
                         <div class="navDean">
-                            <a href="">SEARCH</a>
-                            <a href="">ADD ADMISSION</a>
-                            <a href="">UPDATE ADMISSION</a>
-                            <a href="">DELETE ADMISSION</a>
-                            <a href="">AUDIT LOG</a>
+                            <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
+                            <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/dean/php/delete.php">DELETE ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="attendance">

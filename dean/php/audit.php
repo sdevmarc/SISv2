@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIS | Dashboard</title>
-    <link rel="stylesheet" href="/dbfiles/ias/sisv2/dean/css/search.css">
+    <link rel="stylesheet" href="/dbfiles/ias/sisv2/dean/css/audit.css">
 </head>
 
 <body>
@@ -14,18 +14,18 @@
             <div class="leftbar">
                 <div class="leftbar-content">
                     <div class="dashboard">
-                        <a href="/dbfiles/ias/sisv2/main/php/dashboard.php">DASHBOARD</a>
+                        <a href="/dbfiles/ias/sisv2/MAIN/php/dashboard.php">DASHBOARD</a>
                     </div>
                     <div class="dean">
                         <div class="title">
                             DEAN
                         </div>
                         <div class="navDean">
-                            <a href="">SEARCH</a>
+                            <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/delete.php">DELETE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
+                            <a href="">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="attendance">
@@ -66,12 +66,12 @@
                         <div class="line"></div>
                     </div>
                     <div class="title">
-                        SEARCH
+                        AUDIT LOG
                     </div>
                 </div>
                 <div class="contents">
-                    
-                    
+
+
                 </div>
 
             </div>
