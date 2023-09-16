@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIS | Dashboard</title>
+    <title>SIS | Dean</title>
     <link rel="stylesheet" href="/dbfiles/ias/sisv2/dean/css/delete.css">
 </head>
 
