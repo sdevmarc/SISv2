@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIS | Dean</title>
     <link rel="stylesheet" href="/dbfiles/ias/sisv2/dean/css/search.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
@@ -70,8 +71,70 @@
                     </div>
                 </div>
                 <div class="contents">
-                    
-                    
+                    <div class="search-form">
+                        <form action="" method="post">
+                            <div class="search-box">
+                                <div class="title">
+                                    Search
+                                </div>
+                                <div class="box input-box">
+                                    <input type="text" placeholder="Search" required>
+                                </div>
+                                <div class="buttons">
+                                    <button name="search"><i class='bx bx-search-alt-2'></i></button>
+                                </div>
+                            </div>
+                            <div class="table-content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Admission</th>
+                                            <th>Date</th>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
+                                            <th>Middle Name</th>
+                                            <th>Gender</th>
+                                            <th>Birthdate</th>
+                                            <th>Address</th>
+                                            <th>Emgy. Co.</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>This</td>
+                                            <td>is</td>
+                                            <td>A</td>
+                                            <td>Test</td>
+                                            <td>Data</td>
+                                            <td>Table</td>
+                                            <td>Ok</td>
+                                            <td>Test</td>
+                                            <td>This</td>
+                                            <td>
+                                            <button name="Edit">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>This</td>
+                                            <td>is</td>
+                                            <td>A</td>
+                                            <td>Test</td>
+                                            <td>Data</td>
+                                            <td>Table</td>
+                                            <td>Ok</td>
+                                            <td>Test</td>
+                                            <td>This</td>
+                                            <td>
+                                                <button name="Edit">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
 
             </div>
