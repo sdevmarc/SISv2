@@ -1,0 +1,478 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: var(--font-default);
+
+}
+
+:root {
+    --font-default: #AAA6A6;
+    --font-active: #ffffff;
+    --container: #F6F6F6;
+    --contents: #E6E6E6;
+    --box-shadow: #837e7e;
+    --black1: #000000;
+    --black2: #111111;
+    --black3: #222222;
+    --button: rgb(28, 180, 28);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    background: #10082C;
+}
+
+/* SECTION */
+section {
+    width: 100%;
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+}
+
+
+
+/* LEFT BAR */
+.leftbar {
+    width: 18%;
+    height: 100vh;
+    background: #10082C;
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 2rem;
+    overflow-x: hidden;
+}
+
+.leftbar-content {
+    position: relative;
+    width: 100%;
+    /* background: var(--black1); */
+    z-index: 1;
+}
+
+.leftbar a:hover {
+    transition: .3s;
+    color: var(--font-active);
+}
+
+.leftbar::-webkit-scrollbar {
+    width: 8px;
+    display: none;
+}
+
+.leftbar::-webkit-scrollbar-track {
+    background: var(--font-default);
+}
+
+.leftbar::-webkit-scrollbar-thumb {
+    background: var(--black3);
+    border-radius: 10px;
+}
+
+/* DASHBOARD */
+.leftbar .dashboard {
+    margin: 0 3rem;
+}
+
+/* .dashboard a {
+    color: var(--font-default);
+    font-weight: 600;
+} */
+
+/* DASHBOARD */
+/* DEAN */
+.dean .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.dean .navDean {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.dean .navDean a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* .dean .navDean a:nth-child(2) {
+    color: var(--font-active);
+    font-weight: 600;
+} */
+
+/* DEAN */
+/* ATTENDANCE */
+.attendance .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.attendance .navAttendance {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.attendance .navAttendance a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.attendance .navAttendance a:nth-child(2) {
+    color: var(--font-active);
+    font-weight: 600;
+}
+
+/* ATTENDANCE */
+
+/* SETTINGS */
+.settings .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.settings .navSettings {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.settings .navSettings a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* SETTINGS */
+
+
+/* DESIGN */
+.leftbar .design {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow-y: hidden;
+    z-index: 0;
+}
+
+.design .box-1 {
+    position: relative;
+    top: 35rem;
+    left: -3rem;
+    width: 15rem;
+    height: 15rem;
+    background: #6F89E7;
+    border-radius: 10rem;
+}
+
+.design .box-2 {
+    position: relative;
+    top: 38rem;
+    left: -5rem;
+    width: 10rem;
+    height: 10rem;
+    background: #6F89E7;
+    border-radius: 10rem;
+    box-shadow: -5px 0 6px var(--black3);
+}
+
+/* DESIGN */
+
+
+/* LEFT BAR */
+
+
+/* CONTAINER */
+.container {
+    width: 64%;
+    height: 100vh;
+    background: #F6F6F6;
+    border-radius: 1rem 0 0 1rem;
+    box-shadow: 2px 0 10px 3px var(--black1);
+    z-index: 1;
+}
+
+.header {
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+
+/* HAMBURGER */
+.hamburger {
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 1.6rem;
+    height: .2rem;
+    background: var(--black1);
+    margin: .3rem 0;
+}
+
+/* HAMBURGER */
+/* HEADER */
+.header .title {
+    margin: 0 1rem;
+    color: var(--black3);
+    font-weight: 600;
+}
+
+/* HEADER */
+
+/* CONTENTS */
+
+.contents,
+.create-form {
+    width: 100%;
+    height: 91vh;
+}
+
+.create-form,
+form {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 2em;
+    padding: 1rem 0;
+}
+
+/* FORM */
+form {
+    flex-direction: column;
+}
+
+.create-form .input-box input {
+    width: 30rem;
+    height: 2.5rem;
+}
+
+.create-form .input-box input,
+.create-form .address-input input,
+.create-form .emergency-box input {
+    padding: .4rem .5rem;
+}
+
+.create-form select,
+.create-form .birth-box input {
+    text-align: center;
+}
+
+.create-form select {
+    width: 10rem;
+    height: 2rem;
+}
+
+.create-form .birth-box input {
+    padding: .5rem;
+    width: 10rem;
+    height: 2.5rem;
+    background: var(--button);
+    border: none;
+    border-radius: .2rem;
+    color: var(--font-active);
+}
+
+.create-form .title {
+    font-weight: 600;
+}
+
+.create-form .box,
+.create-form input,
+.create-form .title,
+.create-form select,
+.create-form select option {
+    color: var(--black3);
+}
+
+.create-form .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7em;
+}
+
+.create-form .buttons button {
+    color: var(--font-active);
+    font-weight: 600;
+    border: none;
+    width: 15rem;
+    height: 2rem;
+    border-radius: .6rem;
+    background: var(--button);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.create-form .buttons button:hover {
+    scale: 1.1;
+}
+
+
+/* FORM */
+
+/* CONTENTS */
+
+/* CONTAINER */
+
+
+
+
+
+/* RIGHT BAR */
+.rightbar {
+    width: 18%;
+    height: 100vh;
+    background: var(--container);
+    z-index: 1;
+}
+
+/* HEADER */
+
+.rightbar .header {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header .picture {
+    width: 2.9rem;
+    height: 2.4rem;
+    border-radius: 2rem;
+    background: var(--black3);
+}
+
+.header .user {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.user .name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black3);
+}
+
+.user .role p {
+    font-size: 8px;
+    font-weight: lighter;
+    margin: -.1rem 0;
+}
+
+/* HEADER */
+/* BOX ACTIVE */
+.box-active {
+    width: 100%;
+    height: 35rem;
+    background: var(--font-active);
+    border-radius: 1rem 0 0 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+
+.box-active .title {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+}
+
+.box-active .title p {
+    color: var(--black3);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.box-active .title input {
+    width: 10rem;
+    height: 1.6rem;
+    border-radius: .5rem;
+    border: none;
+    padding: .5rem;
+    color: var(--black3);
+    border: 1px solid var(--black3);
+}
+
+.box-active .active-names {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+    cursor: pointer;
+    padding: .7rem 1rem;
+    border-bottom: 1px solid var(--font-default);
+}
+
+.active-names .picture {
+    width: 3.1rem;
+    height: 2.4rem;
+    border-radius: 2rem;
+    background: var(--black3);
+}
+
+.active-names .name-role {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.name-role .name {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--black3);
+}
+
+.name-role .role {
+    font-size: 10px;
+    font-weight: 100;
+    color: var(--black3);
+}
+
+/* BOX ACTIVE */
+
+/* RIGHT BAR */
+
+
+
+/* SECTION */

@@ -34,11 +34,11 @@
                             ATTENDANCE
                         </div>
                         <div class="navAttendance">
-                            <a href="">SEARCH</a>
-                            <a href="">ADD ADMISSION</a>
-                            <a href="">UPDATE ADMISSION</a>
-                            <a href="">DELETE ADMISSION</a>
-                            <a href="">AUDIT LOG</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">ADD ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">UPDATE ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">DELETE ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="settings">
