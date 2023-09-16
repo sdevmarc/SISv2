@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIS | Dean</title>
     <link rel="stylesheet" href="/dbfiles/ias/sisv2/dean/css/update.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   
 </head>
 
 <body>
@@ -70,7 +72,74 @@
                     </div>
                 </div>
                 <div class="contents">
-                    
+                <div class="update-form">
+                        <form action="" method="post">
+                            <div class="box input-box">
+                                <div class="title">
+                                    Last Name*
+                                </div>
+                                <input id="lastname" name="lastname" placeholder="Lastname" type="text" disabled>
+                                <i id="editLastname" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="box input-box">
+                                <div class="title">
+                                    First Name*
+                                </div>
+                                <input id="firstname" name="firstname" placeholder="Firstname" type="text" disabled>
+                                <i id="editFirstname" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="box input-box">
+                                <div class="title">
+                                    Middle Name*
+                                </div>
+                                <input id="middlename" name="middlename" placeholder="Middlename" type="text" disabled>
+                                <i id="editMiddlename" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="box combo-box">
+                                <div class="title">
+                                    Gender*
+                                </div>
+                                <select id="gender" name="gender" disabled>
+                                    <option value="Male">
+                                        Male
+                                    </option>
+                                    <option value="Female">
+                                        Female
+                                    </option>
+                                </select>
+                                <i id="editGender" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="box birth-box">
+                                <div class="title">
+                                    Birthdate*
+                                </div>
+                                <input id="birthdate" name="birthdate" type="date" disabled>
+                                <i id="editBirthdate" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="box address-box">
+                                <div class="title">
+                                    Address
+                                </div>
+                                <div class="address-input">
+                                    <input id="street" name="street" placeholder="Street" type="text" disabled>
+                                    <input id="town" name="town" placeholder="Town" type="text" disabled>
+                                    <input id="city" name="city" placeholder="City" type="text" disabled><i id="editAddress" class='bx bxs-edit'></i>
+                                </div>
+
+                            </div>
+                            <div class="box emergency-box">
+                                <div class="title">
+                                    Emergency Contact No.*
+                                </div>
+                                <input id="emergency" name="emergency" placeholder="Emergency" type="text" inputmode="numeric" disabled>
+                                <i id="editEmergency" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="buttons">
+                                <button class="submit" name="submit" type="submit" disabled>Save Changes</button>
+                            </div>
+
+                        </form>
+                    </div>
                     
                 </div>
 
@@ -112,7 +181,7 @@
         </div>
 
     </section>
-
+    <script type="text/javascript" src="/dbfiles/ias/sisv2/dean/js/update.js"></script>
 </body>
 
 </html>
