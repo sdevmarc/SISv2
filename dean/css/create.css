@@ -17,6 +17,7 @@
     --black1: #000000;
     --black2: #111111;
     --black3: #222222;
+    --button: rgb(28, 180, 28);
 }
 
 body {
@@ -241,6 +242,100 @@ section {
 }
 
 /* HEADER */
+
+/* CONTENTS */
+
+.contents,
+.create-form {
+    width: 100%;
+    height: 91vh;
+}
+
+.create-form,
+form {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 2em;
+    padding: 1rem 0;
+}
+
+/* FORM */
+form {
+    flex-direction: column;
+}
+
+.create-form .input-box input {
+    width: 30rem;
+    height: 2.5rem;
+}
+
+.create-form .input-box input,
+.create-form .address-input input,
+.create-form .emergency-box input {
+    padding: .4rem .5rem;
+}
+
+.create-form select,
+.create-form .birth-box input {
+    text-align: center;
+}
+
+.create-form select {
+    width: 10rem;
+    height: 2rem;
+}
+
+.create-form .birth-box input {
+    padding: .5rem;
+    width: 10rem;
+    height: 2.5rem;
+    background: var(--button);
+    border: none;
+    border-radius: .2rem;
+    color: var(--font-active);
+}
+
+.create-form .title {
+    font-weight: 600;
+}
+
+.create-form .box,
+.create-form input,
+.create-form .title,
+.create-form select,
+.create-form select option {
+    color: var(--black3);
+}
+
+.create-form .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7em;
+}
+
+.create-form .buttons button {
+    color: var(--font-active);
+    font-weight: 600;
+    border: none;
+    width: 15rem;
+    height: 2rem;
+    border-radius: .6rem;
+    background: var(--button);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.create-form .buttons button:hover {
+    scale: 1.1;
+}
+
+
+/* FORM */
+
+/* CONTENTS */
 
 /* CONTAINER */
 

@@ -70,8 +70,69 @@
                     </div>
                 </div>
                 <div class="contents">
-                    
-                    asd
+                    <div class="create-form">
+                        <form action="" method="post">
+                            <div class="box input-box">
+                                <div class="title">
+                                    Last Name*
+                                </div>
+                                <input name="lastname" placeholder="Lastname" type="text" required>
+                            </div>
+                            <div class="box input-box">
+                                <div class="title">
+                                    First Name*
+                                </div>
+                                <input name="firstname" placeholder="Firstname" type="text" required>
+                            </div>
+                            <div class="box input-box">
+                                <div class="title">
+                                    Middle Name*
+                                </div>
+                                <input name="middlename" placeholder="Middlename" type="text" required>
+                            </div>
+                            <div class="box combo-box">
+                                <div class="title">
+                                    Gender*
+                                </div>
+                                <select name="gender" id="gender">
+                                    <option value="Male">
+                                        Male
+                                    </option>
+                                    <option value="Female">
+                                        Female
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="box birth-box">
+                                <div class="title">
+                                    Birthdate*
+                                </div>
+                                <input name="birthdate" type="date" required>
+                            </div>
+                            <div class="box address-box">
+                                <div class="title">
+                                    Address
+                                </div>
+                                <div class="address-input">
+                                    <input name="street" placeholder="Street" type="text" required>
+                                    <input name="town" placeholder="Town" type="text" required>
+                                    <input name="city" placeholder="City" type="text" required>
+                                </div>
+
+                            </div>
+                            <div class="box emergency-box">
+                                <div class="title">
+                                    Emergency Contact No.*
+                                </div>
+                                <input name="emergency" placeholder="Emergency" type="text" inputmode="numeric" required>
+                            </div>
+                            <div class="buttons">
+                                <button class="cancel" name="cancel">Clear</button>
+                                <button class="submit" name="submit" type="submit">Submit</button>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
 
             </div>
