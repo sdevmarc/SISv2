@@ -17,6 +17,8 @@
     --black1: #000000;
     --black2: #111111;
     --black3: #222222;
+    --button: rgb(28, 180, 28);
+    --hover:rgb(110, 221, 160);
 }
 
 body {
@@ -241,6 +243,111 @@ section {
 }
 
 /* HEADER */
+
+/* CONTENTS */
+.contents {
+    width: 100%;
+    height: 91vh;
+}
+
+.contents .search-form .title {
+    color: var(--black3);
+    font-weight: 600;
+}
+
+.contents form input {
+    color: var(--black3);
+    padding: .7rem 2.5rem .7rem .7rem;
+}
+
+.search-form form .search-box {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+    margin: 0 2rem;
+}
+
+.search-form form input {
+    width: 30rem;
+    height: 2.5rem;
+    border-radius: .6rem;
+    border: 1px solid var(--black3);
+}
+
+.search-form .buttons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 0;
+    right: 3.5rem;
+}
+
+.search-form .buttons button {
+    background: none;
+    border: none;
+}
+
+.search-form .buttons button i {
+    cursor: pointer;
+    color: var(--black3);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+
+/* TABLE CONTENT */
+.table-content {
+    position: relative;
+    top: 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+th {
+    font-weight: 500;
+}
+
+td {
+    text-align: center;
+    font-weight: 400;
+}
+
+th,
+td {
+    padding: .5rem 1rem;
+    border-bottom-width: 10px solid var(--black3);
+    border-bottom: 1px solid var(--black3);
+    color: var(--black3);
+}
+
+.table-content table button {
+    cursor: pointer;
+    color: var(--font-active);
+    font-weight: 500;
+    background: var(--button);
+    border: none;
+    border-radius: .7rem;
+    padding: .2rem .7rem;
+    transition: .3s;
+}
+
+.table-content table button:hover {
+    scale: .9;
+    background: var(--hover);
+}
+
+
+
+
+
+
+/* TABLE CONTENT */
+/* CONTENTS */
 
 /* CONTAINER */
 
