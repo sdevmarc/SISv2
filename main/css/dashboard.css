@@ -50,13 +50,6 @@ section {
     overflow-x: hidden;
 }
 
-.leftbar-content {
-    position: relative;
-    width: 100%;
-    /* background: var(--black1); */
-    z-index: 1;
-}
-
 .leftbar a:hover {
     transition: .3s;
     color: var(--font-active);
@@ -74,6 +67,13 @@ section {
 .leftbar::-webkit-scrollbar-thumb {
     background: var(--black3);
     border-radius: 10px;
+}
+
+.leftbar-content {
+    position: relative;
+    width: 100%;
+    /* background: var(--black1); */
+    z-index: 1;
 }
 
 /* DASHBOARD */
@@ -405,10 +405,11 @@ section {
     align-items: center;
 }
 
-.header .picture {
-    width: 2.9rem;
-    height: 2.4rem;
-    border-radius: 2rem;
+.header .picture .inside {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: var(--black3);
 }
 
@@ -481,10 +482,11 @@ section {
     border-bottom: 1px solid var(--font-default);
 }
 
-.active-names .picture {
-    width: 3.1rem;
-    height: 2.4rem;
-    border-radius: 2rem;
+.active-names .picture .inside {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: var(--black3);
 }
 
