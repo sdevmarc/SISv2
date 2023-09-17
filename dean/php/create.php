@@ -1,3 +1,5 @@
+<?php ob_start();
+$conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -138,7 +140,7 @@
             </div>
             <div class="rightbar">
                 <div class="header">
-                <div class="picture">
+                    <div class="picture">
                         <div class="inside">
 
                         </div>
@@ -152,7 +154,7 @@
                         </div>
                     </div>
                     <div class="logout-button">
-                    <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
+                        <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
                     </div>
                 </div>
                 <div class="box-active">
@@ -180,7 +182,48 @@
         </div>
 
     </section>
-
+    <!-- <script type="text/javascript" src="/dbfiles/ias/sisv2/dean/js/create.js"></script> -->
 </body>
 
 </html>
+
+<?php
+try {
+    // if ($user_role == 'admin') {
+    //     // echo "<script>alert('Welcome Admin!')</script>";
+    // } else if ($user_role == 'enroll' ) {
+    //     echo "<script>document.querySelector('.adsas').style.display = 'none';</script>";
+    //     echo "<script>document.querySelector('.settings').style.display = 'none';</script>";
+    // }
+
+    date_default_timezone_set('Asia/Shanghai');
+    $time = time();
+    $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
+
+    if (isset($_POST['submit'])) {
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $middlename = $_POST['middlename'];
+        $gender = $_POST['gender'];
+        $birthdate = $_POST['birthdate'];
+        $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+        $emergency = $_POST['emergency'];
+
+        $conn = mysqli_connect("localhost", "root", "", "db_sis");
+        $sql = "insert into enroll (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
+        $stmt->execute();
+
+        $stmt->close();
+        $conn->close();
+        header("refresh:0; url=create.php");
+        ob_end_flush();
+        exit();
+    }
+} catch (Exception $e) {
+    echo "<script>alert('Error Encountered!')</script>";
+} finally {
+    mysqli_close($conn);
+}
+?>
