@@ -141,8 +141,10 @@
             </div>
             <div class="rightbar">
                 <div class="header">
-                    <div class="picture">
+                <div class="picture">
+                        <div class="inside">
 
+                        </div>
                     </div>
                     <div class="user">
                         <div class="name">
@@ -152,6 +154,9 @@
                             <p>ADMINISTRATOR</p>
                         </div>
                     </div>
+                    <div class="logout-button">
+                        <button name="logout">Logout</button>
+                    </div>
                 </div>
                 <div class="box-active">
                     <div class="title">
@@ -159,8 +164,10 @@
                         <input type="text" placeholder="Search">
                     </div>
                     <div class="active-names">
-                        <div class="picture">
+                    <div class="picture">
+                            <div class="inside">
 
+                            </div>
                         </div>
                         <div class="name-role">
                             <div class="name">

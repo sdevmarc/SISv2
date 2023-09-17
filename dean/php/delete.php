@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="contents">
-                <div class="search-form">
+                    <div class="search-form">
                         <form action="" method="post">
                             <div class="search-box">
                                 <div class="title">
@@ -112,7 +112,7 @@
                                             <td>Test</td>
                                             <td>This</td>
                                             <td>
-                                            <button name="delete">Delete</button>
+                                                <button name="delete">Delete</button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -135,14 +135,16 @@
 
                         </form>
                     </div>
-                    
+
                 </div>
 
             </div>
             <div class="rightbar">
                 <div class="header">
-                    <div class="picture">
+                <div class="picture">
+                        <div class="inside">
 
+                        </div>
                     </div>
                     <div class="user">
                         <div class="name">
@@ -152,6 +154,9 @@
                             <p>ADMINISTRATOR</p>
                         </div>
                     </div>
+                    <div class="logout-button">
+                        <button name="logout">Logout</button>
+                    </div>
                 </div>
                 <div class="box-active">
                     <div class="title">
@@ -160,7 +165,9 @@
                     </div>
                     <div class="active-names">
                         <div class="picture">
+                            <div class="inside">
 
+                            </div>
                         </div>
                         <div class="name-role">
                             <div class="name">

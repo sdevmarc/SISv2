@@ -378,10 +378,11 @@ td {
     align-items: center;
 }
 
-.header .picture {
-    width: 2.9rem;
-    height: 2.4rem;
-    border-radius: 2rem;
+.header .picture .inside {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: var(--black3);
 }
 
@@ -392,6 +393,23 @@ td {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.header .logout-button button {
+    position: relative;
+    border: none;
+    border-radius: .7rem;
+    background: var(--button);
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--font-active);
+    transition: .3s;
+}
+
+.header .logout-button button:hover {
+    scale: .98;
 }
 
 .user .name {
@@ -430,7 +448,7 @@ td {
 .box-active .title p {
     color: var(--black3);
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .box-active .title input {
@@ -444,6 +462,7 @@ td {
 }
 
 .box-active .active-names {
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: start;
@@ -451,13 +470,24 @@ td {
     gap: 1em;
     cursor: pointer;
     padding: .7rem 1rem;
-    border-bottom: 1px solid var(--font-default);
+    /* border-bottom: 1px solid var(--font-default); */
 }
 
-.active-names .picture {
-    width: 3.1rem;
-    height: 2.4rem;
-    border-radius: 2rem;
+.box-active .active-names::after {
+    content: '';
+    position: absolute;
+    width: 85%;
+    height: 0.09rem;
+    left: 1.5rem;
+    bottom: 0;
+    background: var(--font-default);
+}
+
+.active-names .picture .inside {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: var(--black3);
 }
 

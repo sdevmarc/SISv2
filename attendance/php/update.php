@@ -7,7 +7,7 @@
     <title>SIS | ADSAS</title>
     <link rel="stylesheet" href="/dbfiles/ias/sisv2/attendance/css/update.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-   
+
 </head>
 
 <body>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="contents">
-                <div class="update-form">
+                    <div class="update-form">
                         <form action="" method="post">
                             <div class="box input-box">
                                 <div class="title">
@@ -140,14 +140,16 @@
 
                         </form>
                     </div>
-                    
+
                 </div>
 
             </div>
             <div class="rightbar">
                 <div class="header">
                     <div class="picture">
+                        <div class="inside">
 
+                        </div>
                     </div>
                     <div class="user">
                         <div class="name">
@@ -157,6 +159,9 @@
                             <p>ADMINISTRATOR</p>
                         </div>
                     </div>
+                    <div class="logout-button">
+                        <button name="logout">Logout</button>
+                    </div>
                 </div>
                 <div class="box-active">
                     <div class="title">
@@ -165,7 +170,9 @@
                     </div>
                     <div class="active-names">
                         <div class="picture">
+                            <div class="inside">
 
+                            </div>
                         </div>
                         <div class="name-role">
                             <div class="name">
