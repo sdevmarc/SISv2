@@ -380,21 +380,23 @@ form {
     flex-direction: column;
 }
 
-.header .logout-button button {
+.logout-button a {
     position: relative;
     border: none;
-    border-radius: .7rem;
+    border-radius: .4rem;
     background: var(--button);
-    width: 60px;
-    height: 30px;
+    padding: .2rem .4rem;
     cursor: pointer;
+    font-size: 15px;
     font-weight: 600;
     color: var(--font-active);
     transition: .3s;
 }
 
-.header .logout-button button:hover {
-    scale: .98;
+.logout-button a:hover {
+    font-size: 13px;
+    padding: .2rem .6rem;
+    background: var(--hover);
 }
 
 .user .name {

@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <div class="logout-button">
-                        <button name="logout">Logout</button>
+                    <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
                     </div>
                 </div>
                 <div class="box-active">
