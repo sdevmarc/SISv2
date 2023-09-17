@@ -18,7 +18,7 @@
     --black2: #111111;
     --black3: #222222;
     --button: rgb(28, 180, 28);
-    --hover:rgb(110, 221, 160);
+    --hover: rgb(110, 221, 160);
 }
 
 body {
@@ -424,22 +424,28 @@ section {
     flex-direction: column;
 }
 
-.header .logout-button button {
+.logout-button a {
     position: relative;
     border: none;
-    border-radius: .7rem;
+    border-radius: .4rem;
     background: var(--button);
-    width: 60px;
-    height: 30px;
+    padding: .2rem .4rem;
     cursor: pointer;
+    font-size: 15px;
     font-weight: 600;
     color: var(--font-active);
     transition: .3s;
 }
 
-.header .logout-button button:hover {
-    scale: .98;
+.logout-button a:hover {
+    font-size: 13px;
+    padding: .2rem .6rem;
+    background: var(--hover);
 }
+
+/* .header .logout-button a:hover {
+    scale: .98;
+} */
 
 .user .name {
     font-size: 13px;

@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,3 +60,45 @@
 </body>
 
 </html>
+<?php
+$conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+try {
+    session_start();
+
+    if (!isset($_SESSION['attempts'])) {
+        $_SESSION['attempts'] = 0;
+    }
+
+    if (isset($_POST['login'])) {
+        if (!$conn) {
+            echo "<script>alert('Cannot connect to database!')</script>";
+        } else {
+            // echo "<script>document.querySelector('.invalid').style.visibility = 'visible';</script>";
+            $username = strtolower($_POST['username']);
+            $password = $_POST['password'];
+            $sql = "select * from tbl_users where username = '$username' and password = '$password'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                session_start();
+                $_SESSION['username'] = $username;
+                echo "<script>alert('Login Successful!')</script>";
+                header('location: /dbfiles/ias/sisv2/main/php/dashboard.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['attempts']++;
+                $i = $_SESSION['attempts'];
+                if ($i >= 3) {
+                    echo "<script>alert('Unauthorized access detected!')</script>";
+                }
+            }
+        }
+    }
+} catch (Exception $e) {
+    echo "Error Encountered: " . $e->getMessage() . "<br>";
+} finally {
+    mysqli_close($conn);
+}
+
+
+?>
