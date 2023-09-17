@@ -126,6 +126,7 @@ form .buttons button {
 
 form .buttons button:hover {
     scale: .98;
+    background: var(--hover);
 }
 
 .login-form .details p:nth-child(1) {
