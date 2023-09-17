@@ -18,7 +18,7 @@
     --black2: #111111;
     --black3: #222222;
     --button: rgb(28, 180, 28);
-    --hover:rgb(110, 221, 160);
+    --hover: rgb(110, 221, 160);
 }
 
 body {
@@ -251,6 +251,13 @@ section {
     height: 91vh;
 }
 
+.contents form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .contents .search-form .title {
     color: var(--black3);
     font-weight: 600;
@@ -303,19 +310,40 @@ section {
 .table-content {
     position: relative;
     top: 4rem;
-    width: 100%;
+    width: 90%;
+    height: 75vh;
     display: flex;
     justify-content: center;
     align-items: start;
+    overflow-x: hidden;
+    border: 1.5px solid var(--black3);
+    border-radius: .7rem 0 0 .7rem;
+    padding: 1rem;
+}
+
+.table-content::-webkit-scrollbar {
+    /* display: none; */
+    width: 5px;
+}
+
+.table-content::-webkit-scrollbar-track {
+    background: var(--font-default);
+}
+
+.table-content::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 10px;
 }
 
 th {
+    font-size: 12px;
     font-weight: 500;
 }
 
 td {
     text-align: center;
     font-weight: 400;
+    font-size: 12px;
 }
 
 th,

@@ -101,6 +101,38 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                        $conn = mysqli_connect("localhost", "root", "", "db_sis");
+
+                                        if (!$conn) {
+                                            echo "<script>alert('Database connection failed!')</script>";
+                                        } else {
+                                            $sql = "select * from enroll";
+                                            $result = mysqli_query($conn, $sql);
+
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                echo "
+                                                        <tr>
+                                                            <td>$row[id_number]</td>
+                                                            <td>$row[date_enrolled]</td>
+                                                            <td>$row[lastname]</td>
+                                                            <td>$row[firstname]</td>
+                                                            <td>$row[middlename]</td>
+                                                            <td>$row[gender]</td>
+                                                            <td>$row[birthdate]</td>
+                                                            <td>$row[address]</td>
+                                                            <td>$row[emergency_contact]</td>
+                                                            <td>
+                                                                <button class='btn btnEdit' name='Edit'>Edit</button>
+                                                            </td>
+                                                        </tr>
+
+                                                            ";
+                                                        }
+                                                    }
+                                                    ?>
+<!-- 
+
                                         <tr>
                                             <td>This</td>
                                             <td>is</td>
@@ -112,7 +144,7 @@
                                             <td>Test</td>
                                             <td>This</td>
                                             <td>
-                                            <button name="Edit">Edit</button>
+                                                <button name="Edit">Edit</button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -128,7 +160,7 @@
                                             <td>
                                                 <button name="Edit">Edit</button>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -140,7 +172,7 @@
             </div>
             <div class="rightbar">
                 <div class="header">
-                <div class="picture">
+                    <div class="picture">
                         <div class="inside">
 
                         </div>
@@ -154,7 +186,7 @@
                         </div>
                     </div>
                     <div class="logout-button">
-                    <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
+                        <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
                     </div>
                 </div>
                 <div class="box-active">
@@ -163,7 +195,7 @@
                         <input type="text" placeholder="Search">
                     </div>
                     <div class="active-names">
-                    <div class="picture">
+                        <div class="picture">
                             <div class="inside">
 
                             </div>
