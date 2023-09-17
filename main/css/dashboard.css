@@ -254,7 +254,7 @@ section {
 
 .contents .analysis {
     width: 100%;
-    height: 19rem;
+    height: 40vh;
     background: var(--contents);
     border-radius: 1rem;
     box-shadow: 0 7px 10px 0 var(--box-shadow);
