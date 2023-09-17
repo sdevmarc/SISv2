@@ -170,7 +170,7 @@ section {
 
 .design .box-1 {
     position: relative;
-    top: 35rem;
+    top: 50rem;
     left: -3rem;
     width: 15rem;
     height: 15rem;
@@ -180,7 +180,7 @@ section {
 
 .design .box-2 {
     position: relative;
-    top: 38rem;
+    top: 55rem;
     left: -5rem;
     width: 10rem;
     height: 10rem;
@@ -325,7 +325,7 @@ section {
     position: absolute;
     top: 60%;
     left: 62%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     scale: 1.3;
 }
 
@@ -339,7 +339,7 @@ section {
 
 .other-analysis {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 4em;
     margin: 2rem 0;
@@ -437,7 +437,7 @@ section {
 /* BOX ACTIVE */
 .box-active {
     width: 100%;
-    height: 35rem;
+    height: 88vh;
     background: var(--font-active);
     border-radius: 1rem 0 0 1rem;
     display: flex;
