@@ -542,6 +542,75 @@ td {
 
 /* RIGHT BAR */
 
-
-
 /* SECTION */
+
+
+/* MEDIA QUERIES */
+@media (max-width: 1600px) {
+
+    /* LEFTBAR */
+    .leftbar-content .dashboard a {
+        font-size: 14px;
+    }
+
+    .dean .title,
+    .attendance .title,
+    .settings .title {
+        font-size: 14px;
+    }
+
+    .dean .navDean a,
+    .attendance .navAttendance a,
+    .settings .navSettings a {
+        font-size: 12px;
+    }
+
+    /* LEFTBAR */
+
+
+
+    /* CONTAINER */
+    /* TABLE CONTENT */
+    th {
+        font-size: 10px;
+        font-weight: 500;
+    }
+    
+    td {
+        text-align: center;
+        font-weight: 400;
+        font-size: 10px;
+    }
+    
+    th,
+    td {
+        padding: .5rem 1rem;
+        border-bottom-width: 10px solid var(--black3);
+        border-bottom: 1px solid var(--black3);
+        color: var(--black3);
+    }
+    
+    .table-content table button {
+        padding: .2rem .8rem;
+        font-size: 11px;
+    }
+
+
+    /* TABLE CONTENT */
+    /* CONTAINER */
+
+
+
+
+    /* RIGHTBAR */
+    .logout-button a {
+        padding: .2rem .4rem;
+        font-size: 12px;
+    }
+
+    /* RIGHTBAR */
+
+}
+
+
+/* MEDIA QUERIES */

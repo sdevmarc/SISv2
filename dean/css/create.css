@@ -264,7 +264,13 @@ form {
 
 /* FORM */
 form {
+    justify-content: start;
     flex-direction: column;
+    height: 86vh;
+    overflow-x: hidden;
+    border: 1.5px solid var(--black3);
+    border-radius: .7rem 0 0 .7rem;
+    padding: 1rem;
 }
 
 .create-form .input-box input {
@@ -505,3 +511,48 @@ form {
 
 
 /* SECTION */
+
+/* MEDIA QUERIES */
+@media (max-width: 1600px) {
+
+    /* LEFTBAR */
+    .leftbar-content .dashboard a {
+        font-size: 14px;
+    }
+
+    .dean .title,
+    .attendance .title,
+    .settings .title {
+        font-size: 14px;
+    }
+
+    .dean .navDean a,
+    .attendance .navAttendance a,
+    .settings .navSettings a {
+        font-size: 12px;
+    }
+
+    /* LEFTBAR */
+
+
+
+    /* CONTAINER */
+
+
+    
+    /* CONTAINER */
+
+
+
+
+    /* RIGHTBAR */
+    .logout-button a {
+        padding: .2rem .4rem;
+        font-size: 12px;
+    }
+
+    /* RIGHTBAR */
+
+}
+
+/* MEDIA QUERIES */
