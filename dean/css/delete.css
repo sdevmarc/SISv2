@@ -310,7 +310,7 @@ section {
 .table-content {
     position: relative;
     /* top: 4rem; */
-    margin-top: 4rem;
+    margin-top: 2rem;
     width: 90%;
     height: 75vh;
     display: flex;
@@ -319,7 +319,7 @@ section {
     overflow-x: hidden;
     border: 1.5px solid var(--black3);
     border-radius: .7rem 0 0 .7rem;
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
 .table-content::-webkit-scrollbar {
