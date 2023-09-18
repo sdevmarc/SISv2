@@ -48,7 +48,7 @@ section {
     background: #10082C;
     display: flex;
     flex-direction: column;
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
     overflow-x: hidden;
 }
 
