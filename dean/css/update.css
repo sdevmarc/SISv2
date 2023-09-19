@@ -268,9 +268,23 @@ form {
     flex-direction: column;
     height: 86vh;
     overflow-x: hidden;
-    border: 1.5px solid var(--black3);
+    border: none;
     border-radius: .7rem 0 0 .7rem;
     padding: 1rem;
+}
+
+form::-webkit-scrollbar {
+    /* display: none; */
+    width: 5px;
+}
+
+form::-webkit-scrollbar-track {
+    background: var(--font-default);
+}
+
+form::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 10px;
 }
 
 form i {

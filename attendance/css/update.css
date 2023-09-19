@@ -18,7 +18,7 @@
     --black2: #111111;
     --black3: #222222;
     --button: rgb(28, 180, 28);
-    --hover:rgb(110, 221, 160);
+    --hover: rgb(110, 221, 160);
 }
 
 body {
@@ -48,7 +48,7 @@ section {
     background: #10082C;
     display: flex;
     flex-direction: column;
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
     overflow-x: hidden;
 }
 
@@ -200,6 +200,7 @@ section {
     border-radius: 10rem;
     box-shadow: -5px 0 6px var(--black3);
 }
+
 /* DESIGN */
 
 
@@ -267,7 +268,27 @@ form {
 
 /* FORM */
 form {
+    justify-content: start;
     flex-direction: column;
+    height: 86vh;
+    overflow-x: hidden;
+    border: none;
+    border-radius: .7rem 0 0 .7rem;
+    padding: 1rem;
+}
+
+form::-webkit-scrollbar {
+    /* display: none; */
+    width: 5px;
+}
+
+form::-webkit-scrollbar-track {
+    background: var(--font-default);
+}
+
+form::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 10px;
 }
 
 form i {
@@ -409,6 +430,7 @@ form i {
     padding: .2rem .6rem;
     background: var(--hover);
 }
+
 .user .name {
     font-size: 13px;
     font-weight: 600;
@@ -515,3 +537,48 @@ form i {
 
 
 /* SECTION */
+
+/* MEDIA QUERIES */
+@media (max-width: 1600px) {
+
+    /* LEFTBAR */
+    .leftbar-content .dashboard a {
+        font-size: 14px;
+    }
+
+    .dean .title,
+    .attendance .title,
+    .settings .title {
+        font-size: 14px;
+    }
+
+    .dean .navDean a,
+    .attendance .navAttendance a,
+    .settings .navSettings a {
+        font-size: 12px;
+    }
+
+    /* LEFTBAR */
+
+
+
+    /* CONTAINER */
+
+
+
+    /* CONTAINER */
+
+
+
+
+    /* RIGHTBAR */
+    .logout-button a {
+        padding: .2rem .4rem;
+        font-size: 12px;
+    }
+
+    /* RIGHTBAR */
+
+}
+
+/* MEDIA QUERIES */

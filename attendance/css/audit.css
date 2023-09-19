@@ -48,7 +48,7 @@ section {
     background: #10082C;
     display: flex;
     flex-direction: column;
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
     overflow-x: hidden;
 }
 
@@ -414,3 +414,48 @@ section {
 
 
 /* SECTION */
+
+/* MEDIA QUERIES */
+@media (max-width: 1600px) {
+
+    /* LEFTBAR */
+    .leftbar-content .dashboard a {
+        font-size: 14px;
+    }
+
+    .dean .title,
+    .attendance .title,
+    .settings .title {
+        font-size: 14px;
+    }
+
+    .dean .navDean a,
+    .attendance .navAttendance a,
+    .settings .navSettings a {
+        font-size: 12px;
+    }
+
+    /* LEFTBAR */
+
+
+
+    /* CONTAINER */
+
+
+    
+    /* CONTAINER */
+
+
+
+
+    /* RIGHTBAR */
+    .logout-button a {
+        padding: .2rem .4rem;
+        font-size: 12px;
+    }
+
+    /* RIGHTBAR */
+
+}
+
+/* MEDIA QUERIES */

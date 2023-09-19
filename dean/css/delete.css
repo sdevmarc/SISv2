@@ -317,7 +317,7 @@ section {
     justify-content: center;
     align-items: start;
     overflow-x: hidden;
-    border: 1.5px solid var(--black3);
+    border: none;
     border-radius: .7rem 0 0 .7rem;
     padding: 1.5rem;
 }

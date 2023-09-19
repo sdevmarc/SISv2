@@ -35,10 +35,10 @@
                         </div>
                         <div class="navAttendance">
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">ADD ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">DELETE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/search.php">AUDIT LOG</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/delete.php">DELETE ADMISSION</a>
+                            <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="settings">
@@ -141,7 +141,7 @@
             </div>
             <div class="rightbar">
                 <div class="header">
-                <div class="picture">
+                    <div class="picture">
                         <div class="inside">
 
                         </div>
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     <div class="logout-button">
-                    <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
+                        <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
                     </div>
                 </div>
                 <div class="box-active">
