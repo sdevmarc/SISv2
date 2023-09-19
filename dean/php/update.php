@@ -1,3 +1,22 @@
+<?php
+ob_start();
+$conn = mysqli_connect("localhost", "root", "", "db_sis");
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_GET['id']) || empty($_GET['id'])) {
+        echo "<script>alert('Please search first!')</script>";
+        header("Location: /dbfiles/ias/sisv2/dean/php/search.php"); // You can create an error.php page
+        exit();
+    } else {
+        $id_number = $_GET['id'];
+        $sql = "select * from enroll where id_number = '$id_number'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,47 +92,54 @@
                 </div>
                 <div class="contents">
                     <div class="update-form">
+                        <?php
+                        $id_number = $_GET['id'];
+                        $sql = "select * from enroll where id_number = '$id_number'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        ?>
                         <form action="" method="post">
                             <div class="box input-box">
                                 <div class="title">
                                     Last Name*
                                 </div>
-                                <input id="lastname" name="lastname" placeholder="Lastname" type="text" disabled>
+                                <input value="<?php echo $row['lastname'];  ?>" id="lastname" name="lastname" placeholder="Lastname" type="text">
                                 <i id="editLastname" class='bx bxs-edit'></i>
                             </div>
                             <div class="box input-box">
                                 <div class="title">
                                     First Name*
                                 </div>
-                                <input id="firstname" name="firstname" placeholder="Firstname" type="text" disabled>
+                                <input value="<?php echo $row['firstname'];  ?>" id="firstname" name="firstname" placeholder="Firstname" type="text">
                                 <i id="editFirstname" class='bx bxs-edit'></i>
                             </div>
                             <div class="box input-box">
                                 <div class="title">
                                     Middle Name*
                                 </div>
-                                <input id="middlename" name="middlename" placeholder="Middlename" type="text" disabled>
+                                <input value="<?php echo $row['middlename'];  ?>" id="middlename" name="middlename" placeholder="Middlename" type="text">
                                 <i id="editMiddlename" class='bx bxs-edit'></i>
                             </div>
                             <div class="box combo-box">
                                 <div class="title">
                                     Gender*
                                 </div>
-                                <select id="gender" name="gender" disabled>
-                                    <option value="Male">
+                                <select id="gender" name="gender">
+                                    <option value="Male" <?php if ($row['gender'] == 'Male') echo 'selected'; ?>>
                                         Male
                                     </option>
-                                    <option value="Female">
+                                    <option value="Female" <?php if ($row['gender'] == 'Female') echo 'selected'; ?>>
                                         Female
                                     </option>
                                 </select>
                                 <i id="editGender" class='bx bxs-edit'></i>
                             </div>
+
                             <div class="box birth-box">
                                 <div class="title">
                                     Birthdate*
                                 </div>
-                                <input id="birthdate" name="birthdate" type="date" disabled>
+                                <input value="<?php echo $row['birthdate'];  ?>" id="birthdate" name="birthdate" type="date">
                                 <i id="editBirthdate" class='bx bxs-edit'></i>
                             </div>
                             <div class="box address-box">
@@ -121,9 +147,9 @@
                                     Address
                                 </div>
                                 <div class="address-input">
-                                    <input id="street" name="street" placeholder="Street" type="text" disabled>
-                                    <input id="town" name="town" placeholder="Town" type="text" disabled>
-                                    <input id="city" name="city" placeholder="City" type="text" disabled><i id="editAddress" class='bx bxs-edit'></i>
+                                    <input id="street" name="street" placeholder="Street" type="text">
+                                    <input id="town" name="town" placeholder="Town" type="text">
+                                    <input id="city" name="city" placeholder="City" type="text"><i id="editAddress" class='bx bxs-edit'></i>
                                 </div>
 
                             </div>
@@ -131,11 +157,11 @@
                                 <div class="title">
                                     Emergency Contact No.*
                                 </div>
-                                <input id="emergency" name="emergency" placeholder="Emergency" type="text" inputmode="numeric" disabled>
+                                <input value="<?php echo $row['emergency_contact'];  ?>" id="emergency" name="emergency" placeholder="Emergency" type="text" inputmode="numeric">
                                 <i id="editEmergency" class='bx bxs-edit'></i>
                             </div>
                             <div class="buttons">
-                                <button class="submit" name="submit" type="submit" disabled>Save Changes</button>
+                                <button class="submit" name="submit" type="submit">Save Changes</button>
                             </div>
 
                         </form>
@@ -160,7 +186,7 @@
                         </div>
                     </div>
                     <div class="logout-button">
-                    <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
+                        <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
                     </div>
                 </div>
                 <div class="box-active">
@@ -192,3 +218,38 @@
 </body>
 
 </html>
+
+<?php
+
+try {
+    if (isset($_POST['submit'])) {
+        $id = $_GET['id'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $middlename = $_POST['middlename'];
+        $gender = $_POST['gender'];
+        $birthdate = $_POST['birthdate'];
+        $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+        $emergency = $_POST['emergency'];
+        $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+
+
+        $sql = "update enroll SET lastname = '$lastname',
+        firstname ='$firstname', middlename = '$middlename',
+        gender = '$gender', birthdate ='$birthdate',
+        address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
+
+        $result = mysqli_query($conn, $sql);
+
+        header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+        ob_end_flush();
+        exit();
+    }
+} catch (Exception $e) {
+    echo "<script>slert('Error Encountered!')</script>";
+}
+if (isset($_POST['submit'])) {
+    mysqli_close($conn);
+}
+
+?>

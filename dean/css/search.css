@@ -307,6 +307,12 @@ section {
 
 
 /* TABLE CONTENT */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .table-content {
     position: relative;
     /* top: 4rem; */
@@ -355,19 +361,20 @@ td {
     color: var(--black3);
 }
 
-.table-content table button {
+.table-content table a {
     cursor: pointer;
     color: var(--font-active);
     font-weight: 500;
     background: var(--button);
     border: none;
-    border-radius: .7rem;
-    padding: .2rem .7rem;
+    border-radius: .4rem;
+    padding: .3rem .8rem;
     transition: .3s;
 }
 
-.table-content table button:hover {
-    scale: .9;
+.table-content table a:hover {
+    padding: .2rem .6rem;
+    font-size: 12px;
     background: var(--hover);
 }
 

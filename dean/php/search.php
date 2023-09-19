@@ -78,12 +78,14 @@
                                     Search
                                 </div>
                                 <div class="box input-box">
-                                    <input type="text" placeholder="Search" required>
+                                    <input name="txtSearch" type="text" placeholder="Search" required>
                                 </div>
                                 <div class="buttons">
-                                    <button name="search"><i class='bx bx-search-alt-2'></i></button>
+                                    <button name="btnSearch"><i class='bx bx-search-alt-2'></i></button>
                                 </div>
                             </div>
+                        </form>
+                        <div class="table-container">
                             <div class="table-content">
                                 <table>
                                     <thead>
@@ -101,71 +103,51 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        $conn = mysqli_connect("localhost", "root", "", "db_sis");
+                                        <form action="" method="post">
+                                            <?php
+                                            try {
+                                                $conn = mysqli_connect("localhost", "root", "", "db_sis");
 
-                                        if (!$conn) {
-                                            echo "<script>alert('Database connection failed!')</script>";
-                                        } else {
-                                            $sql = "select * from enroll";
-                                            $result = mysqli_query($conn, $sql);
+                                                if (!$conn) {
+                                                    echo "<script>alert('Database connection failed!')</script>";
+                                                } else {
+                                                    if (isset($_POST['btnSearch'])) {
+                                                        $search = $_POST['txtSearch'];
+                                                        $sql = "select * from enroll where lastname like '%$search%' or firstname like '%$search%' or id_number like '%$search%'";
+                                                        $result = mysqli_query($conn, $sql);
 
-                                            while ($row = mysqli_fetch_assoc($result)) {
-                                                echo "
-                                                        <tr>
-                                                            <td>$row[id_number]</td>
-                                                            <td>$row[date_enrolled]</td>
-                                                            <td>$row[lastname]</td>
-                                                            <td>$row[firstname]</td>
-                                                            <td>$row[middlename]</td>
-                                                            <td>$row[gender]</td>
-                                                            <td>$row[birthdate]</td>
-                                                            <td>$row[address]</td>
-                                                            <td>$row[emergency_contact]</td>
-                                                            <td>
-                                                                <button class='btn btnEdit' name='Edit'>Edit</button>
-                                                            </td>
-                                                        </tr>
-
-                                                            ";
+                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            ?>
+                                                            <tr>
+                                                                <td><?php echo $row['id_number'] ?></td>
+                                                                <td><?php echo $row['date_enrolled'] ?></td>
+                                                                <td><?php echo $row['lastname'] ?></td>
+                                                                <td><?php echo $row['firstname'] ?></td>
+                                                                <td><?php echo $row['middlename'] ?></td>
+                                                                <td><?php echo $row['gender'] ?></td>
+                                                                <td><?php echo $row['birthdate'] ?></td>
+                                                                <td><?php echo $row['address'] ?></td>
+                                                                <td><?php echo $row['emergency_contact'] ?></td>
+                                                                <td>
+                                                                    <a href="update.php?id=<?php echo $row['id_number']; ?>" class='btn btnEdit' name='Edit'>Edit</a>
+                                                                </td>
+                                                            </tr>
+                                            <?php
                                                         }
                                                     }
-                                                    ?>
-<!-- 
+                                                }
+                                            } catch (Exception $e) {
+                                                echo "<script>alert('Error: Error Encountered!')</script>";
+                                            } finally {
+                                                mysqli_close($conn);
+                                            }
 
-                                        <tr>
-                                            <td>This</td>
-                                            <td>is</td>
-                                            <td>A</td>
-                                            <td>Test</td>
-                                            <td>Data</td>
-                                            <td>Table</td>
-                                            <td>Ok</td>
-                                            <td>Test</td>
-                                            <td>This</td>
-                                            <td>
-                                                <button name="Edit">Edit</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>This</td>
-                                            <td>is</td>
-                                            <td>A</td>
-                                            <td>Test</td>
-                                            <td>Data</td>
-                                            <td>Table</td>
-                                            <td>Ok</td>
-                                            <td>Test</td>
-                                            <td>This</td>
-                                            <td>
-                                                <button name="Edit">Edit</button>
-                                            </td>
-                                        </tr> -->
+                                            ?>
+                                        </form>
                                     </tbody>
                                 </table>
                             </div>
-
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -218,3 +200,16 @@
 </body>
 
 </html>
+
+<?php
+
+// function search_user() {
+//     $search = $_POST['txtSearch'];
+
+//     if (isset($_POST['btnSearch'])) {
+//         // echo "<script>alert('Search button clicked!')</script>";
+//         $conn = mysqli_connect("localhost", "root", "", "db_sis");
+//     }
+// }
+
+?>

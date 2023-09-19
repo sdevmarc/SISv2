@@ -18,7 +18,7 @@
     --black2: #111111;
     --black3: #222222;
     --button: rgb(28, 180, 28);
-    --hover:rgb(110, 221, 160);
+    --hover: rgb(110, 221, 160);
 }
 
 body {
@@ -319,7 +319,7 @@ form i {
     padding: .5rem;
     width: 10rem;
     height: 2.5rem;
-    background: #7DCE7D;
+    background: var(--button);
     border: none;
     border-radius: .2rem;
     color: var(--font-active);
@@ -561,7 +561,7 @@ form i {
     /* CONTAINER */
 
 
-    
+
     /* CONTAINER */
 
 

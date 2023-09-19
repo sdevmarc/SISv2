@@ -52,6 +52,13 @@ section {
     overflow-x: hidden;
 }
 
+.leftbar-content {
+    position: relative;
+    width: 100%;
+    /* background: var(--black1); */
+    z-index: 1;
+}
+
 .leftbar a:hover {
     transition: .3s;
     color: var(--font-active);
