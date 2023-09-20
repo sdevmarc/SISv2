@@ -361,7 +361,14 @@ td {
     color: var(--black3);
 }
 
-.table-content table a {
+.table-content .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.table-content table .buttons a {
     cursor: pointer;
     color: var(--font-active);
     font-weight: 500;
@@ -372,7 +379,7 @@ td {
     transition: .3s;
 }
 
-.table-content table a:hover {
+.table-content table .buttons a:hover {
     padding: .2rem .6rem;
     font-size: 12px;
     background: var(--hover);
@@ -380,6 +387,13 @@ td {
 
 
 
+.table-content table .buttons a:nth-child(1) {
+    background: rgb(58, 58, 187);
+}
+
+.table-content table .buttons a:nth-child(2) {
+    background: red;
+}
 
 
 
