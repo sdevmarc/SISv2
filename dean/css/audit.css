@@ -110,7 +110,7 @@ section {
     font-weight: 500;
 }
 
-.dean .navDean a:nth-child(5) {
+.dean .navDean a:nth-child(4) {
     color: var(--font-active);
     font-weight: 600;
 }

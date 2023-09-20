@@ -136,7 +136,7 @@ section {
     font-size: 15px;
     font-weight: 500;
 }
-.attendance .navAttendance a:nth-child(5) {
+.attendance .navAttendance a:nth-child(4) {
     color: var(--font-active);
     font-weight: 600;
 }
