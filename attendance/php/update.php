@@ -1,3 +1,21 @@
+<?php
+ob_start();
+$conn = mysqli_connect("localhost", "root", "", "db_sis");
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_GET['id']) || empty($_GET['id'])) {
+        echo "<script>alert('Please search first!')</script>";
+        header("Location: /dbfiles/ias/sisv2/attendance/php/search.php"); // You can create an error.php page
+        exit();
+    } else {
+        $id_number = $_GET['id'];
+        $sql = "select * from dsas where id_dsas = '$id_number'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +44,6 @@
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -38,7 +55,6 @@
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -73,71 +89,84 @@
                 </div>
                 <div class="contents">
                     <div class="update-form">
+                        <?php
+                        $id_number = $_GET['id'];
+                        $sql = "select * from dsas inner join enroll on dsas.id_dsas_student_no = enroll.id_number where id_dsas = '$id_number'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        ?>
                         <form action="" method="post">
+                            <div class="box input-box">
+                                <div class="title">
+                                    ID NUMBER*
+                                </div>
+                                <input value="<?php echo $row['id_dsas_student_no'];  ?>" id="idnumber" name="idnumber" placeholder="Id Number" type="text">
+                                <i id="editFirstname" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="box birth-box">
+                                <div class="title">
+                                    DATE*
+                                </div>
+                                <input name="birthdate" type="date">
+                            </div>
                             <div class="box input-box">
                                 <div class="title">
                                     Last Name*
                                 </div>
-                                <input id="lastname" name="lastname" placeholder="Lastname" type="text" disabled>
+                                <input value="<?php echo $row['lastname'];  ?>" id="lastname" name="lastname" placeholder="Lastname" type="text">
                                 <i id="editLastname" class='bx bxs-edit'></i>
                             </div>
                             <div class="box input-box">
                                 <div class="title">
                                     First Name*
                                 </div>
-                                <input id="firstname" name="firstname" placeholder="Firstname" type="text" disabled>
+                                <input value="<?php echo $row['firstname'];  ?>" id="firstname" name="firstname" placeholder="Firstname" type="text">
                                 <i id="editFirstname" class='bx bxs-edit'></i>
                             </div>
                             <div class="box input-box">
                                 <div class="title">
                                     Middle Name*
                                 </div>
-                                <input id="middlename" name="middlename" placeholder="Middlename" type="text" disabled>
+                                <input value="<?php echo $row['middlename'];  ?>" id="middlename" name="middlename" placeholder="Middlename" type="text">
                                 <i id="editMiddlename" class='bx bxs-edit'></i>
                             </div>
                             <div class="box combo-box">
                                 <div class="title">
-                                    Gender*
+                                    TYPE*
                                 </div>
-                                <select id="gender" name="gender" disabled>
-                                    <option value="Male">
-                                        Male
+                                <select name="type" id="type">
+                                    <option value="Late" <?php if ($row['type'] == 'Late') echo 'selected'; ?>>
+                                        Late
                                     </option>
-                                    <option value="Female">
-                                        Female
+                                    <option value="Absent" <?php if ($row['type'] == 'Absent') echo 'selected'; ?>>
+                                        Absent
                                     </option>
                                 </select>
-                                <i id="editGender" class='bx bxs-edit'></i>
                             </div>
-                            <div class="box birth-box">
+                            <div class="box input-box">
                                 <div class="title">
-                                    Birthdate*
+                                    Reason
                                 </div>
-                                <input id="birthdate" name="birthdate" type="date" disabled>
-                                <i id="editBirthdate" class='bx bxs-edit'></i>
+                                <input value="<?php echo $row['reason'];  ?>" id="reason" name="reason" placeholder="Reason" type="text">
+                                <i id="editMiddlename" class='bx bxs-edit'></i>
                             </div>
-                            <div class="box address-box">
+                            <div class="box combo-box">
                                 <div class="title">
-                                    Address
+                                    Remarks*
                                 </div>
-                                <div class="address-input">
-                                    <input id="street" name="street" placeholder="Street" type="text" disabled>
-                                    <input id="town" name="town" placeholder="Town" type="text" disabled>
-                                    <input id="city" name="city" placeholder="City" type="text" disabled><i id="editAddress" class='bx bxs-edit'></i>
-                                </div>
-
-                            </div>
-                            <div class="box emergency-box">
-                                <div class="title">
-                                    Emergency Contact No.*
-                                </div>
-                                <input id="emergency" name="emergency" placeholder="Emergency" type="text" inputmode="numeric" disabled>
-                                <i id="editEmergency" class='bx bxs-edit'></i>
+                                <select name="remarks" id="remarks">
+                                    <option value="Late" <?php if ($row['remarks'] == 'Excused') echo 'selected'; ?>>
+                                        Excused
+                                    </option>
+                                    <option value="Absent" <?php if ($row['remarks'] == 'Unexcused') echo 'selected'; ?>>
+                                        Unexcused
+                                    </option>
+                                </select>
                             </div>
                             <div class="buttons">
-                                <button class="submit" name="submit" type="submit" disabled>Save Changes</button>
+                                <button class="cancel" name="cancel">Clear</button>
+                                <button class="submit" name="submit" type="submit">Submit</button>
                             </div>
-
                         </form>
                     </div>
 
@@ -160,7 +189,7 @@
                         </div>
                     </div>
                     <div class="logout-button">
-                    <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
+                        <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
                     </div>
                 </div>
                 <div class="box-active">
