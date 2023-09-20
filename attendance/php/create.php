@@ -24,7 +24,6 @@
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -36,7 +35,6 @@
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -74,57 +72,31 @@
                         <form action="" method="post">
                             <div class="box input-box">
                                 <div class="title">
-                                    Last Name*
+                                    ID NUMBER*
                                 </div>
-                                <input name="lastname" placeholder="Lastname" type="text" required>
-                            </div>
-                            <div class="box input-box">
-                                <div class="title">
-                                    First Name*
-                                </div>
-                                <input name="firstname" placeholder="Firstname" type="text" required>
-                            </div>
-                            <div class="box input-box">
-                                <div class="title">
-                                    Middle Name*
-                                </div>
-                                <input name="middlename" placeholder="Middlename" type="text" required>
+                                <input name="idnumber" placeholder="Id Number" type="text" required>
                             </div>
                             <div class="box combo-box">
                                 <div class="title">
-                                    Gender*
+                                    TYPE*
                                 </div>
-                                <select name="gender" id="gender">
-                                    <option value="Male">
-                                        Male
+                                <select name="type" id="type">
+                                    <option value="Late">
+                                        Late
                                     </option>
-                                    <option value="Female">
-                                        Female
+                                    <option value="Absent">
+                                        Absent
+                                    </option>
+                                    <option value="Excused">
+                                        Excused
                                     </option>
                                 </select>
                             </div>
                             <div class="box birth-box">
                                 <div class="title">
-                                    Birthdate*
+                                    DATE*
                                 </div>
                                 <input name="birthdate" type="date" required>
-                            </div>
-                            <div class="box address-box">
-                                <div class="title">
-                                    Address
-                                </div>
-                                <div class="address-input">
-                                    <input name="street" placeholder="Street" type="text" required>
-                                    <input name="town" placeholder="Town" type="text" required>
-                                    <input name="city" placeholder="City" type="text" required>
-                                </div>
-
-                            </div>
-                            <div class="box emergency-box">
-                                <div class="title">
-                                    Emergency Contact No.*
-                                </div>
-                                <input name="emergency" placeholder="Emergency" type="text" inputmode="numeric" required>
                             </div>
                             <div class="buttons">
                                 <button class="cancel" name="cancel">Clear</button>

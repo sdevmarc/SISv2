@@ -26,7 +26,6 @@ $conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -38,7 +37,6 @@ $conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>

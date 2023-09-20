@@ -25,7 +25,6 @@
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -37,7 +36,6 @@
                             <a href="">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -78,10 +76,10 @@
                                     Search
                                 </div>
                                 <div class="box input-box">
-                                    <input type="text" placeholder="Search" required>
+                                    <input name="txtSearch" type="text" placeholder="Search" required>
                                 </div>
                                 <div class="buttons">
-                                    <button name="search"><i class='bx bx-search-alt-2'></i></button>
+                                    <button name="btnSearch"><i class='bx bx-search-alt-2'></i></button>
                                 </div>
                             </div>
                             <div class="table-content">
@@ -89,46 +87,60 @@
                                     <thead>
                                         <tr>
                                             <th>Admission</th>
+                                            <th>ID No.</th>
                                             <th>Date</th>
                                             <th>Last Name</th>
                                             <th>First Name</th>
                                             <th>Middle Name</th>
-                                            <th>Gender</th>
-                                            <th>Birthdate</th>
-                                            <th>Address</th>
-                                            <th>Emgy. Co.</th>
+                                            <th>Type</th>
+                                            <th>Remarks</th>             
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>This</td>
-                                            <td>is</td>
-                                            <td>A</td>
-                                            <td>Test</td>
-                                            <td>Data</td>
-                                            <td>Table</td>
-                                            <td>Ok</td>
-                                            <td>Test</td>
-                                            <td>This</td>
-                                            <td>
-                                            <button name="Edit">Edit</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>This</td>
-                                            <td>is</td>
-                                            <td>A</td>
-                                            <td>Test</td>
-                                            <td>Data</td>
-                                            <td>Table</td>
-                                            <td>Ok</td>
-                                            <td>Test</td>
-                                            <td>This</td>
-                                            <td>
-                                                <button name="Edit">Edit</button>
-                                            </td>
-                                        </tr>
+                                    <form action="" method="post">
+                                            <?php
+                                            try {
+                                                $conn = mysqli_connect("localhost", "root", "", "db_sis");
+
+                                                if (!$conn) {
+                                                    echo "<script>alert('Database connection failed!')</script>";
+                                                } else {
+                                                    if (isset($_POST['btnSearch'])) {
+                                                        $search = $_POST['txtSearch'];
+                                                        $sql = "select * from dsas inner join enroll on dsas.id_dsas_student_no = enroll.id_number where id_dsas_student_no like '%$search%' or lastname like '%$search%' or firstname like '%$search%' or middlename like '%$search%'";
+                                                        $result = mysqli_query($conn, $sql);
+
+                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            ?>
+                                                            <tr>
+                                                                <td><?php echo $row['id_dsas'] ?></td>
+                                                                <td><?php echo $row['id_dsas_student_no'] ?></td>
+                                                                <td><?php echo $row['date_admission'] ?></td>
+                                                                <td><?php echo $row['lastname'] ?></td>
+                                                                <td><?php echo $row['firstname'] ?></td>
+                                                                <td><?php echo $row['middlename'] ?></td>
+                                                                <td><?php echo $row['type'] ?></td>
+                                                                <td><?php echo $row['remarks'] ?></td>
+                                                                <td>
+                                                                    <div class="buttons">
+                                                                        <a href="update.php?id=<?php echo $row['id_dsas']; ?>" class='btn btnEdit' name='Edit'>Edit</a>
+                                                                        <a href="delete.php?id=<?php echo $row['id_dsas']; ?>" class='btn btnDelete' name='Delete'>Delete</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                            <?php
+                                                        }
+                                                    }
+                                                }
+                                            } catch (Exception $e) {
+                                                echo "<script>alert('Error: Error Encountered!')</script>";
+                                            } finally {
+                                                mysqli_close($conn);
+                                            }
+
+                                            ?>
+                                        </form>
                                     </tbody>
                                 </table>
                             </div>

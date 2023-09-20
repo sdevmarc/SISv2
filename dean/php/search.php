@@ -25,7 +25,6 @@
                             <a href="">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -37,7 +36,6 @@
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/delete.php">DELETE ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
@@ -129,7 +127,10 @@
                                                                 <td><?php echo $row['address'] ?></td>
                                                                 <td><?php echo $row['emergency_contact'] ?></td>
                                                                 <td>
-                                                                    <a href="update.php?id=<?php echo $row['id_number']; ?>" class='btn btnEdit' name='Edit'>Edit</a>
+                                                                    <div class="buttons">
+                                                                        <a href="update.php?id=<?php echo $row['id_number']; ?>" class='btn btnEdit' name='Edit'>Edit</a>
+                                                                        <a href="delete.php?id=<?php echo $row['id_number']; ?>" class='btn btnDelete' name='Delete'>Delete</a>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                             <?php
