@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
     if ($user_role == 'admin') {
         // echo "<script>alert('Welcome Admin!')</script>";
     } else if ($user_role == 'adsas') {
-        header('Location: /dbfiles/ias/sisv2/main/php/dashboard.php');
+        header("location: /dbfiles/ias/sisv2/main/php/error.php");
         exit();
     } else if ($user_role == 'enroll') {
         $id = $_GET['id'];

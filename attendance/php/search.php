@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
 
 session_start();
@@ -110,12 +110,12 @@ if (!isset($_SESSION['username'])) {
                                             <th>First Name</th>
                                             <th>Middle Name</th>
                                             <th>Type</th>
-                                            <th>Remarks</th>             
+                                            <th>Remarks</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <form action="" method="post">
+                                        <form action="" method="post">
                                             <?php
                                             try {
                                                 $conn = mysqli_connect("localhost", "root", "", "db_sis");
@@ -169,7 +169,7 @@ if (!isset($_SESSION['username'])) {
             </div>
             <div class="rightbar">
                 <div class="header">
-                <div class="picture">
+                    <div class="picture">
                         <div class="inside">
 
                         </div>
@@ -183,7 +183,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <div class="logout-button">
-                    <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
+                        <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
                     </div>
                 </div>
                 <div class="box-active">
@@ -192,7 +192,7 @@ if (!isset($_SESSION['username'])) {
                         <input type="text" placeholder="Search">
                     </div>
                     <div class="active-names">
-                    <div class="picture">
+                        <div class="picture">
                             <div class="inside">
 
                             </div>
@@ -222,9 +222,11 @@ if ($user_role == 'admin') {
 } else if ($user_role == 'adsas') {
     echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
     echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
-
 } else if ($user_role == 'enroll') {
     echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
     echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+    header("location: /dbfiles/ias/sisv2/main/php/error.php");
+    ob_end_flush();
+    exit();
 }
 ?>

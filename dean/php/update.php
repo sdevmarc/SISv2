@@ -237,6 +237,9 @@ try {
     } else if ($user_role == 'adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+        header("location: /dbfiles/ias/sisv2/main/php/error.php");
+        ob_end_flush();
+        exit();
     } else if ($user_role == 'enroll') {
         echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";

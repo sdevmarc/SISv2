@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])) {
         header("location:search.php");
         exit();
     } else if ($user_role == 'enroll') {
-        header('Location: /dbfiles/ias/sisv2/main/php/dashboard.php');
+        header("location: /dbfiles/ias/sisv2/main/php/error.php");
         exit();
     } 
 }
