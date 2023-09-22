@@ -11,6 +11,12 @@ if (!isset($_SESSION['username'])) {
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
+
+    if($user_role == 'enroll') {
+        header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
+        ob_end_flush();
+        exit();
+    }
 }
 ?>
 
@@ -223,7 +229,7 @@ try {
     } else if ($user_role == 'enroll') {
         echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
-        header("location: /dbfiles/ias/sisv2/main/php/error.php");
+        header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
         ob_end_flush();
         exit();
     }

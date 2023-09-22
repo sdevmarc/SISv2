@@ -12,16 +12,23 @@ if (!isset($_SESSION['username'])) {
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        if (!isset($_GET['id']) || empty($_GET['id'])) {
-            echo "<script>alert('Please search first!')</script>";
-            header("Location: /dbfiles/ias/sisv2/attendance/php/search.php"); // You can create an error.php page
-            exit();
-        } else {
-            $id_number = $_GET['id'];
-            $sql = "select * from dsas where id_dsas = '$id_number'";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($result);
+
+    if ($user_role == 'enroll') {
+        header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
+        ob_end_flush();
+        exit();
+    } else {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if (!isset($_GET['id']) || empty($_GET['id'])) {
+                echo "<script>alert('Please search first!')</script>";
+                header("Location: /dbfiles/ias/sisv2/attendance/php/search.php"); // You can create an error.php page
+                exit();
+            } else {
+                $id_number = $_GET['id'];
+                $sql = "select * from dsas where id_dsas = '$id_number'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+            }
         }
     }
 }
