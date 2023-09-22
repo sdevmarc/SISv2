@@ -12,16 +12,7 @@ if (!isset($_SESSION['username'])) {
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
-
-    // echo "<script>alert('$user_role')</script>";
-    // if() {
-
-    // }
-
-    // $sql = "update tbl_users set isactive = 1 where username = '$username'";
-    // mysqli_query($conn, $sql);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +39,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="navDean">
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
+                            <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>                       
                         </div>
                     </div>
                     <div class="attendance">
@@ -60,7 +50,6 @@ if (!isset($_SESSION['username'])) {
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="settings">
@@ -69,8 +58,10 @@ if (!isset($_SESSION['username'])) {
                         </div>
                         <div class="navSettings">
                             <a href="">AUDIT LOG</a>
-                            <a href="">MANAGE USER</a>
-                            <a href="">MANAGE UI</a>
+                            <div class="subSettings">
+                                <a href="">MANAGE USER</a>
+                                <a href="">MANAGE UI</a>
+                            </div>
                         </div>
                     </div>
 
@@ -200,3 +191,20 @@ if (!isset($_SESSION['username'])) {
 </body>
 
 </html>
+
+<?php
+
+
+if ($user_role == 'admin') {
+    // echo "<script>alert('Welcome Admin!')</script>";
+} else if ($user_role == 'adsas') {
+    echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+    echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+} else if ($user_role == 'enroll') {
+    echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+    echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+}
+
+
+
+?>

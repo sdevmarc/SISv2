@@ -1,5 +1,18 @@
 <?php ob_start();
-$conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
+$conn = mysqli_connect("localhost", "root", "", "db_sis"); 
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: logout.php');
+    exit();
+} else {
+    $username = $_SESSION['username'];
+    $sql = "select user_role from tbl_users where username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $user_role = $row['user_role'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +39,6 @@ $conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="attendance">
@@ -37,7 +49,6 @@ $conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="settings">
@@ -46,8 +57,10 @@ $conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
                         </div>
                         <div class="navSettings">
                             <a href="">AUDIT LOG</a>
-                            <a href="">MANAGE USER</a>
-                            <a href="">MANAGE UI</a>
+                            <div class="subSettings">
+                                <a href="">MANAGE USER</a>
+                                <a href="">MANAGE UI</a>
+                            </div>
                         </div>
                     </div>
 
@@ -187,37 +200,39 @@ $conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
 
 <?php
 try {
-    // if ($user_role == 'admin') {
-    //     // echo "<script>alert('Welcome Admin!')</script>";
-    // } else if ($user_role == 'enroll' ) {
-    //     echo "<script>document.querySelector('.adsas').style.display = 'none';</script>";
-    //     echo "<script>document.querySelector('.settings').style.display = 'none';</script>";
-    // }
-
     date_default_timezone_set('Asia/Shanghai');
     $time = time();
     $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
 
-    if (isset($_POST['submit'])) {
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $middlename = $_POST['middlename'];
-        $gender = $_POST['gender'];
-        $birthdate = $_POST['birthdate'];
-        $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
-        $emergency = $_POST['emergency'];
+    if ($user_role == 'admin') {
+        // echo "<script>alert('Welcome Admin!')</script>";
+    } else if ($user_role == 'adsas') {
+        echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+    } else if ($user_role == 'enroll') {
+        echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+        if (isset($_POST['submit'])) {
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $middlename = $_POST['middlename'];
+            $gender = $_POST['gender'];
+            $birthdate = $_POST['birthdate'];
+            $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+            $emergency = $_POST['emergency'];
 
-        $conn = mysqli_connect("localhost", "root", "", "db_sis");
-        $sql = "insert into enroll (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $sql);
-        $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
-        $stmt->execute();
+            $conn = mysqli_connect("localhost", "root", "", "db_sis");
+            $sql = "insert into enroll (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
+            $stmt->execute();
 
-        $stmt->close();
-        $conn->close();
-        header("refresh:0; url=create.php");
-        ob_end_flush();
-        exit();
+            $stmt->close();
+            $conn->close();
+            header("refresh:0; url=create.php");
+            ob_end_flush();
+            exit();
+        }
     }
 } catch (Exception $e) {
     echo "<script>alert('Error Encountered!')</script>";

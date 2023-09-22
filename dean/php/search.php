@@ -1,3 +1,18 @@
+<?php
+$conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: logout.php');
+    exit();
+} else {
+    $username = $_SESSION['username'];
+    $sql = "select user_role from tbl_users where username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $user_role = $row['user_role'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +40,6 @@
                             <a href="">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="attendance">
@@ -36,7 +50,6 @@
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="settings">
@@ -45,8 +58,10 @@
                         </div>
                         <div class="navSettings">
                             <a href="">AUDIT LOG</a>
-                            <a href="">MANAGE USER</a>
-                            <a href="">MANAGE UI</a>
+                            <div class="subSettings">
+                                <a href="">MANAGE USER</a>
+                                <a href="">MANAGE UI</a>
+                            </div>
                         </div>
                     </div>
 
@@ -204,13 +219,15 @@
 
 <?php
 
-// function search_user() {
-//     $search = $_POST['txtSearch'];
+if ($user_role == 'admin') {
+    // echo "<script>alert('Welcome Admin!')</script>";
+} else if ($user_role == 'adsas') {
+    echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+    echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+} else if ($user_role == 'enroll') {
+    echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+    echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+}
 
-//     if (isset($_POST['btnSearch'])) {
-//         // echo "<script>alert('Search button clicked!')</script>";
-//         $conn = mysqli_connect("localhost", "root", "", "db_sis");
-//     }
-// }
 
 ?>

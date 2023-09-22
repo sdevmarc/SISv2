@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="attendance">
@@ -55,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="settings">
@@ -215,8 +213,7 @@ try {
         header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
         ob_end_flush();
         exit();
-    }
-    else if (isset($_POST['cancel'])) {
+    } else if (isset($_POST['cancel'])) {
         header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
         ob_end_flush();
         exit();

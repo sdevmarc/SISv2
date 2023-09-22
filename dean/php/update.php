@@ -1,21 +1,32 @@
 <?php
 ob_start();
+session_start();
 $conn = mysqli_connect("localhost", "root", "", "db_sis");
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (!isset($_GET['id']) || empty($_GET['id'])) {
-        echo "<script>alert('Please search first!')</script>";
-        header("Location: /dbfiles/ias/sisv2/dean/php/search.php"); // You can create an error.php page
-        exit();
-    } else {
-        $id_number = $_GET['id'];
-        $sql = "select * from enroll where id_number = '$id_number'";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($result);
+if (!isset($_SESSION['username'])) {
+    header('Location: logout.php');
+    exit();
+} else {
+    $username = $_SESSION['username'];
+    $sql = "select user_role from tbl_users where username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $user_role = $row['user_role'];
+
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            echo "<script>alert('Please search first!')</script>";
+            header("Location: /dbfiles/ias/sisv2/dean/php/search.php"); // You can create an error.php page
+            exit();
+        } else {
+            $id_number = $_GET['id'];
+            $sql = "select * from enroll where id_number = '$id_number'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+        }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
                             <a href="">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="attendance">
@@ -56,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <a href="/dbfiles/ias/sisv2/attendance/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/create.php">ADD ADMISSION</a>
                             <a href="/dbfiles/ias/sisv2/attendance/php/update.php">UPDATE ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/attendance/php/audit.php">AUDIT LOG</a>
                         </div>
                     </div>
                     <div class="settings">
@@ -65,8 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="navSettings">
                             <a href="">AUDIT LOG</a>
-                            <a href="">MANAGE USER</a>
-                            <a href="">MANAGE UI</a>
+                            <div class="subSettings">
+                                <a href="">MANAGE USER</a>
+                                <a href="">MANAGE UI</a>
+                            </div>
                         </div>
                     </div>
 
@@ -221,33 +232,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php
 
 try {
-    if (isset($_POST['submit'])) {
-        $id = $_GET['id'];
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $middlename = $_POST['middlename'];
-        $gender = $_POST['gender'];
-        $birthdate = $_POST['birthdate'];
-        $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
-        $emergency = $_POST['emergency'];
-        $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+    if ($user_role == 'admin') {
+        // echo "<script>alert('Welcome Admin!')</script>";
+    } else if ($user_role == 'adsas') {
+        echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+    } else if ($user_role == 'enroll') {
+        echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+        if (isset($_POST['submit'])) {
+            $id = $_GET['id'];
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $middlename = $_POST['middlename'];
+            $gender = $_POST['gender'];
+            $birthdate = $_POST['birthdate'];
+            $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+            $emergency = $_POST['emergency'];
+            $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
 
+            $sql = "update enroll SET lastname = '$lastname',
+            firstname ='$firstname', middlename = '$middlename',
+            gender = '$gender', birthdate ='$birthdate',
+            address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
 
-        $sql = "update enroll SET lastname = '$lastname',
-        firstname ='$firstname', middlename = '$middlename',
-        gender = '$gender', birthdate ='$birthdate',
-        address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
+            $result = mysqli_query($conn, $sql);
 
-        $result = mysqli_query($conn, $sql);
-
-        header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
-        ob_end_flush();
-        exit();
-    }
-    else if (isset($_POST['cancel'])) {
-        header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
-        ob_end_flush();
-        exit();
+            header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+            ob_end_flush();
+            exit();
+        } else if (isset($_POST['cancel'])) {
+            header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+            ob_end_flush();
+            exit();
+        }
     }
 } catch (Exception $e) {
     echo "<script>slert('Error Encountered!')</script>";

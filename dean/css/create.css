@@ -155,6 +155,13 @@ section {
     gap: .7em;
 }
 
+.subSettings {
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+    margin-top: .1rem;
+}
+
 .settings .navSettings a {
     font-size: 15px;
     font-weight: 500;
