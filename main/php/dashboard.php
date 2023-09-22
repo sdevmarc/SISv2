@@ -1,5 +1,4 @@
 <?php
-
 $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
 
 session_start();
@@ -193,8 +192,6 @@ if (!isset($_SESSION['username'])) {
 </html>
 
 <?php
-
-
 if ($user_role == 'admin') {
     // echo "<script>alert('Welcome Admin!')</script>";
 } else if ($user_role == 'adsas') {
@@ -204,7 +201,4 @@ if ($user_role == 'admin') {
     echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
     echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
 }
-
-
-
 ?>

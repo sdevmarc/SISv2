@@ -1,3 +1,20 @@
+<?php
+
+$conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: logout.php');
+    exit();
+} else {
+    $username = $_SESSION['username'];
+    $sql = "select user_role from tbl_users where username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $user_role = $row['user_role'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,8 +60,10 @@
                         </div>
                         <div class="navSettings">
                             <a href="">AUDIT LOG</a>
-                            <a href="">MANAGE USER</a>
-                            <a href="">MANAGE UI</a>
+                            <div class="subSettings">
+                                <a href="">MANAGE USER</a>
+                                <a href="">MANAGE UI</a>
+                            </div>
                         </div>
                     </div>
 
@@ -196,3 +215,16 @@
 </body>
 
 </html>
+
+<?php
+if ($user_role == 'admin') {
+    // echo "<script>alert('Welcome Admin!')</script>";
+} else if ($user_role == 'adsas') {
+    echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+    echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+
+} else if ($user_role == 'enroll') {
+    echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+    echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+}
+?>

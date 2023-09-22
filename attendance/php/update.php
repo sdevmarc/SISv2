@@ -1,17 +1,28 @@
 <?php
 ob_start();
+session_start();
 $conn = mysqli_connect("localhost", "root", "", "db_sis");
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (!isset($_GET['id']) || empty($_GET['id'])) {
-        echo "<script>alert('Please search first!')</script>";
-        header("Location: /dbfiles/ias/sisv2/attendance/php/search.php"); // You can create an error.php page
-        exit();
-    } else {
-        $id_number = $_GET['id'];
-        $sql = "select * from dsas where id_dsas = '$id_number'";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($result);
+if (!isset($_SESSION['username'])) {
+    header('Location: logout.php');
+    exit();
+} else {
+    $username = $_SESSION['username'];
+    $sql = "select user_role from tbl_users where username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $user_role = $row['user_role'];
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            echo "<script>alert('Please search first!')</script>";
+            header("Location: /dbfiles/ias/sisv2/attendance/php/search.php"); // You can create an error.php page
+            exit();
+        } else {
+            $id_number = $_GET['id'];
+            $sql = "select * from dsas where id_dsas = '$id_number'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+        }
     }
 }
 ?>
@@ -62,8 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="navSettings">
                             <a href="">AUDIT LOG</a>
-                            <a href="">MANAGE USER</a>
-                            <a href="">MANAGE UI</a>
+                            <div class="subSettings">
+                                <a href="">MANAGE USER</a>
+                                <a href="">MANAGE UI</a>
+                            </div>
                         </div>
                     </div>
 
@@ -195,28 +208,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php
 
 try {
-    if (isset($_POST['submit'])) {
-        $id = $_GET['id'];
-        $date = $_POST['date'];
-        $type = $_POST['type'];
-        $reason = $_POST['reason'];
-        $remarks = $_POST['remarks'];
-        $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+    if ($user_role == 'admin') {
+        // echo "<script>alert('Welcome Admin!')</script>";
+    } else if ($user_role == 'adsas') {
+        echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+        if (isset($_POST['submit'])) {
+            $id = $_GET['id'];
+            $date = $_POST['date'];
+            $type = $_POST['type'];
+            $reason = $_POST['reason'];
+            $remarks = $_POST['remarks'];
+            $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
 
+            $sql = "update enroll SET date = '$date',
+            type ='$type', reason = '$reason',
+            remarks = '$remarks' where id_dsas_student_no = '$id_number'";
 
-        $sql = "update enroll SET date = '$date',
-        type ='$type', reason = '$reason',
-        remarks = '$remarks' where id_dsas_student_no = '$id_number'";
+            $result = mysqli_query($conn, $sql);
 
-        $result = mysqli_query($conn, $sql);
-
-        header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
-        ob_end_flush();
-        exit();
-    } else if (isset($_POST['cancel'])) {
-        header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
-        ob_end_flush();
-        exit();
+            header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
+            ob_end_flush();
+            exit();
+        } else if (isset($_POST['cancel'])) {
+            header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
+            ob_end_flush();
+            exit();
+        }
+    } else if ($user_role == 'enroll') {
+        echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
     }
 } catch (Exception $e) {
     echo "<script>slert('Error Encountered!')</script>";

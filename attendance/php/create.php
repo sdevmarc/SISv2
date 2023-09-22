@@ -1,5 +1,18 @@
 <?php ob_start();
-$conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
+$conn = mysqli_connect("localhost", "root", "", "db_sis"); 
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: logout.php');
+    exit();
+} else {
+    $username = $_SESSION['username'];
+    $sql = "select user_role from tbl_users where username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $user_role = $row['user_role'];
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +58,10 @@ $conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
                         </div>
                         <div class="navSettings">
                             <a href="">AUDIT LOG</a>
-                            <a href="">MANAGE USER</a>
-                            <a href="">MANAGE UI</a>
+                            <div class="subSettings">
+                                <a href="">MANAGE USER</a>
+                                <a href="">MANAGE UI</a>
+                            </div>
                         </div>
                     </div>
 
@@ -177,36 +192,40 @@ $conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
 
 <?php
 try {
-    // if ($user_role == 'admin') {
-    //     // echo "<script>alert('Welcome Admin!')</script>";
-    // } else if ($user_role == 'enroll' ) {
-    //     echo "<script>document.querySelector('.adsas').style.display = 'none';</script>";
-    //     echo "<script>document.querySelector('.settings').style.display = 'none';</script>";
-    // }
-
     date_default_timezone_set('Asia/Shanghai');
     $time = time();
     $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
 
-    if (isset($_POST['submit'])) {
-        $idnumber = $_POST['idnumber'];
-        $type = $_POST['type'];
-        $reason = $_POST['reason'];
-        $remarks = $_POST['remarks'];
-        $date = $_POST['date'];
-        $dateToday = $currentTime;
-
-        $conn = mysqli_connect("localhost", "root", "", "db_sis");
-        $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $sql);
-        $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
-        $stmt->execute();
-
-        $stmt->close();
-        $conn->close();
-        header("refresh:0; url=create.php");
-        ob_end_flush();
-        exit();
+    if ($user_role == 'admin') {
+        // echo "<script>alert('Welcome Admin!')</script>";
+    } else if ($user_role == 'adsas') {
+        echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+        if (isset($_POST['submit'])) {
+            $idnumber = $_POST['idnumber'];
+            $type = $_POST['type'];
+            $reason = $_POST['reason'];
+            $remarks = $_POST['remarks'];
+            $date = $_POST['date'];
+            $dateToday = $currentTime;
+    
+            $conn = mysqli_connect("localhost", "root", "", "db_sis");
+            $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
+            $stmt->execute();
+    
+            $stmt->close();
+            $conn->close();
+            header("refresh:0; url=search.php");
+            ob_end_flush();
+            exit();
+    } else if ($user_role == 'enroll') {
+        echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+    }
+    
+    
     }
 } catch (Exception $e) {
     echo "<script>alert('Error Encountered!')</script>";
