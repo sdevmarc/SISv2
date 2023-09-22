@@ -96,39 +96,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         $row = mysqli_fetch_assoc($result);
                         ?>
                         <form action="" method="post">
-                            <div class="box input-box">
-                                <div class="title">
-                                    ID NUMBER*
-                                </div>
-                                <input value="<?php echo $row['id_dsas_student_no'];  ?>" id="idnumber" name="idnumber" placeholder="Id Number" type="text">
-                                <i id="editFirstname" class='bx bxs-edit'></i>
-                            </div>
                             <div class="box birth-box">
                                 <div class="title">
                                     DATE*
                                 </div>
-                                <input name="birthdate" type="date">
-                            </div>
-                            <div class="box input-box">
-                                <div class="title">
-                                    Last Name*
-                                </div>
-                                <input value="<?php echo $row['lastname'];  ?>" id="lastname" name="lastname" placeholder="Lastname" type="text">
-                                <i id="editLastname" class='bx bxs-edit'></i>
-                            </div>
-                            <div class="box input-box">
-                                <div class="title">
-                                    First Name*
-                                </div>
-                                <input value="<?php echo $row['firstname'];  ?>" id="firstname" name="firstname" placeholder="Firstname" type="text">
-                                <i id="editFirstname" class='bx bxs-edit'></i>
-                            </div>
-                            <div class="box input-box">
-                                <div class="title">
-                                    Middle Name*
-                                </div>
-                                <input value="<?php echo $row['middlename'];  ?>" id="middlename" name="middlename" placeholder="Middlename" type="text">
-                                <i id="editMiddlename" class='bx bxs-edit'></i>
+                                <input value="<?php echo $row['date'];  ?>" name="date" type="date">
                             </div>
                             <div class="box combo-box">
                                 <div class="title">
@@ -148,17 +120,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     Reason
                                 </div>
                                 <input value="<?php echo $row['reason'];  ?>" id="reason" name="reason" placeholder="Reason" type="text">
-                                <i id="editMiddlename" class='bx bxs-edit'></i>
+                                <i id="editReason" class='bx bxs-edit'></i>
                             </div>
                             <div class="box combo-box">
                                 <div class="title">
                                     Remarks*
                                 </div>
                                 <select name="remarks" id="remarks">
-                                    <option value="Late" <?php if ($row['remarks'] == 'Excused') echo 'selected'; ?>>
+                                    <option value="Excused" <?php if ($row['remarks'] == 'Excused') echo 'selected'; ?>>
                                         Excused
                                     </option>
-                                    <option value="Absent" <?php if ($row['remarks'] == 'Unexcused') echo 'selected'; ?>>
+                                    <option value="Unexcused" <?php if ($row['remarks'] == 'Unexcused') echo 'selected'; ?>>
                                         Unexcused
                                     </option>
                                 </select>
@@ -221,3 +193,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </body>
 
 </html>
+
+<?php
+
+try {
+    if (isset($_POST['submit'])) {
+        $id = $_GET['id'];
+        $date = $_POST['date'];
+        $type = $_POST['type'];
+        $reason = $_POST['reason'];
+        $remarks = $_POST['remarks'];
+        $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+
+
+        $sql = "update enroll SET date = '$date',
+        type ='$type', reason = '$reason',
+        remarks = '$remarks' where id_dsas_student_no = '$id_number'";
+
+        $result = mysqli_query($conn, $sql);
+
+        header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
+        ob_end_flush();
+        exit();
+    }
+    else if (isset($_POST['cancel'])) {
+        header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
+        ob_end_flush();
+        exit();
+    }
+} catch (Exception $e) {
+    echo "<script>slert('Error Encountered!')</script>";
+}
+if (isset($_POST['submit'])) {
+    mysqli_close($conn);
+}
+
+?>

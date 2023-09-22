@@ -1,3 +1,6 @@
+<?php ob_start();
+$conn = mysqli_connect("localhost", "root", "", "db_sis"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,12 +72,19 @@
                 </div>
                 <div class="contents">
                     <div class="create-form">
-                        <form action="" method="post">
+                    <form action="" method="post">
                             <div class="box input-box">
                                 <div class="title">
                                     ID NUMBER*
                                 </div>
-                                <input name="idnumber" placeholder="Id Number" type="text" required>
+                                <input id="idnumber" name="idnumber" placeholder="Id Number" type="text">
+                                <i id="editId" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="box birth-box">
+                                <div class="title">
+                                    DATE*
+                                </div>
+                                <input name="date" type="date">
                             </div>
                             <div class="box combo-box">
                                 <div class="title">
@@ -87,22 +97,32 @@
                                     <option value="Absent">
                                         Absent
                                     </option>
-                                    <option value="Excused">
-                                        Excused
-                                    </option>
                                 </select>
                             </div>
-                            <div class="box birth-box">
+                            <div class="box input-box">
                                 <div class="title">
-                                    DATE*
+                                    Reason
                                 </div>
-                                <input name="birthdate" type="date" required>
+                                <input id="reason" name="reason" placeholder="Reason" type="text">
+                                <i id="editMiddlename" class='bx bxs-edit'></i>
+                            </div>
+                            <div class="box combo-box">
+                                <div class="title">
+                                    Remarks*
+                                </div>
+                                <select name="remarks" id="remarks">
+                                    <option value="Late">
+                                        Excused
+                                    </option>
+                                    <option value="Absent">
+                                        Unexcused
+                                    </option>
+                                </select>
                             </div>
                             <div class="buttons">
                                 <button class="cancel" name="cancel">Clear</button>
                                 <button class="submit" name="submit" type="submit">Submit</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -156,3 +176,43 @@
 </body>
 
 </html>
+
+<?php
+try {
+    // if ($user_role == 'admin') {
+    //     // echo "<script>alert('Welcome Admin!')</script>";
+    // } else if ($user_role == 'enroll' ) {
+    //     echo "<script>document.querySelector('.adsas').style.display = 'none';</script>";
+    //     echo "<script>document.querySelector('.settings').style.display = 'none';</script>";
+    // }
+
+    date_default_timezone_set('Asia/Shanghai');
+    $time = time();
+    $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
+
+    if (isset($_POST['submit'])) {
+        $idnumber = $_POST['idnumber'];
+        $type = $_POST['type'];
+        $reason = $_POST['reason'];
+        $remarks = $_POST['remarks'];
+        $date = $_POST['date'];
+        $dateToday = $currentTime;
+
+        $conn = mysqli_connect("localhost", "root", "", "db_sis");
+        $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
+        $stmt->execute();
+
+        $stmt->close();
+        $conn->close();
+        header("refresh:0; url=create.php");
+        ob_end_flush();
+        exit();
+    }
+} catch (Exception $e) {
+    echo "<script>alert('Error Encountered!')</script>";
+} finally {
+    mysqli_close($conn);
+}
+?>
