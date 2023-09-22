@@ -1,3 +1,28 @@
+<?php
+
+$conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: logout.php');
+    exit();
+} else {
+    $username = $_SESSION['username'];
+    $sql = "select user_role from tbl_users where username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $user_role = $row['user_role'];
+
+    // echo "<script>alert('$user_role')</script>";
+    // if() {
+
+    // }
+
+    // $sql = "update tbl_users set isactive = 1 where username = '$username'";
+    // mysqli_query($conn, $sql);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

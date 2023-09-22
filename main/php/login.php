@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIS | Login</title>
     <link rel="stylesheet" href="/dbfiles/ias/sisv2/main/css/login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
@@ -24,22 +25,30 @@
     <section>
         <div class="container">
             <div class="login-form">
+
                 <form action="" method="post">
                     <div class="details">
                         <p>Unlock Your World,<br>One Login at a Time.</p>
                         <p>Welcome back, <br>Please login to your account</p>
+                    </div>
+                    <div class="invalid-input">
+                        <i class='bx bxs-x-square'></i>
+                        <p>Invalid username or password</p>
                     </div>
                     <div class="inputs">
                         <div class="box input-box">
                             <input name="username" placeholder="Username" type="text" required>
                         </div>
                         <div class="box input-box">
-                            <input name="password" placeholder="Password" type="password" required>
+                            <input name="password" id="password" placeholder="Password" type="password" required>
                         </div>
                         <div class="buttons">
                             <button id="login" name="login">
                                 Login
                             </button>
+                        </div>
+                        <div class="capsState">
+                            <p>CapsLock is On</p>
                         </div>
                     </div>
 
@@ -56,7 +65,7 @@
             </div>
         </div>
     </section>
-
+    <script type="text/javascript" src="/dbfiles/ias/sisv2/main/js/login.js"></script>
 </body>
 
 </html>
@@ -73,7 +82,7 @@ try {
         if (!$conn) {
             echo "<script>alert('Cannot connect to database!')</script>";
         } else {
-            // echo "<script>document.querySelector('.invalid').style.visibility = 'visible';</script>";
+
             $username = strtolower($_POST['username']);
             $password = $_POST['password'];
             $sql = "select * from tbl_users where username = '$username' and password = '$password'";
@@ -86,6 +95,7 @@ try {
                 ob_end_flush();
                 exit();
             } else {
+                echo "<script>document.querySelector('.invalid-input').style.visibility = 'visible';</script>";
                 $_SESSION['attempts']++;
                 $i = $_SESSION['attempts'];
                 if ($i >= 3) {
