@@ -203,7 +203,26 @@ try {
     $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
 
     if ($user_role == 'admin') {
-        // echo "<script>alert('Welcome Admin!')</script>";
+        if (isset($_POST['submit'])) {
+            $idnumber = $_POST['idnumber'];
+            $type = $_POST['type'];
+            $reason = $_POST['reason'];
+            $remarks = $_POST['remarks'];
+            $date = $_POST['date'];
+            $dateToday = $currentTime;
+    
+            $conn = mysqli_connect("localhost", "root", "", "db_sis");
+            $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
+            $stmt->execute();
+    
+            $stmt->close();
+            $conn->close();
+            header("refresh:0; url=search.php");
+            ob_end_flush();
+            exit();
+        }
     } else if ($user_role == 'adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
@@ -226,6 +245,7 @@ try {
             header("refresh:0; url=search.php");
             ob_end_flush();
             exit();
+        }
     } else if ($user_role == 'enroll') {
         echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
@@ -234,8 +254,6 @@ try {
         exit();
     }
     
-    
-    }
 } catch (Exception $e) {
     echo "<script>alert('Error Encountered!')</script>";
 } finally {

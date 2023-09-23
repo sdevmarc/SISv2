@@ -239,7 +239,32 @@ if (!isset($_SESSION['username'])) {
 
 try {
     if ($user_role == 'admin') {
-        // echo "<script>alert('Welcome Admin!')</script>";
+        if (isset($_POST['submit'])) {
+            $id = $_GET['id'];
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $middlename = $_POST['middlename'];
+            $gender = $_POST['gender'];
+            $birthdate = $_POST['birthdate'];
+            $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+            $emergency = $_POST['emergency'];
+            $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+
+            $sql = "update enroll SET lastname = '$lastname',
+            firstname ='$firstname', middlename = '$middlename',
+            gender = '$gender', birthdate ='$birthdate',
+            address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
+
+            $result = mysqli_query($conn, $sql);
+
+            header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+            ob_end_flush();
+            exit();
+        } else if (isset($_POST['cancel'])) {
+            header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+            ob_end_flush();
+            exit();
+        }
     } else if ($user_role == 'adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";

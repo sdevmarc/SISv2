@@ -14,7 +14,12 @@ if (!isset($_SESSION['username'])) {
     $user_role = $row['user_role'];
     
     if ($user_role == 'admin') {
-        // echo "<script>alert('Welcome Admin!')</script>";
+        $id = $_GET['id'];
+        $sql = "delete from enroll where id_number = '$id'";
+        $result = mysqli_query($conn,$sql);
+        echo "<script>alert('Record Deleted');</script>";
+        header("location:search.php");
+        exit();
     } else if ($user_role == 'adsas') {
         header("location: /dbfiles/ias/sisv2/main/php/error.php");
         exit();

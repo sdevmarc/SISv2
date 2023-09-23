@@ -216,7 +216,28 @@ if (!isset($_SESSION['username'])) {
 
 try {
     if ($user_role == 'admin') {
-        // echo "<script>alert('Welcome Admin!')</script>";
+        if (isset($_POST['submit'])) {
+            $id = $_GET['id'];
+            $date = $_POST['date'];
+            $type = $_POST['type'];
+            $reason = $_POST['reason'];
+            $remarks = $_POST['remarks'];
+            $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+
+            $sql = "update enroll SET date = '$date',
+            type ='$type', reason = '$reason',
+            remarks = '$remarks' where id_dsas_student_no = '$id_number'";
+
+            $result = mysqli_query($conn, $sql);
+
+            header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
+            ob_end_flush();
+            exit();
+        } else if (isset($_POST['cancel'])) {
+            header("refresh:0; url=/dbfiles/ias/sisv2/attendance/php/update.php");
+            ob_end_flush();
+            exit();
+        }
     } else if ($user_role == 'adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";

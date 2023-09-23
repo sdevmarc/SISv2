@@ -38,7 +38,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="navDean">
                             <a href="/dbfiles/ias/sisv2/dean/php/search.php">SEARCH</a>
                             <a href="/dbfiles/ias/sisv2/dean/php/create.php">ADD ADMISSION</a>
-                            <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>                       
+                            <a href="/dbfiles/ias/sisv2/dean/php/update.php">UPDATE ADMISSION</a>
                         </div>
                     </div>
                     <div class="attendance">
@@ -83,7 +83,7 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 <div class="contents">
-                    <div class="adsas">
+                    <div class="attendance-content">
                         <div class="analysis">
                             <div class="title">
                                 <h1>DAILY STUDENT ATTENDANCE ANALYSIS</h1>
@@ -133,6 +133,55 @@ if (!isset($_SESSION['username'])) {
                             <div class="excused">
                                 <div class="title">
                                     <h1>EXCUSED ADMISSIONS</h1>
+                                </div>
+                                <div class="progress">
+                                    test
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dean-content">
+                        <div class="analysis">
+                            <div class="title">
+                                <h1>YEARLY STUDENT ENROLLED ANALYTICS</h1>
+                            </div>
+
+                            <div class="analysis-content">
+                                <div class="analysis-title">
+                                    <h1>ADMISSIONS</h1>
+                                </div>
+                                <div class="analysis-progress">
+                                    <div class="outer">
+                                        <div class="inner">
+                                            <div id="number">
+                                                119
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                                        <defs>
+                                            <linearGradient id="GradientColor">
+                                                <stop offset="0%" stop-color="#222222" />
+                                                <stop offset="100%" stop-color="#222222" />
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="other-analysis">
+                            <div class="late">
+                                <div class="title">
+                                    <h1>REGULAR STUDENTS</h1>
+                                </div>
+                                <div class="progress">
+                                    test
+                                </div>
+                            </div>
+                            <div class="absent">
+                                <div class="title">
+                                    <h1>IRREGULAR STUDENTS</h1>
                                 </div>
                                 <div class="progress">
                                     test
@@ -196,9 +245,11 @@ if ($user_role == 'admin') {
     // echo "<script>alert('Welcome Admin!')</script>";
 } else if ($user_role == 'adsas') {
     echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+    echo "<script>document.querySelector('.dean-content').style.display = 'none';</script>";
     echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
 } else if ($user_role == 'enroll') {
     echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+    echo "<script>document.querySelector('.attendance-content').style.display = 'none';</script>";
     echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
 }
 ?>

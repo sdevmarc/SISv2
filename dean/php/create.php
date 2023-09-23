@@ -212,7 +212,27 @@ try {
     $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
 
     if ($user_role == 'admin') {
-        // echo "<script>alert('Welcome Admin!')</script>";
+        if (isset($_POST['submit'])) {
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $middlename = $_POST['middlename'];
+            $gender = $_POST['gender'];
+            $birthdate = $_POST['birthdate'];
+            $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+            $emergency = $_POST['emergency'];
+
+            $conn = mysqli_connect("localhost", "root", "", "db_sis");
+            $sql = "insert into enroll (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
+            $stmt->execute();
+
+            $stmt->close();
+            $conn->close();
+            header("location: /dbfiles/ias/sisv2/dean/php/search.php");
+            ob_end_flush();
+            exit();
+        }
     } else if ($user_role == 'adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
@@ -239,7 +259,7 @@ try {
 
             $stmt->close();
             $conn->close();
-            header("refresh:0; url=create.php");
+            header("location: /dbfiles/ias/sisv2/dean/php/search.php");
             ob_end_flush();
             exit();
         }
