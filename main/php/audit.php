@@ -58,7 +58,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="navSettings">
                             <a class="audit-css" href="">AUDIT LOG</a>
                             <div class="subSettings">
-                                <a href="">MANAGE USER</a>
+                                <a href="/dbfiles/ias/sisv2/main/php/manage-user.php">MANAGE USER</a>
                                 <a href="">MANAGE UI</a>
                             </div>
                         </div>

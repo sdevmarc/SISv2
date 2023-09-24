@@ -29,7 +29,7 @@ if (!isset($_SESSION['username'])) {
             <div class="leftbar">
                 <div class="leftbar-content">
                     <div class="dashboard">
-                        <a href="">DASHBOARD</a>
+                        <a href="/dbfiles/ias/sisv2/main/php/dashboard.php">DASHBOARD</a>
                     </div>
                     <div class="dean">
                         <div class="title">
@@ -58,7 +58,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="navSettings">
                             <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
                             <div class="subSettings">
-                                <a href="/dbfiles/ias/sisv2/attendance/php/manage-user.php">MANAGE USER</a>
+                                <a href="/dbfiles/ias/sisv2/main/php/manage-user.php">MANAGE USER</a>
                                 <a href="">MANAGE UI</a>
                             </div>
                         </div>
