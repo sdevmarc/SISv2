@@ -1,0 +1,500 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: var(--font-default);
+
+}
+
+:root {
+    --font-default: #AAA6A6;
+    --font-active: #ffffff;
+    --container: #F6F6F6;
+    --contents: #E6E6E6;
+    --box-shadow: #837e7e;
+    --black1: #000000;
+    --black2: #111111;
+    --black3: #222222;
+    --button: rgb(28, 180, 28);
+    --hover: rgb(110, 221, 160);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    background: #10082C;
+}
+
+/* SECTION */
+section {
+    width: 100%;
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+}
+
+
+
+/* LEFT BAR */
+.leftbar {
+    width: 18%;
+    height: 100vh;
+    background: #10082C;
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 1.5rem;
+    overflow-x: hidden;
+}
+
+.leftbar-content {
+    position: relative;
+    width: 100%;
+    /* background: var(--black1); */
+    z-index: 1;
+}
+
+.leftbar a:hover {
+    transition: .3s;
+    color: var(--font-active);
+}
+
+.leftbar::-webkit-scrollbar {
+    width: 8px;
+    display: none;
+}
+
+.leftbar::-webkit-scrollbar-track {
+    background: var(--font-default);
+}
+
+.leftbar::-webkit-scrollbar-thumb {
+    background: var(--black3);
+    border-radius: 10px;
+}
+
+.leftbar-content {
+    position: relative;
+    width: 100%;
+    /* background: var(--black1); */
+    z-index: 1;
+}
+
+/* DASHBOARD */
+.leftbar .dashboard {
+    margin: 0 3rem;
+}
+
+/* .dashboard a {
+    color: var(--font-active);
+    font-weight: 600;
+} */
+
+/* DASHBOARD */
+/* DEAN */
+.dean .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.dean .navDean {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.dean .navDean a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* DEAN */
+/* ATTENDANCE */
+.attendance .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.attendance .navAttendance {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.attendance .navAttendance a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* ATTENDANCE */
+
+/* SETTINGS */
+.settings .title {
+    margin: 1rem 0;
+    cursor: default;
+    font-weight: 600;
+    font-size: 17px;
+    color: #878BB3;
+}
+
+.settings .navSettings {
+    display: flex;
+    flex-direction: column;
+    margin: .7rem 3rem;
+    gap: .7em;
+}
+
+.subSettings {
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+    margin-top: .1rem;
+}
+
+.settings .navSettings a {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.navSettings .subSettings a:nth-child(1) {
+    color: var(--font-active);
+    font-weight: 600;
+}
+
+/* SETTINGS */
+
+
+/* DESIGN */
+.leftbar .design {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow-y: hidden;
+    z-index: 0;
+}
+
+.design .box-1 {
+    position: relative;
+    top: 50rem;
+    left: -3rem;
+    width: 15rem;
+    height: 15rem;
+    background: #6F89E7;
+    border-radius: 10rem;
+}
+
+.design .box-2 {
+    position: relative;
+    top: 55rem;
+    left: -5rem;
+    width: 10rem;
+    height: 10rem;
+    background: #6F89E7;
+    border-radius: 10rem;
+    box-shadow: -5px 0 6px var(--black3);
+}
+
+
+
+
+/* DESIGN */
+
+
+/* LEFT BAR */
+
+
+
+
+
+/* CONTAINER */
+.container {
+    width: 64%;
+    height: 100vh;
+    background: #F6F6F6;
+    border-radius: 1rem 0 0 1rem;
+    box-shadow: 2px 0 10px 3px var(--black1);
+    z-index: 1;
+}
+
+.header {
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+
+/* HAMBURGER */
+.hamburger {
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 1.6rem;
+    height: .2rem;
+    background: var(--black1);
+    margin: .3rem 0;
+}
+
+/* HAMBURGER */
+/* HEADER */
+.header .title {
+    margin: 0 1rem;
+    color: var(--black3);
+    font-weight: 600;
+}
+
+/* HEADER */
+/* CONTENTS */
+.contents {
+    width: 100%;
+    height: 88vh;
+    padding: 1rem 2rem;
+    overflow-x: hidden;
+
+}
+
+.contents::-webkit-scrollbar {
+    width: 8px;
+    display: none;
+}
+
+.contents::-webkit-scrollbar-track {
+    background: var(--font-default);
+}
+
+.contents::-webkit-scrollbar-thumb {
+    background: var(--black3);
+    border-radius: 10px;
+}
+
+
+
+/* CONTENTS */
+
+/* CONTAINER */
+
+
+
+
+
+/* RIGHT BAR */
+.rightbar {
+    width: 18%;
+    height: 100vh;
+    background: var(--container);
+    z-index: 1;
+}
+
+/* HEADER */
+
+.rightbar .header {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header .picture .inside {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--black3);
+}
+
+.header .user {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logout-button a {
+    position: relative;
+    border: none;
+    border-radius: .4rem;
+    background: var(--button);
+    padding: .2rem .4rem;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--font-active);
+    transition: .3s;
+}
+
+.logout-button a:hover {
+    font-size: 13px;
+    padding: .2rem .6rem;
+    background: var(--hover);
+}
+
+/* .header .logout-button a:hover {
+    scale: .98;
+} */
+
+.user .name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black3);
+}
+
+.user .role p {
+    font-size: 8px;
+    font-weight: lighter;
+    margin: -.1rem 0;
+}
+
+/* HEADER */
+/* BOX ACTIVE */
+.box-active {
+    width: 100%;
+    height: 88vh;
+    background: var(--font-active);
+    border-radius: 1rem 0 0 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+
+.box-active .title {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+}
+
+
+.box-active .title p {
+    color: var(--black3);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.box-active .title input {
+    width: 10rem;
+    height: 1.6rem;
+    border-radius: .5rem;
+    border: none;
+    padding: .5rem;
+    color: var(--black3);
+    border: 1px solid var(--black3);
+}
+
+.box-active .active-names {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+    cursor: pointer;
+    padding: .7rem 1rem;
+    /* border-bottom: 1px solid var(--font-default); */
+}
+
+.box-active .active-names::after {
+    content: '';
+    position: absolute;
+    width: 85%;
+    height: 0.09rem;
+    left: 1.5rem;
+    bottom: 0;
+    background: var(--font-default);
+}
+
+.active-names .picture .inside {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--black3);
+}
+
+.active-names .name-role {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.name-role .name {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--black3);
+}
+
+.name-role .role {
+    font-size: 10px;
+    font-weight: 100;
+    color: var(--black3);
+}
+
+/* BOX ACTIVE */
+
+/* RIGHT BAR */
+
+
+
+/* SECTION */
+
+
+
+
+/* MEDIA QUERIES */
+@media (max-width: 1600px) {
+
+    /* LEFTBAR */
+    .leftbar-content .dashboard a {
+        font-size: 14px;
+    }
+
+    .dean .title,
+    .attendance .title,
+    .settings .title {
+        font-size: 14px;
+    }
+
+    .dean .navDean a,
+    .attendance .navAttendance a,
+    .settings .navSettings a {
+        font-size: 12px;
+    }
+
+    /* LEFTBAR */
+    /* RIGHTBAR */
+    .logout-button a {
+        padding: .2rem .4rem;
+        font-size: 12px;
+    }
+
+    /* RIGHTBAR */
+
+}
+
+
+/* MEDIA QUERIES */

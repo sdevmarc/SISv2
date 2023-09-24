@@ -20,7 +20,7 @@ if (!isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIS | Dashboard</title>
-    <link rel="stylesheet" href="/dbfiles/ias/sisv2/main/css/dashboard.css">
+    <link rel="stylesheet" href="/dbfiles/ias/sisv2/main/css/manage-user.css">
 </head>
 
 <body>
@@ -83,112 +83,8 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 <div class="contents">
-                    <div class="attendance-content">
-                        <div class="analysis">
-                            <div class="title">
-                                <h1>DAILY STUDENT ATTENDANCE ANALYSIS</h1>
-                            </div>
-
-                            <div class="analysis-content">
-                                <div class="analysis-title">
-                                    <h1>ADMISSIONS</h1>
-                                </div>
-                                <div class="analysis-progress">
-                                    <div class="outer">
-                                        <div class="inner">
-                                            <div id="number">
-                                                119
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
-                                        <defs>
-                                            <linearGradient id="GradientColor">
-                                                <stop offset="0%" stop-color="#222222" />
-                                                <stop offset="100%" stop-color="#222222" />
-                                            </linearGradient>
-                                        </defs>
-                                        <circle cx="80" cy="80" r="70" stroke-linecap="round" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="other-analysis">
-                            <div class="late">
-                                <div class="title">
-                                    <h1>LATE ADMISSIONS</h1>
-                                </div>
-                                <div class="progress">
-                                    test
-                                </div>
-                            </div>
-                            <div class="absent">
-                                <div class="title">
-                                    <h1>ABSENT ADMISSIONS</h1>
-                                </div>
-                                <div class="progress">
-                                    test
-                                </div>
-                            </div>
-                            <div class="excused">
-                                <div class="title">
-                                    <h1>EXCUSED ADMISSIONS</h1>
-                                </div>
-                                <div class="progress">
-                                    test
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dean-content">
-                        <div class="analysis">
-                            <div class="title">
-                                <h1>YEARLY STUDENT ENROLLED ANALYTICS</h1>
-                            </div>
-
-                            <div class="analysis-content">
-                                <div class="analysis-title">
-                                    <h1>ADMISSIONS</h1>
-                                </div>
-                                <div class="analysis-progress">
-                                    <div class="outer">
-                                        <div class="inner">
-                                            <div id="number">
-                                                119
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
-                                        <defs>
-                                            <linearGradient id="GradientColor">
-                                                <stop offset="0%" stop-color="#222222" />
-                                                <stop offset="100%" stop-color="#222222" />
-                                            </linearGradient>
-                                        </defs>
-                                        <circle cx="80" cy="80" r="70" stroke-linecap="round" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="other-analysis">
-                            <div class="late">
-                                <div class="title">
-                                    <h1>REGULAR STUDENTS</h1>
-                                </div>
-                                <div class="progress">
-                                    test
-                                </div>
-                            </div>
-                            <div class="absent">
-                                <div class="title">
-                                    <h1>IRREGULAR STUDENTS</h1>
-                                </div>
-                                <div class="progress">
-                                    test
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    
                 </div>
             </div>
             <div class="rightbar">
