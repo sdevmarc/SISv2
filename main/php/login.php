@@ -39,8 +39,15 @@
                         <div class="box input-box">
                             <input name="username" placeholder="Username" type="text" required>
                         </div>
-                        <div class="box input-box">
-                            <input name="password" id="password" placeholder="Password" type="password" required>
+                        <div class="box input-box pass">
+                            <div class="inp-pas">
+                                <input name="password" id="password" placeholder="Password" type="password" required>   
+                            </div>
+                            <div class="show-pas">
+                                <i class='bx bx-show'></i>
+                                <i class='bx bx-hide'></i>
+                            </div>
+
                         </div>
                         <div class="buttons">
                             <button id="login" name="login">
@@ -82,18 +89,57 @@ try {
         if (!$conn) {
             echo "<script>alert('Cannot connect to database!')</script>";
         } else {
-
             $username = strtolower($_POST['username']);
             $password = $_POST['password'];
             $sql = "select * from tbl_users where username = '$username' and password = '$password'";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
-                session_start();
-                $_SESSION['username'] = $username;
-                echo "<script>alert('Login Successful!')</script>";
-                header('location: /dbfiles/ias/sisv2/main/php/dashboard.php');
-                ob_end_flush();
-                exit();
+                $sql = "select isactive from tbl_users where username = '$username'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $isactive = $row['isactive'];
+                if ($isactive == 0) {
+                    $sql = "select id from tbl_users where username = '$username'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $id_user = $row['id'];
+
+                    $sql = "select user_role from tbl_users inner join tbl_roles on tbl_users.id_role = tbl_roles.id_roles where username = '$username'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $user_role = $row['user_role'];
+                    if ($user_role == 'Admin') {
+                    } else {
+                        $sql = "select * from tbl_online_request where id_user = '$id_user'";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            header('location: /dbfiles/ias/sisv2/main/php/pending.php');
+                            exit();
+                        } else {
+                            $sql = "select id from tbl_users where username = '$username'";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_assoc($result);
+                            $id = $row['id'];
+
+                            $sql = "insert into tbl_online_request (id_user) values ($id)";
+                            $result = mysqli_query($conn, $sql);
+
+                            header('location: /dbfiles/ias/sisv2/main/php/pending.php');
+                            exit();
+                        }
+                    }
+                } elseif ($isactive == 1) {
+                    session_start();
+                    $_SESSION['username'] = $username;
+                    $sql = "select id from tbl_users where username = '$username'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $id = $row['id'];
+
+                    header('location: /dbfiles/ias/sisv2/main/php/dashboard.php');
+                    ob_end_flush();
+                    exit();
+                }
             } else {
                 echo "<script>document.querySelector('.invalid-input').style.visibility = 'visible';</script>";
                 $_SESSION['attempts']++;
