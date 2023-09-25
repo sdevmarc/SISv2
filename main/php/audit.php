@@ -79,7 +79,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="line"></div>
                     </div>
                     <div class="title">
-                        OVERVIEW
+                        AUDIT LOG   
                     </div>
                 </div>
                 <div class="contents">
