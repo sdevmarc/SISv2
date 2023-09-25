@@ -8,7 +8,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 } else {
     $username = $_SESSION['username'];
-    $sql = "select user_role from tbl_users where username = '$username'";
+    $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
@@ -215,7 +215,7 @@ if (!isset($_SESSION['username'])) {
 <?php
 
 try {
-    if ($user_role == 'admin') {
+    if ($user_role == 'Admin') {
         if (isset($_POST['submit'])) {
             $id = $_GET['id'];
             $date = $_POST['date'];
@@ -238,7 +238,7 @@ try {
             ob_end_flush();
             exit();
         }
-    } else if ($user_role == 'adsas') {
+    } else if ($user_role == 'Adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
         if (isset($_POST['submit'])) {
@@ -263,7 +263,7 @@ try {
             ob_end_flush();
             exit();
         }
-    } else if ($user_role == 'enroll') {
+    } else if ($user_role == 'Dean') {
         echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
         header("location: /dbfiles/ias/sisv2/main/php/error.php");
