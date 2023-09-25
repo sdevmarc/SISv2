@@ -12,8 +12,7 @@ if (!isset($_SESSION['username'])) {
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
     strtolower($user_role);
-    echo "<script>alert('$user_role')</script>";
-    
+    // echo "<script>alert('$user_role')</script>";
 }
 ?>
 <!DOCTYPE html>
