@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: var(--font-default);
+
+}
+
+:root {
+    --font-default: #AAA6A6;
+    --font-active: #ffffff;
+    --container: #F6F6F6;
+    --contents: #E6E6E6;
+    --box-shadow: #837e7e;
+    --black1: #000000;
+    --black2: #111111;
+    --black3: #222222;
+    --button: rgb(28, 180, 28);
+    --hover: rgb(110, 221, 160);
+    --direc: rgb(21, 21, 66);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+}
+
+/* SECTION */
+section {
+    width: 100%;
+    height: 80vh;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    background: var(--contents);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pending {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pending .pending-image img {
+    width: 12rem;
+    border-radius: 1rem;
+    /* box-shadow: 0 51px 42px 17px rgba(0, 0, 0, 0.308); */
+}
+
+.pending-msg,
+.message {
+    text-align: center;
+}
+
+.pending-msg .title h1,
+.pending-msg .message p {
+    color: var(--black3);
+}
+
+.pending-msg .message p {
+    font-size: 14px;
+}
+
+.pending-msg .direction a {
+    color: var(--font-active);
+    padding: .4rem 1rem;
+    background: var(--black3);
+    border-radius: .5rem;
+    transition: .3s;
+}
+
+.pending-msg .direction a:hover {
+    background: rgb(82, 82, 82);
+}
+
+.pending-msg .direction a i {
+    position: relative;
+    top: 2px;
+    scale: 1.5;
+    color: var(--font-active);
+}
+
+footer {
+    width: 100%;
+    height: 20vh;
+    background: var(--black3);
+    display: flex;
+}
+
+.contents {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contents .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.contents .message {
+    font-size: 14px;
+}
+
+.contents .message a {
+    position: relative;
+    width: 100%;
+    color: var(--font-active);
+    text-decoration: none;
+    /* Add this line to remove the underline on links */
+}
+
+.contents .message a::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 0.09rem;
+    bottom: 0;
+    transform: scale(0);
+    background: yellow;
+    transition: 0.3s;
+}
+
+.contents .message a:hover::before {
+    transform: scale(1);
+}
