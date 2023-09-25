@@ -286,7 +286,14 @@ section {
     border-radius: 10px;
 }
 
-
+.request-form {
+    width: 100%;
+    height: 100%;
+    background: var(--black3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* CONTENTS */
 

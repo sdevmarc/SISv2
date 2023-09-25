@@ -83,8 +83,27 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 <div class="contents">
-                    
-                    
+                    <div class="request-form">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Test Name</td>
+                                    <td>
+                                        <a href="">Approve</a>
+                                        <a href="">Decline</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
                 </div>
             </div>
             <div class="rightbar">
