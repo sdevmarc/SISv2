@@ -1,6 +1,6 @@
 <?php
 ob_start();
-$conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+$conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -124,7 +124,7 @@ if (!isset($_SESSION['username'])) {
                                         <form action="" method="post">
                                             <?php
                                             try {
-                                                $conn = mysqli_connect("localhost", "root", "", "db_sis");
+                                                $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
                                                 if (!$conn) {
                                                     echo "<script>alert('Database connection failed!')</script>";

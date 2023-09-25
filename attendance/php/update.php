@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "db_sis");
+$conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
 if (!isset($_SESSION['username'])) {
     header('Location: logout.php');
@@ -222,7 +222,7 @@ try {
             $type = $_POST['type'];
             $reason = $_POST['reason'];
             $remarks = $_POST['remarks'];
-            $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+            $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
             $sql = "update enroll SET date = '$date',
             type ='$type', reason = '$reason',
@@ -247,7 +247,7 @@ try {
             $type = $_POST['type'];
             $reason = $_POST['reason'];
             $remarks = $_POST['remarks'];
-            $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+            $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
             $sql = "update enroll SET date = '$date',
             type ='$type', reason = '$reason',

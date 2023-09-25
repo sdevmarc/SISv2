@@ -1,5 +1,5 @@
 <?php ob_start();
-$conn = mysqli_connect("localhost", "root", "", "db_sis"); 
+$conn = mysqli_connect("localhost", "root", "", "db_sisv2"); 
 
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -211,7 +211,7 @@ try {
             $date = $_POST['date'];
             $dateToday = $currentTime;
     
-            $conn = mysqli_connect("localhost", "root", "", "db_sis");
+            $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
             $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
@@ -234,7 +234,7 @@ try {
             $date = $_POST['date'];
             $dateToday = $currentTime;
     
-            $conn = mysqli_connect("localhost", "root", "", "db_sis");
+            $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
             $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);

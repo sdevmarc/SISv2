@@ -1,5 +1,5 @@
 <?php ob_start();
-$conn = mysqli_connect("localhost", "root", "", "db_sis"); 
+$conn = mysqli_connect("localhost", "root", "", "db_sisv2"); 
 
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -221,7 +221,7 @@ try {
             $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
             $emergency = $_POST['emergency'];
 
-            $conn = mysqli_connect("localhost", "root", "", "db_sis");
+            $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
             $sql = "insert into enroll (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
@@ -251,7 +251,7 @@ try {
             $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
             $emergency = $_POST['emergency'];
 
-            $conn = mysqli_connect("localhost", "root", "", "db_sis");
+            $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
             $sql = "insert into enroll (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);

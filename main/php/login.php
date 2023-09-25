@@ -70,7 +70,7 @@
 
 </html>
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+$conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 try {
     session_start();
 

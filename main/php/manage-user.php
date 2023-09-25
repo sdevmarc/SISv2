@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+$conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
 session_start();
 if (!isset($_SESSION['username'])) {

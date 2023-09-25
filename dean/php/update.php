@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "db_sis");
+$conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
 if (!isset($_SESSION['username'])) {
     header('Location: logout.php');
@@ -248,7 +248,7 @@ try {
             $birthdate = $_POST['birthdate'];
             $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
             $emergency = $_POST['emergency'];
-            $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+            $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
             $sql = "update enroll SET lastname = '$lastname',
             firstname ='$firstname', middlename = '$middlename',
@@ -283,7 +283,7 @@ try {
             $birthdate = $_POST['birthdate'];
             $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
             $emergency = $_POST['emergency'];
-            $conn = mysqli_connect('localhost', 'root', '', 'db_sis');
+            $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
             $sql = "update enroll SET lastname = '$lastname',
             firstname ='$firstname', middlename = '$middlename',
