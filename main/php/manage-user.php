@@ -79,29 +79,54 @@ if (!isset($_SESSION['username'])) {
                         <div class="line"></div>
                     </div>
                     <div class="title">
-                        OVERVIEW
+                        MANAGE USER
                     </div>
                 </div>
                 <div class="contents">
                     <div class="request-form">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Test Name</td>
-                                    <td>
-                                        <a href="">Approve</a>
-                                        <a href="">Decline</a>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        <form action="" method="post">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    try {
+                                        $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
-                        </table>
+                                        if (!$conn) {
+                                            echo "<script>alert('Database connection failed!')</script>";
+                                        } else {
+                                            $sql = "select id_user, username from tbl_online_request inner join tbl_users on tbl_online_request.id_user = tbl_users.id";
+                                            $result = mysqli_query($conn, $sql);
+
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                                <tr>
+                                                    <td><?php echo $row['id_user'] ?></td>
+                                                    <td><?php echo $row['username'] ?></td>
+                                                    <td>
+                                                        <a href="/dbfiles/ias/sisv2/main/php/isactive.php?id=<?php echo $row['id_user'] ?>">Approve</a>
+                                                        <a href="/dbfiles/ias/sisv2/main/php/decline.php?id=<?php echo $row['id_user'] ?>">Decline</a>
+                                                    </td>
+                                                </tr>
+                                    <?php
+                                            }
+                                        }
+                                    } catch (Exception $e) {
+                                        echo "<script>alert('Error: Error Encountered!')</script>";
+                                    } finally {
+                                        mysqli_close($conn);
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </form>
+
                     </div>
 
                 </div>
@@ -157,7 +182,7 @@ if (!isset($_SESSION['username'])) {
 
 <?php
 if ($user_role == 'Admin') {
-    // echo "<script>alert('Welcome Admin!')</script>";
+
 } else if ($user_role == 'Adsas') {
     echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
     echo "<script>document.querySelector('.dean-content').style.display = 'none';</script>";
