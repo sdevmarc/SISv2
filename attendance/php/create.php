@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
 
-    if($user_role == 'enroll') {
+    if($user_role == 'dean') {
         header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
         ob_end_flush();
         exit();
@@ -216,9 +216,23 @@ try {
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
             $stmt->execute();
-    
             $stmt->close();
-            $conn->close();
+
+            $sql = "select * from tbl_users where username = ?";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $id = $row['id'];
+            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $name = strtoupper($username);
+            $message = '[ADSAS] ' . $name . ' added a student at ' . $currentTime;
+            $stmt->bind_param('iss', $id, $message, $currentTime);
+            $stmt->execute();
+            $stmt->close();
+
             header("refresh:0; url=search.php");
             ob_end_flush();
             exit();
@@ -239,9 +253,23 @@ try {
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
             $stmt->execute();
-    
             $stmt->close();
-            $conn->close();
+
+            $sql = "select * from tbl_users where username = ?";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $id = $row['id'];
+            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $name = strtoupper($username);
+            $message = '[ADSAS] ' . $name . ' added a student at ' . $currentTime;
+            $stmt->bind_param('iss', $id, $message, $currentTime);
+            $stmt->execute();
+            $stmt->close();
+
             header("refresh:0; url=search.php");
             ob_end_flush();
             exit();

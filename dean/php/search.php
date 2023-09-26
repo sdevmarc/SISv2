@@ -1,5 +1,8 @@
 <?php
 ob_start();
+date_default_timezone_set('Asia/Shanghai');
+$time = time();
+$currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
 $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
 session_start();
@@ -132,9 +135,27 @@ if (!isset($_SESSION['username'])) {
                                                     echo "<script>alert('Database connection failed!')</script>";
                                                 } else {
                                                     if (isset($_POST['btnSearch'])) {
+                                                        $sql = "select * from tbl_users where username = ?";
+                                                        $stmt = mysqli_prepare($conn, $sql);
+                                                        $stmt->bind_param('s', $username);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
+                                                        $row = $result->fetch_assoc();
+                                                        $id = $row['id'];
+                                                        $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                                                        $stmt = mysqli_prepare($conn, $sql);
+                                                        $name = strtoupper($username);
+                                                        $message = '[DEAN] ' . $name . ' searched "' . $_POST['txtSearch'] . '" at ' . $currentTime;
+                                                        $stmt->bind_param('iss', $id, $message, $currentTime);
+                                                        $stmt->execute();
+                                                        $stmt->close();
+
                                                         $search = $_POST['txtSearch'];
-                                                        $sql = "select * from enroll where lastname like '%$search%' or firstname like '%$search%' or id_number like '%$search%'";
+                                                        $sql = "select * from dean where lastname like '%$search%' or firstname like '%$search%' or id_number like '%$search%'";
                                                         $result = mysqli_query($conn, $sql);
+
+                                                      
+                                            
 
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                             ?>

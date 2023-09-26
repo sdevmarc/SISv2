@@ -1,5 +1,9 @@
 <?php
 ob_start();
+date_default_timezone_set('Asia/Shanghai');
+$time = time();
+$currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
+
 $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
 session_start();
@@ -13,7 +17,7 @@ if (!isset($_SESSION['username'])) {
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
 
-    if($user_role == 'enroll') {
+    if($user_role == 'dean') {
         header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
         ob_end_flush();
         exit();
@@ -130,8 +134,23 @@ if (!isset($_SESSION['username'])) {
                                                     echo "<script>alert('Database connection failed!')</script>";
                                                 } else {
                                                     if (isset($_POST['btnSearch'])) {
+                                                        $sql = "select * from tbl_users where username = ?";
+                                                        $stmt = mysqli_prepare($conn, $sql);
+                                                        $stmt->bind_param('s', $username);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
+                                                        $row = $result->fetch_assoc();
+                                                        $id = $row['id'];
+                                                        $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                                                        $stmt = mysqli_prepare($conn, $sql);
+                                                        $name = strtoupper($username);
+                                                        $message = '[ADSAS] ' . $name . ' searched "' . $_POST['txtSearch'] . '" at ' . $currentTime;
+                                                        $stmt->bind_param('iss', $id, $message, $currentTime);
+                                                        $stmt->execute();
+                                                        $stmt->close();
+
                                                         $search = $_POST['txtSearch'];
-                                                        $sql = "select * from dsas inner join enroll on dsas.id_dsas_student_no = enroll.id_number where id_dsas_student_no like '%$search%' or lastname like '%$search%' or firstname like '%$search%' or middlename like '%$search%'";
+                                                        $sql = "select * from dsas inner join dean on dsas.id_dsas_student_no = dean.id_number where id_dsas_student_no like '%$search%' or lastname like '%$search%' or firstname like '%$search%' or middlename like '%$search%'";
                                                         $result = mysqli_query($conn, $sql);
 
                                                         while ($row = mysqli_fetch_assoc($result)) {

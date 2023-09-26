@@ -1,5 +1,9 @@
 <?php
 ob_start();
+date_default_timezone_set('Asia/Shanghai');
+$time = time();
+$currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
+
 session_start();
 $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
@@ -25,7 +29,7 @@ if (!isset($_SESSION['username'])) {
                 exit();
             } else {
                 $id_number = $_GET['id'];
-                $sql = "select * from enroll where id_number = '$id_number'";
+                $sql = "select * from dean where id_number = '$id_number'";
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_assoc($result);
             }
@@ -109,7 +113,7 @@ if (!isset($_SESSION['username'])) {
                     <div class="update-form">
                         <?php
                         $id_number = $_GET['id'];
-                        $sql = "select * from enroll where id_number = '$id_number'";
+                        $sql = "select * from dean where id_number = '$id_number'";
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_assoc($result);
                         ?>
@@ -250,12 +254,26 @@ try {
             $emergency = $_POST['emergency'];
             $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
-            $sql = "update enroll SET lastname = '$lastname',
+            $sql = "update dean SET lastname = '$lastname',
             firstname ='$firstname', middlename = '$middlename',
             gender = '$gender', birthdate ='$birthdate',
             address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
-
             $result = mysqli_query($conn, $sql);
+
+            $sql = "select * from tbl_users where username = ?";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $id = $row['id'];
+            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $name = strtoupper($username);
+            $message = '[DEAN] ' . $name . ' updated a student at ' . $currentTime;
+            $stmt->bind_param('iss', $id, $message, $currentTime);
+            $stmt->execute();
+            $stmt->close();
 
             header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
             ob_end_flush();
@@ -285,12 +303,26 @@ try {
             $emergency = $_POST['emergency'];
             $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
-            $sql = "update enroll SET lastname = '$lastname',
+            $sql = "update dean SET lastname = '$lastname',
             firstname ='$firstname', middlename = '$middlename',
             gender = '$gender', birthdate ='$birthdate',
             address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
-
             $result = mysqli_query($conn, $sql);
+
+            $sql = "select * from tbl_users where username = ?";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $id = $row['id'];
+            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $name = strtoupper($username);
+            $message = '[DEAN] ' . $name . ' updated a student at ' . $currentTime;
+            $stmt->bind_param('iss', $id, $message, $currentTime);
+            $stmt->execute();
+            $stmt->close();
 
             header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
             ob_end_flush();

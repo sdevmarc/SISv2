@@ -300,13 +300,24 @@ section {
 }
 
 
-th, td {
+th,
+td {
     border: 1px solid var(--black3);
-   width: 40rem;
-   text-align: center;
-   font-size: 15px;
-   color: var(--black3);
+    text-align: center;
+    font-size: 15px;
+    color: var(--black3);
 }
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 5rem;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 40rem;
+}
+
 td {
     font-size: 13px;
 }

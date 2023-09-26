@@ -88,6 +88,7 @@ if (!isset($_SESSION['username'])) {
                             <table>
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Audit Log</th>
                                     </tr>
                                 </thead>
@@ -99,12 +100,13 @@ if (!isset($_SESSION['username'])) {
                                         if (!$conn) {
                                             echo "<script>alert('Database connection failed!')</script>";
                                         } else {
-                                            $sql = "select * from tbl_users inner join tbl_audit_log on tbl_users.id = tbl_audit_log.id_audit_user";
+                                            $sql = "select * from tbl_users inner join tbl_audit_log on tbl_users.id = tbl_audit_log.id_audit_user order by date ASC";
                                             $result = mysqli_query($conn, $sql);
 
                                             while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                                 <tr>
+                                                    <td><?php echo $row['id_audit_user'] ?></td>
                                                     <td><?php echo $row['message'] ?></td>
                                                 </tr>
                                     <?php

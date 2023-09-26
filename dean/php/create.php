@@ -1,5 +1,5 @@
 <?php ob_start();
-$conn = mysqli_connect("localhost", "root", "", "db_sisv2"); 
+$conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -12,13 +12,12 @@ if (!isset($_SESSION['username'])) {
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
 
-    if($user_role == 'adsas') {
+    if ($user_role == 'adsas') {
         header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
         ob_end_flush();
         exit();
     }
-
-    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -207,6 +206,7 @@ if (!isset($_SESSION['username'])) {
 
 <?php
 try {
+    $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
     date_default_timezone_set('Asia/Shanghai');
     $time = time();
     $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
@@ -221,14 +221,27 @@ try {
             $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
             $emergency = $_POST['emergency'];
 
-            $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
-            $sql = "insert into enroll (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "insert into dean (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
             $stmt->execute();
-
             $stmt->close();
-            $conn->close();
+
+            $sql = "select * from tbl_users where username = ?";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $id = $row['id'];
+            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $name = strtoupper($username);
+            $message = '[DEAN] ' . $name . ' added a student at ' . $currentTime;
+            $stmt->bind_param('iss', $id, $message, $currentTime);
+            $stmt->execute();
+            $stmt->close();
+
             header("location: /dbfiles/ias/sisv2/dean/php/search.php");
             ob_end_flush();
             exit();
@@ -252,20 +265,33 @@ try {
             $emergency = $_POST['emergency'];
 
             $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
-            $sql = "insert into enroll (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "insert into dean (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
             $stmt->execute();
 
+            $sql = "select * from tbl_users where username = ?";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $id = $row['id'];
+            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            $name = strtoupper($username);
+            $message = $name . ' Added a student at ' . $currentTime;
+            $stmt->bind_param('iss', $id, $message, $currentTime);
+            $stmt->execute();
             $stmt->close();
-            $conn->close();
+
             header("location: /dbfiles/ias/sisv2/dean/php/search.php");
             ob_end_flush();
             exit();
         }
     }
 } catch (Exception $e) {
-    echo "<script>alert('Error Encountered!')</script>";
+    echo "<script>alert('$e')</script>";
 } finally {
     mysqli_close($conn);
 }
