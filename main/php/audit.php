@@ -79,11 +79,47 @@ if (!isset($_SESSION['username'])) {
                         <div class="line"></div>
                     </div>
                     <div class="title">
-                        AUDIT LOG   
+                        AUDIT LOG
                     </div>
                 </div>
                 <div class="contents">
-                    asd
+                    <div class="audit-contents">
+                        <form action="" method="post">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Audit Log</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    try {
+                                        $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
+
+                                        if (!$conn) {
+                                            echo "<script>alert('Database connection failed!')</script>";
+                                        } else {
+                                            $sql = "select * from tbl_users inner join tbl_audit_log on tbl_users.id = tbl_audit_log.id_audit_user";
+                                            $result = mysqli_query($conn, $sql);
+
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                                <tr>
+                                                    <td><?php echo $row['message'] ?></td>
+                                                </tr>
+                                    <?php
+                                            }
+                                        }
+                                    } catch (Exception $e) {
+                                        echo "<script>alert('Error: Error Encountered!')</script>";
+                                    } finally {
+                                        mysqli_close($conn);
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="rightbar">

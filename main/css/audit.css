@@ -291,6 +291,30 @@ section {
     border-radius: 10px;
 }
 
+/* TABLE CONTENTS */
+.audit-contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: var(--black3); */
+}
+
+
+th, td {
+    border: 1px solid var(--black3);
+   width: 40rem;
+   text-align: center;
+   font-size: 15px;
+   color: var(--black3);
+}
+td {
+    font-size: 13px;
+}
+
+
+
+/* TABLE CONTENTS */
+
 /* CONTENTS */
 
 /* CONTAINER */
