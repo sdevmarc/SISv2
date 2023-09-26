@@ -15,7 +15,7 @@
         <div class="container">
             <div class="error">
                 <div class="error-image">
-                    <img src="https://pbs.twimg.com/media/FteWD0saAAMIVVZ.jpg" alt="">
+                    <img src="https://media.tenor.com/QGk8WCu_5r8AAAAd/the-rock-stop.gif" alt="">
                 </div>
                 <div class="error-msg">
                     <div class="title">
