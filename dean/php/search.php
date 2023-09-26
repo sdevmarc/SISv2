@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
 
-    if($user_role == 'adsas') {
+    if ($user_role == 'adsas') {
         header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
         ob_end_flush();
         exit();
@@ -67,8 +67,9 @@ if (!isset($_SESSION['username'])) {
                             SETTINGS
                         </div>
                         <div class="navSettings">
-                            <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
+                            <a href="">MANAGE PROFILE</a>
                             <div class="subSettings">
+                                <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
                                 <a href="/dbfiles/ias/sisv2/main/php/manage-user.php">MANAGE USER</a>
                                 <a href="">MANAGE UI</a>
                             </div>
@@ -154,8 +155,8 @@ if (!isset($_SESSION['username'])) {
                                                         $sql = "select * from dean where lastname like '%$search%' or firstname like '%$search%' or id_number like '%$search%'";
                                                         $result = mysqli_query($conn, $sql);
 
-                                                      
-                                            
+
+
 
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                             ?>

@@ -168,6 +168,11 @@ section {
     margin-top: .1rem;
 }
 
+.subSettings a:nth-child(1) {
+    color: var(--font-active);
+    font-weight: 600;
+}
+
 .settings .navSettings a {
     font-size: 15px;
     font-weight: 500;

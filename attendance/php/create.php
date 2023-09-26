@@ -1,5 +1,5 @@
 <?php ob_start();
-$conn = mysqli_connect("localhost", "root", "", "db_sisv2"); 
+$conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
 
-    if($user_role == 'dean') {
+    if ($user_role == 'dean') {
         header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
         ob_end_flush();
         exit();
@@ -63,8 +63,9 @@ if (!isset($_SESSION['username'])) {
                             SETTINGS
                         </div>
                         <div class="navSettings">
-                            <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
+                            <a href="">MANAGE PROFILE</a>
                             <div class="subSettings">
+                                <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
                                 <a href="/dbfiles/ias/sisv2/main/php/manage-user.php">MANAGE USER</a>
                                 <a href="">MANAGE UI</a>
                             </div>
@@ -91,7 +92,7 @@ if (!isset($_SESSION['username'])) {
                 </div>
                 <div class="contents">
                     <div class="create-form">
-                    <form action="" method="post">
+                        <form action="" method="post">
                             <div class="box input-box">
                                 <div class="title">
                                     ID NUMBER*
@@ -149,7 +150,7 @@ if (!isset($_SESSION['username'])) {
             </div>
             <div class="rightbar">
                 <div class="header">
-                <div class="picture">
+                    <div class="picture">
                         <div class="inside">
 
                         </div>
@@ -163,7 +164,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <div class="logout-button">
-                    <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
+                        <a href="/dbfiles/ias/sisv2/main/php/logout.php">Logout</a>
                     </div>
                 </div>
                 <div class="box-active">
@@ -172,7 +173,7 @@ if (!isset($_SESSION['username'])) {
                         <input type="text" placeholder="Search">
                     </div>
                     <div class="active-names">
-                    <div class="picture">
+                        <div class="picture">
                             <div class="inside">
 
                             </div>
@@ -210,11 +211,11 @@ try {
             $remarks = $_POST['remarks'];
             $date = $_POST['date'];
             $dateToday = $currentTime;
-    
+
             $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
             $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
+            $stmt->bind_param('isssss', $idnumber, $dateToday, $date, $type, $reason, $remarks);
             $stmt->execute();
             $stmt->close();
 
@@ -247,11 +248,11 @@ try {
             $remarks = $_POST['remarks'];
             $date = $_POST['date'];
             $dateToday = $currentTime;
-    
+
             $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
             $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('isssss', $idnumber,$dateToday, $date, $type, $reason, $remarks);
+            $stmt->bind_param('isssss', $idnumber, $dateToday, $date, $type, $reason, $remarks);
             $stmt->execute();
             $stmt->close();
 
@@ -281,7 +282,6 @@ try {
         ob_end_flush();
         exit();
     }
-    
 } catch (Exception $e) {
     echo "<script>alert('Error Encountered!')</script>";
 } finally {

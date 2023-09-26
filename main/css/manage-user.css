@@ -169,7 +169,7 @@ section {
     font-weight: 500;
 }
 
-.navSettings .subSettings a:nth-child(1) {
+.navSettings .subSettings a:nth-child(2) {
     color: var(--font-active);
     font-weight: 600;
 }
