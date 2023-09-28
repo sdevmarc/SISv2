@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
 
     if ($user_role == 'Admin') {
         if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
-            header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+            header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
             ob_end_flush();
             exit();
         } else {
@@ -51,7 +51,7 @@ if (!isset($_SESSION['username'])) {
         exit();
     } else if ($user_role == 'Dean') {
         if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
-            header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+            header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
             ob_end_flush();
             exit();
         } else {

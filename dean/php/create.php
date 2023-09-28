@@ -3,16 +3,16 @@ $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+    header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
     exit();
 } else {
     if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
-        header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+        header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
         ob_end_flush();
         exit();
     } else {
         $_SESSION['last_login_timestamp'] = time();
-        
+
         $username = $_SESSION['username'];
         $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
         $result = mysqli_query($conn, $sql);
@@ -222,38 +222,46 @@ try {
 
     if ($user_role == 'Admin') {
         if (isset($_POST['submit'])) {
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $middlename = $_POST['middlename'];
-            $gender = $_POST['gender'];
-            $birthdate = $_POST['birthdate'];
-            $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
-            $emergency = $_POST['emergency'];
+            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['last_login_timestamp'] = time();
+                
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
+                $middlename = $_POST['middlename'];
+                $gender = $_POST['gender'];
+                $birthdate = $_POST['birthdate'];
+                $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+                $emergency = $_POST['emergency'];
 
-            $sql = "insert into dean (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
-            $stmt->execute();
-            $stmt->close();
+                $sql = "insert into dean (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
+                $stmt->execute();
+                $stmt->close();
 
-            $sql = "select * from tbl_users where username = ?";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $id = $row['id'];
-            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $name = strtoupper($username);
-            $message = '[DEAN] ' . $name . ' added a student at ' . $currentTime;
-            $stmt->bind_param('iss', $id, $message, $currentTime);
-            $stmt->execute();
-            $stmt->close();
+                $sql = "select * from tbl_users where username = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $id = $row['id'];
+                $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $name = strtoupper($username);
+                $message = '[DEAN] ' . $name . ' added a student at ' . $currentTime;
+                $stmt->bind_param('iss', $id, $message, $currentTime);
+                $stmt->execute();
+                $stmt->close();
 
-            header("location: /dbfiles/ias/sisv2/dean/php/search.php");
-            ob_end_flush();
-            exit();
+                header("location: /dbfiles/ias/sisv2/dean/php/search.php");
+                ob_end_flush();
+                exit();
+            }
         }
     } else if ($user_role == 'Adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
@@ -265,38 +273,46 @@ try {
         echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
         if (isset($_POST['submit'])) {
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $middlename = $_POST['middlename'];
-            $gender = $_POST['gender'];
-            $birthdate = $_POST['birthdate'];
-            $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
-            $emergency = $_POST['emergency'];
+            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['last_login_timestamp'] = time();
 
-            $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
-            $sql = "insert into dean (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
-            $stmt->execute();
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
+                $middlename = $_POST['middlename'];
+                $gender = $_POST['gender'];
+                $birthdate = $_POST['birthdate'];
+                $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+                $emergency = $_POST['emergency'];
 
-            $sql = "select * from tbl_users where username = ?";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $id = $row['id'];
-            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $name = strtoupper($username);
-            $message = $name . ' Added a student at ' . $currentTime;
-            $stmt->bind_param('iss', $id, $message, $currentTime);
-            $stmt->execute();
-            $stmt->close();
+                $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
+                $sql = "insert into dean (date_enrolled, lastname, firstname, middlename, gender, birthdate, address, emergency_contact) values (?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('sssssssi', $currentTime, $lastname, $firstname, $middlename, $gender, $birthdate, $address, $emergency);
+                $stmt->execute();
 
-            header("location: /dbfiles/ias/sisv2/dean/php/search.php");
-            ob_end_flush();
-            exit();
+                $sql = "select * from tbl_users where username = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $id = $row['id'];
+                $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $name = strtoupper($username);
+                $message = $name . ' Added a student at ' . $currentTime;
+                $stmt->bind_param('iss', $id, $message, $currentTime);
+                $stmt->execute();
+                $stmt->close();
+
+                header("location: /dbfiles/ias/sisv2/dean/php/search.php");
+                ob_end_flush();
+                exit();
+            }
         }
     }
 } catch (Exception $e) {

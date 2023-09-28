@@ -6,7 +6,7 @@ $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
 
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('Location: logout.php');
+    header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
     exit();
 } else {
     $username = $_SESSION['username'];
@@ -17,7 +17,7 @@ if (!isset($_SESSION['username'])) {
 
     if ($user_role == 'Admin') {
         if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
-            header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+            header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
             ob_end_flush();
             exit();
         } else {
@@ -47,12 +47,12 @@ if (!isset($_SESSION['username'])) {
         }
     } else if ($user_role == 'Adsas') {
         if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
-            header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+            header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
             ob_end_flush();
             exit();
         } else {
             $_SESSION['last_login_timestamp'] = time();
-            
+
             $id = $_GET['id'];
             $sql = "delete from dsas where id_dsas = '$id'";
             $result = mysqli_query($conn, $sql);

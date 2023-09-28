@@ -8,11 +8,11 @@ $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+    header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
     exit();
 } else {
     if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
-        header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+        header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
         ob_end_flush();
         exit();
     } else {
@@ -143,44 +143,52 @@ if (!isset($_SESSION['username'])) {
                                                     echo "<script>alert('Database connection failed!')</script>";
                                                 } else {
                                                     if (isset($_POST['btnSearch'])) {
-                                                        $sql = "select * from tbl_users where username = ?";
-                                                        $stmt = mysqli_prepare($conn, $sql);
-                                                        $stmt->bind_param('s', $username);
-                                                        $stmt->execute();
-                                                        $result = $stmt->get_result();
-                                                        $row = $result->fetch_assoc();
-                                                        $id = $row['id'];
-                                                        $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
-                                                        $stmt = mysqli_prepare($conn, $sql);
-                                                        $name = strtoupper($username);
-                                                        $message = '[ADSAS] ' . $name . ' searched "' . $_POST['txtSearch'] . '" at ' . $currentTime;
-                                                        $stmt->bind_param('iss', $id, $message, $currentTime);
-                                                        $stmt->execute();
-                                                        $stmt->close();
+                                                        if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                                                            header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                                                            ob_end_flush();
+                                                            exit();
+                                                        } else {
+                                                            $_SESSION['last_login_timestamp'] = time();
 
-                                                        $search = $_POST['txtSearch'];
-                                                        $sql = "select * from dsas inner join dean on dsas.id_dsas_student_no = dean.id_number where id_dsas_student_no like '%$search%' or lastname like '%$search%' or firstname like '%$search%' or middlename like '%$search%'";
-                                                        $result = mysqli_query($conn, $sql);
+                                                            $sql = "select * from tbl_users where username = ?";
+                                                            $stmt = mysqli_prepare($conn, $sql);
+                                                            $stmt->bind_param('s', $username);
+                                                            $stmt->execute();
+                                                            $result = $stmt->get_result();
+                                                            $row = $result->fetch_assoc();
+                                                            $id = $row['id'];
+                                                            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                                                            $stmt = mysqli_prepare($conn, $sql);
+                                                            $name = strtoupper($username);
+                                                            $message = '[ADSAS] ' . $name . ' searched "' . $_POST['txtSearch'] . '" at ' . $currentTime;
+                                                            $stmt->bind_param('iss', $id, $message, $currentTime);
+                                                            $stmt->execute();
+                                                            $stmt->close();
 
-                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                            $search = $_POST['txtSearch'];
+                                                            $sql = "select * from dsas inner join dean on dsas.id_dsas_student_no = dean.id_number where id_dsas_student_no like '%$search%' or lastname like '%$search%' or firstname like '%$search%' or middlename like '%$search%'";
+                                                            $result = mysqli_query($conn, $sql);
+
+                                                            while ($row = mysqli_fetch_assoc($result)) {
                                             ?>
-                                                            <tr>
-                                                                <td><?php echo $row['id_dsas'] ?></td>
-                                                                <td><?php echo $row['id_dsas_student_no'] ?></td>
-                                                                <td><?php echo $row['date_admission'] ?></td>
-                                                                <td><?php echo $row['lastname'] ?></td>
-                                                                <td><?php echo $row['firstname'] ?></td>
-                                                                <td><?php echo $row['middlename'] ?></td>
-                                                                <td><?php echo $row['type'] ?></td>
-                                                                <td><?php echo $row['remarks'] ?></td>
-                                                                <td>
-                                                                    <div class="buttons">
-                                                                        <a href="update.php?id=<?php echo $row['id_dsas']; ?>" class='btn btnEdit' name='Edit'>Edit</a>
-                                                                        <a href="delete.php?id=<?php echo $row['id_dsas']; ?>" class='btn btnDelete' name='Delete'>Delete</a>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                                <tr>
+                                                                    <td><?php echo $row['id_dsas'] ?></td>
+                                                                    <td><?php echo $row['id_dsas_student_no'] ?></td>
+                                                                    <td><?php echo $row['date_admission'] ?></td>
+                                                                    <td><?php echo $row['lastname'] ?></td>
+                                                                    <td><?php echo $row['firstname'] ?></td>
+                                                                    <td><?php echo $row['middlename'] ?></td>
+                                                                    <td><?php echo $row['type'] ?></td>
+                                                                    <td><?php echo $row['remarks'] ?></td>
+                                                                    <td>
+                                                                        <div class="buttons">
+                                                                            <a href="update.php?id=<?php echo $row['id_dsas']; ?>" class='btn btnEdit' name='Edit'>Edit</a>
+                                                                            <a href="delete.php?id=<?php echo $row['id_dsas']; ?>" class='btn btnDelete' name='Delete'>Delete</a>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
                                             <?php
+                                                            }
                                                         }
                                                     }
                                                 }

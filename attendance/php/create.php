@@ -3,11 +3,11 @@ $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+    header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
     exit();
 } else {
     if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
-        header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+        header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
         ob_end_flush();
         exit();
     } else {
@@ -213,75 +213,91 @@ try {
 
     if ($user_role == 'Admin') {
         if (isset($_POST['submit'])) {
-            $idnumber = $_POST['idnumber'];
-            $type = $_POST['type'];
-            $reason = $_POST['reason'];
-            $remarks = $_POST['remarks'];
-            $date = $_POST['date'];
-            $dateToday = $currentTime;
+            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['last_login_timestamp'] = time();
 
-            $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
-            $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('isssss', $idnumber, $dateToday, $date, $type, $reason, $remarks);
-            $stmt->execute();
-            $stmt->close();
+                $idnumber = $_POST['idnumber'];
+                $type = $_POST['type'];
+                $reason = $_POST['reason'];
+                $remarks = $_POST['remarks'];
+                $date = $_POST['date'];
+                $dateToday = $currentTime;
 
-            $sql = "select * from tbl_users where username = ?";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $id = $row['id'];
-            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $name = strtoupper($username);
-            $message = '[ADSAS] ' . $name . ' added a student at ' . $currentTime;
-            $stmt->bind_param('iss', $id, $message, $currentTime);
-            $stmt->execute();
-            $stmt->close();
+                $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
+                $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('isssss', $idnumber, $dateToday, $date, $type, $reason, $remarks);
+                $stmt->execute();
+                $stmt->close();
 
-            header("refresh:0; url=search.php");
-            ob_end_flush();
-            exit();
+                $sql = "select * from tbl_users where username = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $id = $row['id'];
+                $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $name = strtoupper($username);
+                $message = '[ADSAS] ' . $name . ' added a student at ' . $currentTime;
+                $stmt->bind_param('iss', $id, $message, $currentTime);
+                $stmt->execute();
+                $stmt->close();
+
+                header("refresh:0; url=search.php");
+                ob_end_flush();
+                exit();
+            }
         }
     } else if ($user_role == 'Adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
         if (isset($_POST['submit'])) {
-            $idnumber = $_POST['idnumber'];
-            $type = $_POST['type'];
-            $reason = $_POST['reason'];
-            $remarks = $_POST['remarks'];
-            $date = $_POST['date'];
-            $dateToday = $currentTime;
+            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['last_login_timestamp'] = time();
 
-            $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
-            $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('isssss', $idnumber, $dateToday, $date, $type, $reason, $remarks);
-            $stmt->execute();
-            $stmt->close();
+                $idnumber = $_POST['idnumber'];
+                $type = $_POST['type'];
+                $reason = $_POST['reason'];
+                $remarks = $_POST['remarks'];
+                $date = $_POST['date'];
+                $dateToday = $currentTime;
 
-            $sql = "select * from tbl_users where username = ?";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $id = $row['id'];
-            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $name = strtoupper($username);
-            $message = '[ADSAS] ' . $name . ' added a student at ' . $currentTime;
-            $stmt->bind_param('iss', $id, $message, $currentTime);
-            $stmt->execute();
-            $stmt->close();
+                $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
+                $sql = "insert into dsas (id_dsas_student_no, date_admission, date,  type, reason, remarks) values (?, ?, ?, ?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('isssss', $idnumber, $dateToday, $date, $type, $reason, $remarks);
+                $stmt->execute();
+                $stmt->close();
 
-            header("refresh:0; url=search.php");
-            ob_end_flush();
-            exit();
+                $sql = "select * from tbl_users where username = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $id = $row['id'];
+                $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $name = strtoupper($username);
+                $message = '[ADSAS] ' . $name . ' added a student at ' . $currentTime;
+                $stmt->bind_param('iss', $id, $message, $currentTime);
+                $stmt->execute();
+                $stmt->close();
+
+                header("refresh:0; url=search.php");
+                ob_end_flush();
+                exit();
+            }
         }
     } else if ($user_role == 'Dean') {
         echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";

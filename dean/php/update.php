@@ -8,7 +8,7 @@ session_start();
 $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
 if (!isset($_SESSION['username'])) {
-    header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+    header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
     exit();
 } else {
     $username = $_SESSION['username'];
@@ -23,12 +23,12 @@ if (!isset($_SESSION['username'])) {
         exit();
     } else {
         if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
-            header('Location: /dbfiles/ias/sisv2/main.php/logout.php');
+            header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
             ob_end_flush();
             exit();
         } else {
             $_SESSION['last_login_timestamp'] = time();
-            
+
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 if (!isset($_GET['id']) || empty($_GET['id'])) {
                     echo "<script>alert('Please search first!')</script>";
@@ -253,44 +253,60 @@ if (!isset($_SESSION['username'])) {
 try {
     if ($user_role == 'Admin') {
         if (isset($_POST['submit'])) {
-            $id = $_GET['id'];
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $middlename = $_POST['middlename'];
-            $gender = $_POST['gender'];
-            $birthdate = $_POST['birthdate'];
-            $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
-            $emergency = $_POST['emergency'];
-            $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
+            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['last_login_timestamp'] = time();
 
-            $sql = "update dean SET lastname = '$lastname',
-            firstname ='$firstname', middlename = '$middlename',
-            gender = '$gender', birthdate ='$birthdate',
-            address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
-            $result = mysqli_query($conn, $sql);
+                $id = $_GET['id'];
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
+                $middlename = $_POST['middlename'];
+                $gender = $_POST['gender'];
+                $birthdate = $_POST['birthdate'];
+                $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+                $emergency = $_POST['emergency'];
+                $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
-            $sql = "select * from tbl_users where username = ?";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $id = $row['id'];
-            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $name = strtoupper($username);
-            $message = '[DEAN] ' . $name . ' updated a student at ' . $currentTime;
-            $stmt->bind_param('iss', $id, $message, $currentTime);
-            $stmt->execute();
-            $stmt->close();
+                $sql = "update dean SET lastname = '$lastname',
+                firstname ='$firstname', middlename = '$middlename',
+                gender = '$gender', birthdate ='$birthdate',
+                address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
+                $result = mysqli_query($conn, $sql);
 
-            header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
-            ob_end_flush();
-            exit();
+                $sql = "select * from tbl_users where username = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $id = $row['id'];
+                $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $name = strtoupper($username);
+                $message = '[DEAN] ' . $name . ' updated a student at ' . $currentTime;
+                $stmt->bind_param('iss', $id, $message, $currentTime);
+                $stmt->execute();
+                $stmt->close();
+
+                header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+                ob_end_flush();
+                exit();
+            }
         } else if (isset($_POST['cancel'])) {
-            header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
-            ob_end_flush();
-            exit();
+            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['last_login_timestamp'] = time();
+
+                header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+                ob_end_flush();
+                exit();
+            }
         }
     } else if ($user_role == 'Adsas') {
         echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
@@ -302,44 +318,60 @@ try {
         echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
         if (isset($_POST['submit'])) {
-            $id = $_GET['id'];
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $middlename = $_POST['middlename'];
-            $gender = $_POST['gender'];
-            $birthdate = $_POST['birthdate'];
-            $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
-            $emergency = $_POST['emergency'];
-            $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
+            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['last_login_timestamp'] = time();
 
-            $sql = "update dean SET lastname = '$lastname',
-            firstname ='$firstname', middlename = '$middlename',
-            gender = '$gender', birthdate ='$birthdate',
-            address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
-            $result = mysqli_query($conn, $sql);
+                $id = $_GET['id'];
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
+                $middlename = $_POST['middlename'];
+                $gender = $_POST['gender'];
+                $birthdate = $_POST['birthdate'];
+                $address = $_POST['street'] . ", " . $_POST['town'] . ", " . $_POST['city'];
+                $emergency = $_POST['emergency'];
+                $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
-            $sql = "select * from tbl_users where username = ?";
-            $stmt = mysqli_prepare($conn, $sql);
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $id = $row['id'];
-            $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            $name = strtoupper($username);
-            $message = '[DEAN] ' . $name . ' updated a student at ' . $currentTime;
-            $stmt->bind_param('iss', $id, $message, $currentTime);
-            $stmt->execute();
-            $stmt->close();
+                $sql = "update dean SET lastname = '$lastname',
+                firstname ='$firstname', middlename = '$middlename',
+                gender = '$gender', birthdate ='$birthdate',
+                address = '$address', emergency_contact = '$emergency' where id_number = '$id_number'";
+                $result = mysqli_query($conn, $sql);
 
-            header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
-            ob_end_flush();
-            exit();
+                $sql = "select * from tbl_users where username = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $id = $row['id'];
+                $sql = "insert into tbl_audit_log (id_audit_user, message, date) values (?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                $name = strtoupper($username);
+                $message = '[DEAN] ' . $name . ' updated a student at ' . $currentTime;
+                $stmt->bind_param('iss', $id, $message, $currentTime);
+                $stmt->execute();
+                $stmt->close();
+
+                header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+                ob_end_flush();
+                exit();
+            }
         } else if (isset($_POST['cancel'])) {
-            header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
-            ob_end_flush();
-            exit();
+            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+                header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
+                ob_end_flush();
+                exit();
+            } else {
+                $_SESSION['last_login_timestamp'] = time();
+
+                header("refresh:0; url=/dbfiles/ias/sisv2/dean/php/update.php");
+                ob_end_flush();
+                exit();
+            }
         }
     }
 } catch (Exception $e) {
