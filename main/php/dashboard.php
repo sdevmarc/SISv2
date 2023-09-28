@@ -3,7 +3,6 @@ ob_start();
 $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 date_default_timezone_set('Asia/Manila');
 $time = time();
-$currentTime = date('H:i:s', $time);
 
 session_start();
 if (!isset($_SESSION['username'])) {

@@ -1,8 +1,6 @@
 <?php
 ob_start();
 date_default_timezone_set('Asia/Manila');
-$time = time();
-$currentTime = date('H:i:s', $time);
 
 ?>
 <!DOCTYPE html>
@@ -139,7 +137,7 @@ try {
                 } elseif ($isactive == 1) {
                     session_start();
                     $_SESSION['username'] = $username;
-                    $_SESSION['last_login_timestamp'] = $currentTime;
+                    $_SESSION['last_login_timestamp'] = time();
 
                     $sql = "select id from tbl_users where username = '$username'";
                     $result = mysqli_query($conn, $sql);
