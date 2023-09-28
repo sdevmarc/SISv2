@@ -13,9 +13,10 @@ if (!isset($_SESSION['username'])) {
         exit();
     } else {
         $_SESSION['last_login_timestamp'] = time();
-        date_default_timezone_set('Asia/Shanghai');
+        date_default_timezone_set('Asia/Manila');
         $time = time();
-        echo "<script>alert('$time')</script>";
+        $currentTime = date('H:i:s', $time);
+        echo "<script>alert('$currentTime')</script>";
 
         $username = $_SESSION['username'];
         $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
