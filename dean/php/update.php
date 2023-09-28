@@ -1,6 +1,6 @@
 <?php
 ob_start();
-date_default_timezone_set('Asia/Shanghai');
+date_default_timezone_set('Asia/Manila');
 $time = time();
 $currentTime = date('Y-m-d H:i:s', $time); // Format as 'YYYY-MM-DD HH:MM:SS'
 
