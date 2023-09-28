@@ -1,4 +1,7 @@
-<?php ob_start(); ?>
+<?php
+    ob_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +44,7 @@
                         </div>
                         <div class="box input-box pass">
                             <div class="inp-pas">
-                                <input name="password" id="password" placeholder="Password" type="password" required>   
+                                <input name="password" id="password" placeholder="Password" type="password" required>
                             </div>
                             <div class="show-pas">
                                 <i class='bx bx-show'></i>
@@ -77,9 +80,9 @@
 
 </html>
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 try {
     session_start();
+    $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
     if (!isset($_SESSION['attempts'])) {
         $_SESSION['attempts'] = 0;
@@ -89,6 +92,8 @@ try {
         if (!$conn) {
             echo "<script>alert('Cannot connect to database!')</script>";
         } else {
+
+
             $username = strtolower($_POST['username']);
             $password = $_POST['password'];
             $sql = "select * from tbl_users where username = '$username' and password = '$password'";
@@ -131,6 +136,8 @@ try {
                 } elseif ($isactive == 1) {
                     session_start();
                     $_SESSION['username'] = $username;
+                    $_SESSION['last_login_timestamp'] = time();
+
                     $sql = "select id from tbl_users where username = '$username'";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
