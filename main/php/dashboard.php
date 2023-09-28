@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
     header('Location: logout.php');
     exit();
 } else {
-    if((time() - $_SESSION['last_login_timestamp']) > 6)  {
+    if((time() - $_SESSION['last_login_timestamp']) > 6)  { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
         header('Location: logout.php');
         ob_end_flush();
         exit();
