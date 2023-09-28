@@ -1,8 +1,6 @@
 <?php
 ob_start();
 $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
-date_default_timezone_set('Asia/Manila');
-$time = time();
 
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -15,7 +13,6 @@ if (!isset($_SESSION['username'])) {
         exit();
     } else {
         $_SESSION['last_login_timestamp'] = time();
-        echo "<script>alert('$time')</script>";
 
         $username = $_SESSION['username'];
         $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
