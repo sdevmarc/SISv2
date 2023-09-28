@@ -1,22 +1,23 @@
 <?php
 ob_start();
 $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
+// date_default_timezone_set('Asia/Manila');
+// $time = time();
+// $currentTime = date('H:i:s', $time);
 
 session_start();
 if (!isset($_SESSION['username'])) {
     header('Location: logout.php');
     exit();
 } else {
-    if((time() - $_SESSION['last_login_timestamp']) > 6)  { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+    if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
         header('Location: logout.php');
         ob_end_flush();
         exit();
     } else {
         $_SESSION['last_login_timestamp'] = time();
-        date_default_timezone_set('Asia/Manila');
-        $time = time();
-        $currentTime = date('H:i:s', $time);
-        echo "<script>alert('$currentTime')</script>";
+        $setttt = $_SESSION['last_login_timestamp'];
+        echo "<script>alert('$setttt')</script>";
 
         $username = $_SESSION['username'];
         $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
