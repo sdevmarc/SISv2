@@ -17,21 +17,29 @@ if (!isset($_SESSION['username'])) {
     $row = mysqli_fetch_assoc($result);
     $user_role = $row['user_role'];
 
-    if ($user_role == 'adsas') {
+    if ($user_role == 'Adsas') {
         header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
         ob_end_flush();
         exit();
     } else {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if (!isset($_GET['id']) || empty($_GET['id'])) {
-                echo "<script>alert('Please search first!')</script>";
-                header("Location: /dbfiles/ias/sisv2/dean/php/search.php"); // You can create an error.php page
-                exit();
-            } else {
-                $id_number = $_GET['id'];
-                $sql = "select * from dean where id_number = '$id_number'";
-                $result = mysqli_query($conn, $sql);
-                $row = mysqli_fetch_assoc($result);
+        if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+            header('Location: logout.php');
+            ob_end_flush();
+            exit();
+        } else {
+            $_SESSION['last_login_timestamp'] = time();
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                if (!isset($_GET['id']) || empty($_GET['id'])) {
+                    echo "<script>alert('Please search first!')</script>";
+                    header("Location: /dbfiles/ias/sisv2/dean/php/search.php"); // You can create an error.php page
+                    exit();
+                } else {
+                    $id_number = $_GET['id'];
+                    $sql = "select * from dean where id_number = '$id_number'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                }
             }
         }
     }
@@ -83,7 +91,7 @@ if (!isset($_SESSION['username'])) {
                             SETTINGS
                         </div>
                         <div class="navSettings">
-                        <a href="">MANAGE PROFILE</a>
+                            <a href="">MANAGE PROFILE</a>
                             <div class="subSettings">
                                 <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
                                 <a href="/dbfiles/ias/sisv2/main/php/manage-user.php">MANAGE USER</a>

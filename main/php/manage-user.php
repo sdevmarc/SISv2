@@ -6,11 +6,18 @@ if (!isset($_SESSION['username'])) {
     header('Location: logout.php');
     exit();
 } else {
-    $username = $_SESSION['username'];
-    $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $user_role = $row['user_role'];
+    if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+        header('Location: logout.php');
+        ob_end_flush();
+        exit();
+    } else {
+        $_SESSION['last_login_timestamp'] = time();
+        $username = $_SESSION['username'];
+        $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $user_role = $row['user_role'];
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -56,7 +63,7 @@ if (!isset($_SESSION['username'])) {
                             SETTINGS
                         </div>
                         <div class="navSettings">
-                        <a href="">MANAGE PROFILE</a>
+                            <a href="">MANAGE PROFILE</a>
                             <div class="subSettings">
                                 <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
                                 <a href="/dbfiles/ias/sisv2/main/php/manage-user.php">MANAGE USER</a>
@@ -183,7 +190,6 @@ if (!isset($_SESSION['username'])) {
 
 <?php
 if ($user_role == 'Admin') {
-
 } else if ($user_role == 'Adsas') {
     echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
     echo "<script>document.querySelector('.dean-content').style.display = 'none';</script>";

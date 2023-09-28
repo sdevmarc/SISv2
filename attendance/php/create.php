@@ -6,16 +6,24 @@ if (!isset($_SESSION['username'])) {
     header('Location: logout.php');
     exit();
 } else {
-    $username = $_SESSION['username'];
-    $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $user_role = $row['user_role'];
-
-    if ($user_role == 'dean') {
-        header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
+    if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+        header('Location: logout.php');
         ob_end_flush();
         exit();
+    } else {
+        $_SESSION['last_login_timestamp'] = time();
+
+        $username = $_SESSION['username'];
+        $sql = "select user_role from tbl_roles inner join tbl_users on tbl_roles.id_roles = tbl_users.id_role where username = '$username'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $user_role = $row['user_role'];
+
+        if ($user_role == 'Dean') {
+            header("refresh:0; url=/dbfiles/ias/sisv2/main/php/error.php");
+            ob_end_flush();
+            exit();
+        }
     }
 }
 ?>
