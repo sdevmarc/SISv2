@@ -80,7 +80,7 @@ if (!isset($_SESSION['username'])) {
                             <a href="">MANAGE PROFILE</a>
                             <div class="subSettings">
                                 <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
-                                <a href="/dbfiles/ias/sisv2/main/php/manage-user.php">MANAGE USER</a>
+                                <a href="/dbfiles/ias/sisv2/main/php/manage.php">MANAGE</a>
                                 <a href="">MANAGE UI</a>
                             </div>
                         </div>
