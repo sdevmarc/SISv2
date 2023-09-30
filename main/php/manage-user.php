@@ -6,7 +6,7 @@ if (!isset($_SESSION['username'])) {
     header('Location: logout.php');
     exit();
 } else {
-    if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+    if ((time() - $_SESSION['last_login_timestamp']) > 900) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
         header('Location: logout.php');
         ob_end_flush();
         exit();
@@ -91,52 +91,97 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 <div class="contents">
-                    <div class="request-form">
-                        <form action="" method="post">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    try {
-                                        $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
-
-                                        if (!$conn) {
-                                            echo "<script>alert('Database connection failed!')</script>";
-                                        } else {
-                                            $sql = "select id_user, username from tbl_online_request inner join tbl_users on tbl_online_request.id_user = tbl_users.id";
-                                            $result = mysqli_query($conn, $sql);
-
-                                            while ($row = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                                <tr>
-                                                    <td><?php echo $row['id_user'] ?></td>
-                                                    <td><?php echo $row['username'] ?></td>
-                                                    <td>
-                                                        <a href="/dbfiles/ias/sisv2/main/php/isactive.php?id=<?php echo $row['id_user'] ?>">Approve</a>
-                                                        <a href="/dbfiles/ias/sisv2/main/php/decline.php?id=<?php echo $row['id_user'] ?>">Decline</a>
-                                                    </td>
-                                                </tr>
-                                    <?php
-                                            }
-                                        }
-                                    } catch (Exception $e) {
-                                        echo "<script>alert('Error: Error Encountered!')</script>";
-                                    } finally {
-                                        mysqli_close($conn);
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </form>
-
+                    <div class="tabs">
+                        <button class="btnTab active">Requests</button>
+                        <button class="btnTab">Add User</button>
                     </div>
+                    <div class="content-box">
+                        <div class="content-tab active">
+                            <div class="request-form">
+                                <form action="" method="post">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            try {
+                                                $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
 
+                                                if (!$conn) {
+                                                    echo "<script>alert('Database connection failed!')</script>";
+                                                } else {
+                                                    $sql = "select id_user, username from tbl_online_request inner join tbl_users on tbl_online_request.id_user = tbl_users.id";
+                                                    $result = mysqli_query($conn, $sql);
+
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                            ?>
+                                                        <tr>
+                                                            <td><?php echo $row['id_user'] ?></td>
+                                                            <td><?php echo $row['username'] ?></td>
+                                                            <td>
+                                                                <a href="/dbfiles/ias/sisv2/main/php/isactive.php?id=<?php echo $row['id_user'] ?>">Approve</a>
+                                                                <a href="/dbfiles/ias/sisv2/main/php/decline.php?id=<?php echo $row['id_user'] ?>">Decline</a>
+                                                            </td>
+                                                        </tr>
+                                            <?php
+                                                    }
+                                                }
+                                            } catch (Exception $e) {
+                                                echo "<script>alert('Error: Error Encountered!')</script>";
+                                            } finally {
+                                                mysqli_close($conn);
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="content-tab">
+                            <div class="create-form">
+                                <form action="" method="post">
+                                    <div class="box input-box">
+                                        <div class="title">
+                                            Username*
+                                        </div>
+                                        <input name="username" placeholder="Username" type="text" required>
+                                    </div>
+                                    <div class="box input-box">
+                                        <div class="title">
+                                            Password*
+                                        </div>
+                                        <input name="password" placeholder="Password" type="text" required>
+                                    </div>
+
+                                    <div class="box combo-box">
+                                        <div class="title">
+                                            Role*
+                                        </div>
+                                        <select name="role" id="role">
+                                            <option value="1">
+                                                Admin
+                                            </option>
+                                            <option value="3">
+                                                Adsas
+                                            </option>
+                                            <option value="2">
+                                                Dean
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="buttons">
+                                        <button class="cancel" name="cancel">Clear</button>
+                                        <button class="submit" name="submit" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="rightbar">
@@ -184,19 +229,42 @@ if (!isset($_SESSION['username'])) {
 
     </section>
     <script type="text/javascript" src="/dbfiles/ias/sisv2/main/js/dashboard.js"></script>
+    <script type="text/javascript" src="/dbfiles/ias/sisv2/main/js/manage-user.js"></script>
 </body>
 
 </html>
 
 <?php
-if ($user_role == 'Admin') {
-} else if ($user_role == 'Adsas') {
-    echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
-    echo "<script>document.querySelector('.dean-content').style.display = 'none';</script>";
-    echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
-} else if ($user_role == 'Dean') {
-    echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
-    echo "<script>document.querySelector('.attendance-content').style.display = 'none';</script>";
-    echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+try {
+    $conn = mysqli_connect("localhost", "root", "", "db_sisv2");
+    if ($user_role == 'Admin') {
+        if (!$conn) {
+            echo "<script>alert('Database connection failed!')</script>";
+        } else {
+            if (isset($_POST['submit'])) {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $encpass = md5($password);
+
+                $isactive = 0;
+                $role = $_POST['role'];
+                $sql = "insert into tbl_users (username, password,isactive, id_role) values ('$username', '$encpass', '$isactive', '$role')";
+                $result = mysqli_query($conn, $sql);
+            }
+        }
+    } else if ($user_role == 'Adsas') {
+        echo "<script>document.querySelector('.dean').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.dean-content').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+    } else if ($user_role == 'Dean') {
+        echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.attendance-content').style.display = 'none';</script>";
+        echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
+    }
+} catch (Exception $e) {
+    echo "<script>alert('Error Encountered')</script>";
+} finally {
+    mysqli_close($conn);
 }
+
 ?>
