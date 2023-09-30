@@ -27,7 +27,6 @@ ob_start();
     <section>
         <div class="container">
             <div class="login-form">
-
                 <form action="" method="post">
                     <div class="details">
                         <p>Unlock Your World,<br>One Login at a Time.</p>
@@ -91,60 +90,90 @@ try {
         if (!$conn) {
             echo "<script>alert('Cannot connect to database!')</script>";
         } else {
-
-
             $username = strtolower($_POST['username']);
             $password = $_POST['password'];
-            $sql = "select * from tbl_users where username = '$username' and password = '$password'";
+            $test = md5($password);
+
+            // echo "<script>alert('Password: $test')</script>";
+
+            $sql = "select username, password from tbl_users where username = '$username'";
             $result = mysqli_query($conn, $sql);
+
+            $row = mysqli_fetch_assoc($result);
+            $username = $row['username'];
+            $encpass = $row['password'];
+
             if (mysqli_num_rows($result) > 0) {
-                $sql = "select isactive from tbl_users where username = '$username'";
-                $result = mysqli_query($conn, $sql);
-                $row = mysqli_fetch_assoc($result);
-                $isactive = $row['isactive'];
-                if ($isactive == 0) {
-                    $sql = "select id from tbl_users where username = '$username'";
+                if (md5($password) == $encpass) {
+                    // echo "<script>alert('Password Match')</script>";
+                    $sql = "select isactive from tbl_users where username = '$username'";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
-                    $id_user = $row['id'];
-
-                    $sql = "select user_role from tbl_users inner join tbl_roles on tbl_users.id_role = tbl_roles.id_roles where username = '$username'";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($result);
-                    $user_role = $row['user_role'];
-                    if ($user_role == 'Admin') {
-                    } else {
-                        $sql = "select * from tbl_online_request where id_user = '$id_user'";
+                    $isactive = $row['isactive'];
+                    if ($isactive == 0) {
+                        $sql = "select id from tbl_users where username = '$username'";
                         $result = mysqli_query($conn, $sql);
-                        if (mysqli_num_rows($result) > 0) {
-                            header('location: /dbfiles/ias/sisv2/main/php/pending.php');
-                            exit();
+                        $row = mysqli_fetch_assoc($result);
+                        $id_user = $row['id'];
+
+                        $sql = "select user_role from tbl_users inner join tbl_roles on tbl_users.id_role = tbl_roles.id_roles where username = '$username'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $user_role = $row['user_role'];
+                        // echo "<script>alert('$user_role')</script>";
+                        if ($user_role == 'Admin') {
+                            $sql = "select * from tbl_online_request where id_user = '$id_user'";
+                            $result = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                header('location: /dbfiles/ias/sisv2/main/php/pending.php');
+                                exit();
+                            } else {
+                                $sql = "select id from tbl_users where username = '$username'";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_assoc($result);
+                                $id = $row['id'];
+
+                                $sql = "insert into tbl_online_request (id_user) values ($id)";
+                                $result = mysqli_query($conn, $sql);
+
+                                header('location: /dbfiles/ias/sisv2/main/php/pending.php');
+                                exit();
+                            }
                         } else {
-                            $sql = "select id from tbl_users where username = '$username'";
+                            $sql = "select * from tbl_online_request where id_user = '$id_user'";
                             $result = mysqli_query($conn, $sql);
-                            $row = mysqli_fetch_assoc($result);
-                            $id = $row['id'];
+                            if (mysqli_num_rows($result) > 0) {
+                                header('location: /dbfiles/ias/sisv2/main/php/pending.php');
+                                exit();
+                            } else {
+                                $sql = "select id from tbl_users where username = '$username'";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_assoc($result);
+                                $id = $row['id'];
 
-                            $sql = "insert into tbl_online_request (id_user) values ($id)";
-                            $result = mysqli_query($conn, $sql);
+                                $sql = "insert into tbl_online_request (id_user) values ($id)";
+                                $result = mysqli_query($conn, $sql);
 
-                            header('location: /dbfiles/ias/sisv2/main/php/pending.php');
-                            exit();
+                                header('location: /dbfiles/ias/sisv2/main/php/pending.php');
+                                exit();
+                            }
                         }
+                    } elseif ($isactive == 1) {
+                        session_start();
+                        $_SESSION['username'] = $username;
+                        $_SESSION['last_login_timestamp'] = time();
+
+                        $sql = "select id from tbl_users where username = '$username'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $id = $row['id'];
+
+                        header('location: /dbfiles/ias/sisv2/main/php/dashboard.php');
+                        ob_end_flush();
+                        exit();
                     }
-                } elseif ($isactive == 1) {
-                    session_start();
-                    $_SESSION['username'] = $username;
-                    $_SESSION['last_login_timestamp'] = time();
-
-                    $sql = "select id from tbl_users where username = '$username'";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($result);
-                    $id = $row['id'];
-
-                    header('location: /dbfiles/ias/sisv2/main/php/dashboard.php');
-                    ob_end_flush();
-                    exit();
+                } else {
+                    echo "<script>document.querySelector('.invalid-input').style.visibility = 'visible';</script>";
                 }
             } else {
                 echo "<script>document.querySelector('.invalid-input').style.visibility = 'visible';</script>";
