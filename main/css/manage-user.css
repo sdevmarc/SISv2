@@ -210,16 +210,10 @@ section {
     box-shadow: -5px 0 6px var(--black3);
 }
 
-
-
-
 /* DESIGN */
 
 
 /* LEFT BAR */
-
-
-
 
 
 /* CONTAINER */
@@ -232,7 +226,7 @@ section {
     z-index: 1;
 }
 
-.header {
+.container .header {
     width: 100%;
     height: 9vh;
     display: flex;
@@ -266,7 +260,6 @@ section {
 /* CONTENTS */
 .contents {
     width: 100%;
-    height: 88vh;
     padding: 1rem 2rem;
     overflow-x: hidden;
 
@@ -274,11 +267,10 @@ section {
 
 .contents::-webkit-scrollbar {
     width: 8px;
-    display: none;
 }
 
 .contents::-webkit-scrollbar-track {
-    background: var(--font-default);    
+    background: var(--font-default);
 }
 
 .contents::-webkit-scrollbar-thumb {
@@ -289,7 +281,6 @@ section {
 /* TABLE */
 
 .request-form {
-    /* background: var(--black3); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -321,7 +312,8 @@ section {
 }
 
 
-th, td {
+th,
+td {
     padding: .3rem 2rem;
     border: 1px solid var(--black3);
     color: var(--black3);
@@ -338,6 +330,163 @@ th:nth-child(3), td:nth-child(3) {
  } */
 
 /* TABLE */
+
+/* CONTENT TABS */
+.content-tab {
+    width: 100%;
+    height: 100%;
+    display: none;
+    animation: moving .5s;
+}
+
+@keyframes moving {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.content-tab.active {
+    display: block;
+}
+
+.contents .tabs {
+    position: relative;
+    width: 100%;
+}
+
+.contents .tabs::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0.09rem;
+    left: 0;
+    bottom: 0;
+    background: var(--font-default);
+}
+
+.contents .tabs button {
+    width: 10rem;
+    height: 2rem;
+    color: var(--black3);
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: .5rem .5rem 0 0;
+    transition: .3s;
+}
+
+.contents .tabs button:hover {
+    color: var(--font-active);
+    background: var(--button);
+}
+
+.tabs .btnTab.active {
+    color: var(--font-active);
+    background: var(--button);
+}
+
+/* CONTENT TABS */
+
+/* ADD USER */
+
+.contents .create-form,
+.create-form form {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 2em;
+    padding: 1rem 0;
+}
+
+.create-form form {
+    justify-content: start;
+    flex-direction: column;
+    height: 80vh;
+    overflow-x: hidden;
+    border: none;
+    border-radius: .7rem 0 0 .7rem;
+    padding: 1rem;
+}
+
+form::-webkit-scrollbar {
+    /* display: none; */
+    width: 5px;
+}
+
+form::-webkit-scrollbar-track {
+    background: var(--font-default);
+}
+
+form::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 10px;
+}
+
+.create-form .input-box input {
+    width: 30rem;
+    height: 2.5rem;
+}
+
+.create-form .input-box input {
+    padding: .4rem .5rem;
+}
+
+.create-form select {
+    text-align: center;
+}
+
+.create-form select {
+    width: 10rem;
+    height: 2rem;
+}
+
+.create-form .title {
+    font-weight: 600;
+}
+
+.create-form .box,
+.create-form input,
+.create-form .title,
+.create-form select,
+.create-form select option {
+    color: var(--black3);
+}
+
+.create-form .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7em;
+}
+
+.create-form .buttons button {
+    color: var(--font-active);
+    font-weight: 600;
+    border: none;
+    width: 15rem;
+    height: 2rem;
+    border-radius: .6rem;
+    background: var(--button);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.create-form .buttons button:hover {
+    scale: 1.1;
+}
+
+
+
+
+/* ADD USER */
 
 /* CONTENTS */
 
@@ -359,10 +508,11 @@ th:nth-child(3), td:nth-child(3) {
 
 .rightbar .header {
     width: 100%;
-    height: 5rem;
+    height: 9vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 2rem;
 }
 
 .header .picture .inside {
