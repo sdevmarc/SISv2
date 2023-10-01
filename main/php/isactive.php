@@ -27,7 +27,7 @@ try {
                     $sql = "delete from tbl_online_request where id_user = '$id'";
                     $result = mysqli_query($conn, $sql);
 
-                    header("refresh:0; url=/dbfiles/ias/sisv2/main/php/manage-user.php");
+                    header("refresh:0; url=/dbfiles/ias/sisv2/main/php/manage.php");
                     ob_end_flush();
                     exit();
                 } else if ($user_role == 'Adsas') {
