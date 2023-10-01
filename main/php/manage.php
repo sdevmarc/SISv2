@@ -1,7 +1,10 @@
 <?php
+// include 'backup.php';
+ob_start();
+session_start();
+
 $conn = mysqli_connect('localhost', 'root', '', 'db_sisv2');
 
-session_start();
 if (!isset($_SESSION['username'])) {
     header('Location: logout.php');
     exit();
@@ -66,7 +69,7 @@ if (!isset($_SESSION['username'])) {
                             <a href="">MANAGE PROFILE</a>
                             <div class="subSettings">
                                 <a href="/dbfiles/ias/sisv2/main/php/audit.php">AUDIT LOG</a>
-                                <a href="/dbfiles/ias/sisv2/main/php/manage-user.php">MANAGE USER</a>
+                                <a href="/dbfiles/ias/sisv2/main/php/manage.php">MANAGE</a>
                                 <a href="">MANAGE UI</a>
                             </div>
                         </div>
@@ -94,6 +97,8 @@ if (!isset($_SESSION['username'])) {
                     <div class="tabs">
                         <button class="btnTab active">Requests</button>
                         <button class="btnTab">Add User</button>
+                        <button class="btnTab">Backup</button>
+                        <button class="btnTab">Restore</button>
                     </div>
                     <div class="content-box">
                         <div class="content-tab active">
@@ -175,8 +180,38 @@ if (!isset($_SESSION['username'])) {
                                         </select>
                                     </div>
                                     <div class="buttons">
-                                        <button class="cancel" name="cancel">Clear</button>
-                                        <button class="submit" name="submit" type="submit">Submit</button>
+                                        <button class="cancel" name="create_cancel">Clear</button>
+                                        <button class="submit" name="create_submit" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="content-tab">
+                            <div class="backup-form">
+                                <form action="" method="post">
+                                    <div class="buttons">
+                                        <button class="submit" name="bup_submit" type="submit">Backup</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="content-tab">
+                            <div class="restore-form">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <div class="box input-box">
+                                        <div class="title">
+                                            Database Name*
+                                        </div>
+                                        <input name="dbName" placeholder="Database Name" type="text" required>
+                                    </div>
+                                    <div class="box input-box">
+                                        <div class="title">
+                                            File*
+                                        </div>
+                                        <input name="sql" placeholder="Choose a file" type="file" required>
+                                    </div>
+                                    <div class="buttons">
+                                        <button class="cancel" name="bup_restore">Restore</button>
                                     </div>
                                 </form>
                             </div>
@@ -241,7 +276,7 @@ try {
         if (!$conn) {
             echo "<script>alert('Database connection failed!')</script>";
         } else {
-            if (isset($_POST['submit'])) {
+            if (isset($_POST['create_submit'])) {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
                 $encpass = md5($password);
@@ -250,6 +285,39 @@ try {
                 $role = $_POST['role'];
                 $sql = "insert into tbl_users (username, password,isactive, id_role) values ('$username', '$encpass', '$isactive', '$role')";
                 $result = mysqli_query($conn, $sql);
+            } elseif (isset($_POST['bup_submit'])) {
+                $backupDirectory = 'C:\Users\User\Desktop\IAS\Backup'; // Replace with your desired backup directory
+                $dbName = 'db_sisv2'; // Replace with your database name
+            
+                // Generate a unique backup file name
+                $backupFileName = $backupDirectory . '/backup_' . date('Ymd_His') . '.sql';
+            
+                // Execute the mysqldump command to backup all tables
+                exec("mysqldump -u root -p  $dbName > $backupFileName");
+            
+                if (file_exists($backupFileName)) {
+                    echo "<script>alert('Backup successful. File saved as $backupFileName');</script>";
+                } else {
+                    echo "<script>alert('Backup failed');</script>";
+                }
+
+
+
+                // backDb("localhost", "root", "", "db_sisv2");
+                // exit();
+            } elseif (isset($_POST['bup_restore'])) {
+                $dbName = 'restore'; // Replace with your database name
+                $restoreFileName = $_FILES['sql']['tmp_name']; // Temporary file path
+            
+                // Check if a file was uploaded
+                if (empty($restoreFileName)) {
+                    echo "<script>alert('Please choose a file to restore.');</script>";
+                } else {
+                    // Execute the mysql command to restore the database from the uploaded file
+                    exec("mysql -u root -p your_mysql_password $dbName < $restoreFileName");
+            
+                    echo "<script>alert('Restore completed successfully.');</script>";
+                }
             }
         }
     } else if ($user_role == 'Adsas') {
