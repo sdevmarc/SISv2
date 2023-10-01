@@ -258,11 +258,11 @@ section {
 
 /* HEADER */
 /* CONTENTS */
-.contents {
+.container .contents {
     width: 100%;
+    height: 88vh;
     padding: 1rem 2rem;
     overflow-x: hidden;
-
 }
 
 .contents::-webkit-scrollbar {
@@ -278,12 +278,12 @@ section {
     border-radius: 10px;
 }
 
-/* TABLE */
 
-.request-form {
+.content-tab .request-form {
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+
 }
 
 .request-form a {
@@ -310,26 +310,6 @@ section {
 .request-form a:nth-child(2):hover {
     background: rgb(245, 117, 117);
 }
-
-
-th,
-td {
-    padding: .3rem 2rem;
-    border: 1px solid var(--black3);
-    color: var(--black3);
-    font-size: 14px;
-    text-align: center;
-}
-
-/* th:nth-child(2), td:nth-child(2) {
-   width: 30rem;
-}
-
-th:nth-child(3), td:nth-child(3) {
-    padding: .3rem 2rem;
- } */
-
-/* TABLE */
 
 /* CONTENT TABS */
 .content-tab {
@@ -394,29 +374,54 @@ th:nth-child(3), td:nth-child(3) {
 
 /* CONTENT TABS */
 
-/* ADD USER */
 
-.contents .create-form,
+/* TABLE */
+
+
+th,
+td {
+    padding: .3rem 2rem;
+    border: 1px solid var(--black3);
+    color: var(--black3);
+    font-size: 14px;
+    text-align: center;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 30rem;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    padding: .3rem 2rem;
+}
+
+/* TABLE */
+
+
+
+/* ADD USER */
+.content-tab .create-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    padding: 1rem 0;
+    overflow-x: hidden;
+}
+
 .create-form form {
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
+    flex-direction: column;
     gap: 2em;
-    padding: 1rem 0;
 }
 
-.create-form form {
-    justify-content: start;
-    flex-direction: column;
-    height: 80vh;
-    overflow-x: hidden;
-    border: none;
-    border-radius: .7rem 0 0 .7rem;
-    padding: 1rem;
-}
 
 form::-webkit-scrollbar {
-    /* display: none; */
     width: 5px;
 }
 
@@ -483,10 +488,71 @@ form::-webkit-scrollbar-thumb {
     scale: 1.1;
 }
 
-
-
-
 /* ADD USER */
+
+
+/* BACKUP-RESTORE */
+/* BACKUP */
+
+.backup-form form .buttons {
+    width: 100%;
+    height: 76vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.backup-form button {
+    color: var(--font-active);
+    font-weight: 600;
+    border: none;
+    width: 15rem;
+    height: 2rem;
+    border-radius: .6rem;
+    background: var(--button);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.backup-form button:hover {
+    scale: 1.1;
+}
+
+/* BACKUP */
+/* RESTORE */
+.restore-form form .buttons {
+    width: 100%;
+    height: 76vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.restore-form button {
+    color: var(--font-active);
+    font-weight: 600;
+    border: none;
+    width: 15rem;
+    height: 2rem;
+    border-radius: .6rem;
+    background: var(--button);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.restore-form button:hover {
+    scale: 1.1;
+}
+
+
+
+
+/* RESTORE */
+/* BACKUP-RESTORE */
 
 /* CONTENTS */
 
