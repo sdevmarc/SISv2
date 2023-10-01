@@ -99,11 +99,10 @@ try {
             $sql = "select username, password from tbl_users where username = '$username'";
             $result = mysqli_query($conn, $sql);
 
-            $row = mysqli_fetch_assoc($result);
-            $username = $row['username'];
-            $encpass = $row['password'];
-
             if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $username = $row['username'];
+                $encpass = $row['password'];
                 if (md5($password) == $encpass) {
                     // echo "<script>alert('Password Match')</script>";
                     $sql = "select isactive from tbl_users where username = '$username'";
