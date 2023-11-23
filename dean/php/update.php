@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])) {
         ob_end_flush();
         exit();
     } else {
-        if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+        if ((time() - $_SESSION['last_login_timestamp']) > 100) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
             header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
             ob_end_flush();
             exit();
@@ -253,7 +253,7 @@ if (!isset($_SESSION['username'])) {
 try {
     if ($user_role == 'Admin') {
         if (isset($_POST['submit'])) {
-            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+            if ((time() - $_SESSION['last_login_timestamp']) > 100) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
                 header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
                 ob_end_flush();
                 exit();
@@ -296,7 +296,7 @@ try {
                 exit();
             }
         } else if (isset($_POST['cancel'])) {
-            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+            if ((time() - $_SESSION['last_login_timestamp']) > 100) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
                 header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
                 ob_end_flush();
                 exit();
@@ -318,7 +318,7 @@ try {
         echo "<script>document.querySelector('.attendance').style.display = 'none';</script>";
         echo "<script>document.querySelector('.subSettings').style.display = 'none';</script>";
         if (isset($_POST['submit'])) {
-            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+            if ((time() - $_SESSION['last_login_timestamp']) > 100) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
                 header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
                 ob_end_flush();
                 exit();
@@ -361,7 +361,7 @@ try {
                 exit();
             }
         } else if (isset($_POST['cancel'])) {
-            if ((time() - $_SESSION['last_login_timestamp']) > 6) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
+            if ((time() - $_SESSION['last_login_timestamp']) > 100) { // 900 = 15 (Minutes) * 60 (seconds) // // 6 = 0.1 * 60 // 
                 header('Location: /dbfiles/ias/sisv2/main/php/logout.php');
                 ob_end_flush();
                 exit();
